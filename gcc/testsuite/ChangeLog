@@ -1,3 +1,17 @@
+2014-05-22  Peter Bergner  <bergner@vnet.ibm.com>
+
+	* gcc.target/powerpc/htm-ttest.c: New test.
+
+2014-05-21  Igor Zamyatin  <igor.zamyatin@intel.com>
+
+	PR c++/60189
+	* c-c++-common/cilk-plus/CK/invalid_sync.cc: New test.
+
+2014-05-18  Jan Hubicka  <hubicka@ucw.cz>
+
+	PR middle-end/58094
+	* g++.dg/ipa/devirt-11.C: Be lax about number of devirtualizations.
+
 2014-05-18  Eric Botcazou  <ebotcazou@adacore.com>
 
 	* gnat.dg/enum3.adb: New test.
