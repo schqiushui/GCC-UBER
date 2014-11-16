@@ -1,3 +1,44 @@
+2014-11-16  Eric Botcazou  <ebotcazou@adacore.com>
+
+	* doc/tm.texi.in (TARGET_FLAGS_REGNUM): Move around.
+	* doc/tm.texi: Regenerate.
+
+2014-11-14  Felix Yang  <felix.yang@huawei.com>
+
+	Backport from mainline
+	2014-11-14  Felix Yang  <felix.yang@huawei.com>
+		    Jiji Jiang  <jiangjiji@huawei.com>
+
+	* config/aarch64/aarch64-simd.md (*aarch64_simd_ld1r<mode>): Use
+	VALL mode iterator instead of VALLDI.
+
+2014-11-13  Teresa Johnson  <tejohnson@google.com>
+
+	PR tree-optimization/63841
+	* tree-ssa-strlen.c (strlen_optimize_stmt): Ignore clobbers.
+
+2014-11-13  Christophe Lyon  <christophe.lyon@linaro.org>
+
+	Backport from mainline
+	2014-11-02  Michael Collison  <michael.collison@linaro.org>
+
+	* config/arm/arm.h (CLZ_DEFINED_VALUE_AT_ZERO) : Update
+	to support vector modes.
+	(CTZ_DEFINED_VALUE_AT_ZERO): Ditto.
+
+2014-11-13  Eric Botcazou  <ebotcazou@adacore.com>
+
+	* doc/tm.texi.in (SELECT_CC_MODE): Update example.
+	(REVERSIBLE_CC_MODE): Fix example.
+	(REVERSE_CONDITION): Fix typo.
+	* doc/tm.texi: Regenerate.
+
+2014-11-12  Jakub Jelinek  <jakub@redhat.com>
+
+	PR ipa/63838
+	* ipa-pure-const.c (propagate_nothrow): Walk w->indirect_calls
+	chain instead of node->indirect_calls.
+
 2014-11-11  Eric Botcazou  <ebotcazou@adacore.com>
 
 	PR target/61535
