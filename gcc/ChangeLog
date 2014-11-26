@@ -1,3 +1,53 @@
+2014-11-25  Rohit  <rohitarulraj@freescale.com>
+
+	PR bootstrap/63703
+	* config/rs6000/darwin.h (REGISTER_NAMES): Update based on 32 newly
+	added GCC hard register numbers for SPE high registers.
+
+2014-11-23  Oleg Endo  <olegendo@gcc.gnu.org>
+
+	Backport from mainline
+	2014-11-23  Oleg Endo  <olegendo@gcc.gnu.org>
+
+	PR target/53976
+	* config/sh/sh_optimize_sett_clrt.cc
+	(sh_optimize_sett_clrt::find_last_ccreg_values): Return bool instead
+	of void.  Abort at complex edges.
+	(sh_optimize_sett_clrt::execute): Do nothing if find_last_ccreg_values
+	returned false.
+
+2014-11-22  Oleg Endo  <olegendo@gcc.gnu.org>
+
+	Backport from mainline
+	2014-11-22  Oleg Endo  <olegendo@gcc.gnu.org>
+
+	PR target/63783
+	PR target/51244
+	* config/sh/sh_treg_combine.cc (sh_treg_combine::make_not_reg_insn):
+	Do not emit bitwise not insn.  Emit logical not insn sequence instead.
+	Adjust related comments throughout the file.
+
+2014-11-22  Oleg Endo  <olegendo@gcc.gnu.org>
+
+	Backport from mainline
+	2014-11-20  Segher Boessenkool  <segher@kernel.crashing.org>
+
+	PR target/60111
+	* config/sh/sh.c: Use signed char for signed field.
+
+2014-11-21  Bill Schmidt  <wschmidt@linux.vnet.ibm.com>
+
+	PR target/63673
+	* config/rs6000/rs6000-c.c (altivec_overloaded_builtins): Allow
+	the base pointer of vec_vsx_ld and vec_vsx_st to take a pointer to
+	double.
+
+2014-11-21  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/61750
+	* tree-ssa-forwprop.c (simplify_vce): Verify type sizes
+	match for the resulting VIEW_CONVERT_EXPR.
+
 2014-11-19  Uros Bizjak  <ubizjak@gmail.com>
 
 	PR target/63947
