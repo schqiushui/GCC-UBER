@@ -1,3 +1,74 @@
+2014-12-04  Jakub Jelinek  <jakub@redhat.com>
+
+	PR c++/56493
+	* c-c++-common/pr56493.c: New test.
+
+2014-12-03  Renlin Li  <Renlin.Li@arm.com>
+
+	Backported from mainline
+	2014-12-03  Renlin Li  <Renlin.Li@arm.com>
+		    H.J. Lu  <hongjiu.lu@intel.com>
+
+	 PR middle-end/63762
+	 PR target/63661
+	 * gcc.dg/pr63762.c: New test.
+	 * gcc.target/i386/pr63661.c: New test.
+
+2014-12-01  Martin Jambor  <mjambor@suse.cz>
+
+	PR ipa/63551
+	* gcc.dg/ipa/pr63551.c: New test.
+	* gcc.dg/ipa/pr64041.c: Likewise.
+
+2014-12-01  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/63738
+	* gcc.dg/torture/pr63738.c: Fix call to setjmp.
+
+2014-11-28  Jakub Jelinek  <jakub@redhat.com>
+
+	Backported from mainline
+	2014-11-27  Jakub Jelinek  <jakub@redhat.com>
+
+	PR middle-end/64067
+	* gcc.c-torture/compile/pr64067.c: New test.
+
+	2014-11-19  Jakub Jelinek  <jakub@redhat.com>
+
+	PR tree-optimization/63915
+	* c-c++-common/gomp/pr60823-4.c: New test.
+
+	PR sanitizer/63913
+	* g++.dg/ubsan/pr63913.C: New test.
+
+	2014-10-31  Jakub Jelinek  <jakub@redhat.com>
+
+	PR rtl-optimization/63659
+	* gcc.c-torture/execute/pr63659.c: New test.
+
+2014-11-26  Richard Biener  <rguenther@suse.de>
+
+	PR middle-end/63738
+	* gcc.dg/torture/pr63738.c: New testcase.
+
+2014-11-26  Richard Biener  <rguenther@suse.de>
+
+	Backport from mainline
+	2014-11-26  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/62238
+	* gcc.dg/torture/pr62238.c: New testcase.
+
+	2014-11-07  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/63605
+	* gcc.dg/vect/pr63605.c: New testcase.
+
+	2014-10-28  Richard Biener  <rguenther@suse.de>
+
+	PR middle-end/63665
+	* gcc.dg/pr63665.c: New testcase.
+
 2014-11-24  Eric Botcazou  <ebotcazou@adacore.com>
 
 	* gnat.dg/opt45.adb: New test.
