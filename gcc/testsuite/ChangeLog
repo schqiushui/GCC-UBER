@@ -1,3 +1,28 @@
+2014-12-07  Oleg Endo  <olegendo@gcc.gnu.org>
+
+	Backport from mainline
+	2014-12-07  Oleg Endo  <olegendo@gcc.gnu.org>
+
+	* gcc.target/h8300/h8300.exp: Fix duplicated text.
+	* gcc.target/h8300/pragma-isr.c: Likewise.
+	* gcc.target/h8300/pragma-isr2.c: Likewise.
+
+2014-12-05  H.J. Lu  <hongjiu.lu@intel.com>
+
+	Backport from mainline
+	2014-12-02  H.J. Lu  <hongjiu.lu@intel.com>
+
+	PR target/64108
+	* gcc.target/i386/memset-strategy-2.c: New test.
+
+2014-12-05  H.J. Lu  <hongjiu.lu@intel.com>
+
+	Backport from mainline
+	2014-11-28  H.J. Lu  <hongjiu.lu@intel.com>
+
+	PR rtl-optimization/64037
+	* g++.dg/pr64037.C: New test.
+
 2014-12-04  Jakub Jelinek  <jakub@redhat.com>
 
 	PR c++/56493

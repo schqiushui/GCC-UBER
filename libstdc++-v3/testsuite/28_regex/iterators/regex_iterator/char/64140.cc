@@ -1,47 +1,53 @@
-// { dg-options "-std=gnu++0x" }
-// { dg-do compile }
+// { dg-options "-std=gnu++11" }
 
-// Copyright (C) 2011-2014 Free Software Foundation, Inc.
+//
+// Copyright (C) 2014 Free Software Foundation, Inc.
 //
 // This file is part of the GNU ISO C++ Library.  This library is free
 // software; you can redistribute it and/or modify it under the
 // terms of the GNU General Public License as published by the
 // Free Software Foundation; either version 3, or (at your option)
 // any later version.
-
+//
 // This library is distributed in the hope that it will be useful,
 // but WITHOUT ANY WARRANTY; without even the implied warranty of
 // MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 // GNU General Public License for more details.
-
+//
 // You should have received a copy of the GNU General Public License along
 // with this library; see the file COPYING3.  If not see
 // <http://www.gnu.org/licenses/>.
 
-// 20.4.2.1 [tuple.cnstr] Allocator-extended constructors
+// libstdc++/64140
 
-#include <memory>
-#include <tuple>
+#include <regex>
+#include <testsuite_hooks.h>
 
-struct MyAlloc { };
-
-struct Type
+void
+test01()
 {
-  typedef MyAlloc allocator_type; // uses_allocator<Type, MyAlloc> is true
+  bool test __attribute__((unused)) = true;
 
-  explicit Type(int) { }
+  const std::regex e("z*");
+  const std::string s("ab");
 
-  Type(std::allocator_arg_t, MyAlloc) { }
-  Type(MyAlloc) { }
-};
-
-void test01()
-{
-  using std::allocator_arg;
-  using std::tuple;
-
-  MyAlloc a;
-
-  tuple<Type> t(allocator_arg, a, 1);
+  auto it = std::sregex_iterator(s.begin(), s.end(), e);
+  auto end = std::sregex_iterator();
+  VERIFY(it != end);
+  VERIFY(!it->prefix().matched);
+  ++it;
+  VERIFY(it != end);
+  VERIFY(it->prefix().matched);
+  ++it;
+  VERIFY(it != end);
+  VERIFY(it->prefix().matched);
+  ++it;
+  VERIFY(it == end);
 }
-// { dg-error "no matching function" "" { target *-*-* } 119 }
+
+int
+main()
+{
+  test01();
+  return 0;
+}

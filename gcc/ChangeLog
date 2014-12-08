@@ -1,3 +1,29 @@
+2014-12-07  Oleg Endo  <olegendo@gcc.gnu.org>
+
+	Backport from mainline
+	2014-12-07  Oleg Endo  <olegendo@gcc.gnu.org>
+
+	PR target/50751
+	* config/sh/sh.md (extendqihi2): Allow only for TARGET_SH1.
+
+2014-12-05  H.J. Lu  <hongjiu.lu@intel.com>
+
+	Backport from mainline
+	2014-12-02  H.J. Lu  <hongjiu.lu@intel.com>
+
+	PR target/64108
+	* config/i386/i386.c (decide_alg): Stop only if there aren't
+	any usable algorithms.
+
+2014-12-05  H.J. Lu  <hongjiu.lu@intel.com>
+
+	Backport from mainline
+	2014-11-28  H.J. Lu  <hongjiu.lu@intel.com>
+
+	PR rtl-optimization/64037
+	* combine.c (setup_incoming_promotions): Pass the argument
+	before any promotions happen to promote_function_mode.
+
 2014-12-04  Tobias Burnus  <burnus@net-b.de>
 
 	* configure.ac
