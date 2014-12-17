@@ -1,3 +1,20 @@
+2014-12-17  Ulrich Weigand  <Ulrich.Weigand@de.ibm.com>
+
+	Backport from mainline
+	2014-12-03  Ulrich Weigand  <Ulrich.Weigand@de.ibm.com>
+
+	PR rtl-optimization/64010
+	* reload.c (push_reload): Before reusing a register contained
+	in an operand as input reload register, ensure that it is not
+	used in CALL_INSN_FUNCTION_USAGE.
+
+2014-12-15  Jakub Jelinek  <jakub@redhat.com>
+
+	PR sanitizer/64265
+	* tsan.c (instrument_func_entry): Insert __tsan_func_entry
+	call on edge from entry block to single succ instead
+	of after labels of single succ of entry block.
+
 2014-12-14  H.J. Lu  <hongjiu.lu@intel.com>
 
 	Backported from mainline
