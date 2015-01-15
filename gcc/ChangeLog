@@ -1,3 +1,27 @@
+2015-01-14  Jakub Jelinek  <jakub@redhat.com>
+
+	Backported from mainline
+	2015-01-12  Jakub Jelinek  <jakub@redhat.com>
+
+	PR target/64513
+	* config/i386/i386.c (ix86_expand_prologue): Add
+	REG_FRAME_RELATED_EXPR to %rax and %r10 pushes.
+
+	2015-01-13  Jakub Jelinek  <jakub@redhat.com>
+
+	PR rtl-optimization/64286
+	* ree.c (combine_reaching_defs): Move part of comment earlier,
+	remove !SCALAR_INT_MODE_P check.
+	(add_removable_extension): Don't add vector mode
+	extensions if all uses of the source register aren't the same
+	vector extensions.
+
+	2015-01-12  Jakub Jelinek  <jakub@redhat.com>
+
+	PR tree-optimization/64563
+	* tree-vrp.c (vrp_evaluate_conditional): Check for VR_RANGE
+	instead of != VR_VARYING.
+
 2015-01-14  Marek Polacek  <polacek@redhat.com>
 
 	Backport from mainline
