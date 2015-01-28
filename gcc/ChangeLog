@@ -1,3 +1,84 @@
+2015-01-27  Andreas Krebbel  <Andreas.Krebbel@de.ibm.com>
+
+	* config/s390/s390.c (s390_memory_move_cost): Increase costs for
+	memory accesses.
+
+2015-01-27  Andreas Krebbel  <Andreas.Krebbel@de.ibm.com>
+
+	* config/s390/s390.c (s390_register_move_cost): Increase costs for
+	FPR->GPR moves.
+
+2015-01-26  Uros Bizjak  <ubizjak@gmail.com>
+
+	Backport from mainline
+	2015-01-26  Uros Bizjak  <ubizjak@gmail.com>
+
+	PR target/64795
+	* config/i386/i386.md (*movdi_internal): Also check operand 0
+	to determine TYPE_LEA operand.
+	(*movsi_internal): Ditto.
+
+	Backport from mainline
+	2015-01-23  Uros Bizjak  <ubizjak@gmail.com>
+
+	* config/i386/sse.md (sse2_loadld): Set attribute isa to sse2 for
+	alternative 1.
+
+2015-01-23  Jakub Jelinek  <jakub@redhat.com>
+
+	PR middle-end/64734
+	* omp-low.c (scan_sharing_clauses): Don't ignore
+	OMP_CLAUSE_MAP_ZERO_BIAS_ARRAY_SECTION GOMP_MAP_POINTER clauses
+	on target data/update constructs.
+
+2015-01-23  Wei Mi  <wmi@google.com>
+
+	Backported from trunk.
+	2015-01-22  Wei Mi  <wmi@google.com>
+
+	PR rtl-optimization/64557
+	* dse.c (record_store): Call get_addr for mem_addr.
+	(check_mem_read_rtx): Likewise.
+
+2015-01-22  Andreas Krebbel  <Andreas.Krebbel@de.ibm.com>
+
+	* config/s390/s390.md (atomic code attribute): Fix typo "ior" ->
+	"or".
+
+2015-01-21  Wei Mi  <wmi@google.com>
+
+	Backported from trunk.
+	2014-11-22  Jan Hubicka  <hubicka@ucw.cz>
+
+	PR ipa/63970
+	* ipa.c (symbol_table::remove_unreachable_nodes): Mark all inline clones
+	as having abstract origin used.
+	* ipa-inline-transform.c (can_remove_node_now_p_1): Drop abstract origin check.
+	(clone_inlined_nodes): Copy abstract originflag.
+	* lto-cgraph.c (compute_ltrans_boundary): Use get_create to get abstract origin node.
+
+2015-01-20  Chung-Lin Tang  <cltang@codesourcery.com>
+
+	Backport from mainline
+	* config/nios2/nios2.c (nios2_asm_file_end): Implement
+	TARGET_ASM_FILE_END hook for adding .note.GNU-stack section when
+	needed.
+	(TARGET_ASM_FILE_END): Define.
+
+2015-01-15  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2014-11-27  Richard Biener  <rguenther@suse.de>
+
+	PR middle-end/63704
+	* alias.c (mems_in_disjoint_alias_sets_p): Remove assert
+	and instead return false when !fstrict-aliasing.
+
+2015-01-15  Eric Botcazou  <ebotcazou@adacore.com>
+
+	* expr.c (expand_expr_real_1) <normal_inner_ref>: Use the expression to
+	set the memory attributes in all cases but clear MEM_EXPR if need be.
+
 2015-01-14  Jakub Jelinek  <jakub@redhat.com>
 
 	Backported from mainline
