@@ -1,3 +1,58 @@
+2015-02-01  H.J. Lu  <hongjiu.lu@intel.com>
+
+	Backported from mainline
+	2015-01-24  H.J. Lu  <hongjiu.lu@intel.com>
+
+	* config/i386/driver-i386.c (host_detect_local_cpu): Check new
+	Silvermont, Haswell, Broadwell and Knights Landing model numbers.
+	* config/i386/i386.c (processor_model): Add
+	M_INTEL_COREI7_BROADWELL.
+	(arch_names_table): Add "broadwell".
+
+2015-02-01  Jakub Jelinek  <jakub@redhat.com>
+
+	Backported from mainline
+	2015-01-27  Jakub Jelinek  <jakub@redhat.com>
+
+	PR rtl-optimization/61058
+	* jump.c (cleanup_barriers): Update basic block boundaries
+	if BLOCK_FOR_INSN is non-NULL on PREV.
+
+	2015-01-26  Jakub Jelinek  <jakub@redhat.com>
+
+	PR middle-end/64421
+	* omp-low.c (simd_clone_mangle): If DECL_ASSEMBLER_NAME starts
+	with asterisk, skip the first character.
+
+	* config/rs6000/rs6000-cpus.def (POWERPC_MASKS): Add
+	OPTION_MASK_QUAD_MEMORY_ATOMIC.
+
+	2015-01-23  Jakub Jelinek  <jakub@redhat.com>
+
+	PR rtl-optimization/63637
+	PR rtl-optimization/60663
+	* cse.c (merge_equiv_classes): Set new_elt->cost to MAX_COST
+	if elt->cost is MAX_COST for ASM_OPERANDS.
+	(find_sets_in_insn): Fix up comment typo.
+	(cse_insn): Don't set src_volatile for all non-volatile
+	ASM_OPERANDS in PARALLELs, but just those with multiple outputs
+	or with "memory" clobber.  Set elt->cost to MAX_COST
+	for ASM_OPERANDS in PARALLEL.  Set src_elt->cost to MAX_COST
+	if new_src is ASM_OPERANDS and elt->cost is MAX_COST.
+
+	PR debug/64511
+	* dwarf2out.c (struct dw_loc_descr_node): Add chain_next
+	GTY markup.
+
+	2015-01-20  Jakub Jelinek  <jakub@redhat.com>
+
+	PR debug/64663
+	* dwarf2out.c (decl_piece_node): Don't put bitsize into
+	mode if bitsize <= 0.
+	(decl_piece_bitsize, adjust_piece_list, add_var_loc_to_decl,
+	dw_sra_loc_expr): Use HOST_WIDE_INT instead of int for bit
+	sizes and positions.
+
 2015-01-29  Ilya Tocar  <ilya.tocar@intel.com>
 
 	* config/i386/avx2intrin.h (_mm256_bslli_epi128,
