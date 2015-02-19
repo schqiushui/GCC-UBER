@@ -1,3 +1,104 @@
+2015-02-19  Richard Biener  <rguenther@suse.de>
+
+	Backport from mainline
+	2014-12-09  Richard Biener  <rguenther@suse.de>
+
+	PR middle-end/64199
+	* fold-const.c (fold_binary_loc): Use TREE_OVERFLOW_P.
+
+	2015-01-14  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/64493
+	PR tree-optimization/64495
+	* tree-vect-loop.c (vect_finalize_reduction): For double-reductions
+	assign the proper vectorized PHI to the inner loop exit PHIs.
+
+	2015-01-27  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/56273
+	PR tree-optimization/59124
+	PR tree-optimization/64277
+	* tree-vrp.c (vrp_finalize): Emit array-bound warnings only
+	from the first VRP pass.
+
+	2015-02-19  Richard Biener  <rguenther@suse.de>
+
+	Backport from mainline
+	2015-01-15  Richard Biener  <rguenther@suse.de>
+
+	PR middle-end/64365
+	* tree-data-ref.c (dr_analyze_indices): Make sure that accesses
+	for MEM_REF access functions with the same base can never partially
+	overlap.
+
+2015-02-17  Ilya Tocar  <ilya.tocar@intel.com>
+
+	Backported from mainline
+	2015-01-14  Ilya Tocar  <ilya.tocar@intel.com>
+
+	PR target/64387
+	* config/i386/sse.md (vec_unpacks_hi_v8sf): Fix predicate.
+	(vec_unpacks_hi_v16sf): Ditto.
+
+2015-02-15  John David Anglin  <danglin@gcc.gnu.org>
+
+	* config/pa/pa.c (pa_secondary_reload): Request a secondary reload
+	for all floading point loads and stores except those using a register
+	index address.
+	* config/pa/pa.md: Add new patterns to load a lo_sum DLT operand
+	to a register.
+
+2015-02-13  John David Anglin  <danglin@gcc.gnu.org>
+
+	* config/pa/constraints.md: Change "Q" and "T" constraints to memory
+	constraints.
+	* config/pa/pa.c (pa_cannot_force_const_mem): Don't allow constant
+	symbolic references to data to be forced to constant memory on the
+	SOM target.
+
+2015-02-11  Jakub Jelinek  <jakub@redhat.com>
+
+	Backported from mainline
+	2015-02-09  Jakub Jelinek  <jakub@redhat.com>
+
+	PR target/64979
+	* tree-stdarg.c (pass_stdarg::execute): Scan phi node args for
+	va_list escapes.
+
+2015-02-11  Uros Bizjak  <ubizjak@gmail.com>
+
+	* config/alpha/alpha.md (reload_out<mode>_aligned): Make operands 2
+	and 3 earlyclobber operands.
+
+2015-02-09  Dominik Vogt  <vogt@linux.vnet.ibm.com>
+
+        * doc/extend.texi: s/390: Update documentation of hotpatch attribute.
+        * doc/invoke.texi (-mhotpatch): s/390: Update documentation of
+        -mhotpatch= option.
+        * config/s390/s390.opt (mhotpatch): s/390: Remove -mhotpatch and
+        -mno-hotpatch options.  Change syntax of -mhotpatch= option.
+        * config/s390/s390.c (s390_hotpatch_trampoline_halfwords_default):
+        Renamed.
+        (s390_hotpatch_trampoline_halfwords_max): Renamed.
+        (s390_hotpatch_hw_max): New name.
+        (s390_hotpatch_trampoline_halfwords): Renamed.
+        (s390_hotpatch_hw_before_label): New name.
+        (get_hotpatch_attribute): Removed.
+        (s390_hotpatch_hw_after_label): New name.
+        (s390_handle_hotpatch_attribute): Add second parameter to hotpatch
+        attribute.
+        (s390_attribute_table): Ditto.
+        (s390_function_num_hotpatch_trampoline_halfwords): Renamed.
+        (s390_function_num_hotpatch_hw): New name.
+        Remove special handling of inline functions and hotpatching.
+        Return number of nops before and after the function label.
+        (s390_can_inline_p): Removed.
+        (s390_asm_output_function_label): Emit a configurable number of nops
+        after the function label.
+        (s390_option_override): Update -mhotpatch= syntax and remove -mhotpatch.
+        (TARGET_CAN_INLINE_P) Removed.
+        (TARGET_FUNCTION_ATTRIBUTE_INLINABLE_P): New.
+
 2015-02-05  Segher Boessenkool  <segher@kernel.crashing.org>
 
 	PR target/64580
