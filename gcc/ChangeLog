@@ -1,3 +1,44 @@
+2015-02-26  Matthew Fortune  <matthew.fortune@imgtec.com>
+
+	PR target/64569
+	Backported from mainline: r213872, r217446, r217939, r219867
+
+	* config.in [!USED_FOR_TARGET] (HAVE_AS_DOT_MODULE): Undefine.
+	* config/mips/mips.h (FP_ASM_SPEC): New macro.
+	(ASM_SPEC): Use FP_ASM_SPEC.
+	* configure.ac (HAVE_AS_DOT_MODULE): Detect support for .module
+	and FPXX extensions.
+	* configure: Regenerate.
+
+2015-02-25  Jason Merrill  <jason@redhat.com>
+
+	* common.opt (-flifetime-dse): New.
+
+2015-02-25  Kai Tietz  <ktietz@redhat.com>
+
+	PR tree-optimization/61917
+	* tree-vect-loop.c (vectorizable_reduction): Handle obvious case
+	that reduc_def_stmt is null.
+
+	Merged from mainline
+	PR target/64212
+	* symtab.c (symtab::make_decl_local): Set DECL_IMPORT_P explicit to 0.
+	(symtab::noninterposable_alias): Likewise.
+
+2015-02-25  Richard Biener  <rguenther@suse.de>
+	Kai Tietz  <ktietz@redhat.com>
+
+	Backported from mainline
+	PR tree-optimization/61917
+	* tree-vect-loop.c (vectorizable_reduction): Allow
+	vect_internal_def without reduction to exit graceful.
+
+2015-02-25  Georg-Johann Lay  <avr@gjlay.de>
+
+	PR target/65196
+	* config/avr/avr.c (avr_adjust_insn_length): Call recog_memoized
+	only with NONDEBUG_INSN_P.
+
 2015-02-25  Kaz Kojima  <kkojima@gcc.gnu.org>
 
 	Backport from mainline
@@ -24,7 +65,7 @@
 	for LTO produced CUs.
 
 	2015-02-16  Richard Biener  <rguenther@suse.de>
- 
+
 	PR lto/65015
 	* varasm.c (default_file_start): For LTO produced units
 	emit <artificial> as file directive.
