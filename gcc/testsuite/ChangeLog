@@ -1,3 +1,20 @@
+2015-02-27  Pat Haugen <pthaugen@us.ibm.com>
+
+	* gcc.dg/vect/pr59354.c: Move vector producing code to separate function.
+
+2015-02-27  Marek Polacek  <polacek@redhat.com>
+
+	Backported from mainline
+	2015-02-27  Marek Polacek  <polacek@redhat.com>
+
+	PR c/65228
+	* gcc.dg/pr65228.c: New test.
+
+2015-02-27  Richard Biener  <rguenther@suse.de>
+
+	PR lto/65193
+	* g++.dg/lto/pr65193_0.C: New testcase.
+
 2015-02-26  Peter Bergner  <bergner@vnet.ibm.com>
 
 	Backport from mainline
