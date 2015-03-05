@@ -47,6 +47,7 @@
 #endif
 #include <limits.h>
 #include <errno.h>
+#include <asm/page.h>
 
 #ifndef PAGE_SIZE
 #define PAGE_SIZE 4096
