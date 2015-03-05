@@ -68,9 +68,6 @@ AC_DEFUN([ISL_INIT_FLAGS],
     ENABLE_ISL_CHECK=no
     AC_MSG_WARN([using in-tree ISL, disabling version check])
   fi
-
-  islinc="-DCLOOG_INT_GMP ${islinc}"
-  isllibs="${isllibs} -lisl"
 ]
 )
 
