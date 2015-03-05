@@ -2234,8 +2234,10 @@ if test -f $gcc_cv_binutils_srcdir/configure.in \
 	gcc_cv_readelf=../binutils/readelf$build_exeext
 elif test -x readelf$build_exeext; then
 	gcc_cv_readelf=./readelf$build_exeext
+elif ( set dummy $READELF_FOR_TARGET; test -x $[2] ); then
+        gcc_cv_readelf="$READELF_FOR_TARGET"
 else
-        AC_PATH_PROG(gcc_cv_readelf, readelf)
+        AC_PATH_PROG(gcc_cv_readelf, $READELF_FOR_TARGET)
 fi])
 
 AC_MSG_CHECKING(what readelf to use)
@@ -5526,9 +5528,6 @@ AC_ARG_VAR(GMPINC,[How to find GMP include files])
 
 AC_ARG_VAR(ISLLIBS,[How to link ISL])
 AC_ARG_VAR(ISLINC,[How to find ISL include files])
-if test "x${ISLLIBS}" != "x" ; then 
-   AC_DEFINE(HAVE_isl, 1, [Define if isl is in use.])
-fi
 
 AC_ARG_VAR(CLOOGLIBS,[How to link CLOOG])
 AC_ARG_VAR(CLOOGINC,[How to find CLOOG include files])
