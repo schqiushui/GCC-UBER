@@ -1,3 +1,55 @@
+2015-03-12  Mikael Morin  <mikael@gcc.gnu.org>
+
+	PR fortran/60898
+	* gfortran.dg/entry_20.f90: New.
+
+2015-03-12  Dominik Vogt  <vogt@linux.vnet.ibm.com>
+
+	Backport from mainline
+	* gcc.target/s390/hotpatch-21.c: New test for hotpatch alignment.
+	* gcc.target/s390/hotpatch-22.c: Likewise.
+	* gcc.target/s390/hotpatch-23.c: Likewise.
+	* gcc.target/s390/hotpatch-24.c: Likewise.
+	* gcc.target/s390/hotpatch-2.c: Also check hotpatch alignment.
+	* gcc.target/s390/hotpatch-1.c: Update expected output.
+	* gcc.target/s390/hotpatch-2.c: Likewise.
+	* gcc.target/s390/hotpatch-3.c: Likewise.
+	* gcc.target/s390/hotpatch-4.c: Likewise.
+	* gcc.target/s390/hotpatch-5.c: Likewise.
+	* gcc.target/s390/hotpatch-6.c: Likewise.
+	* gcc.target/s390/hotpatch-7.c: Likewise.
+	* gcc.target/s390/hotpatch-8.c: Likewise.
+	* gcc.target/s390/hotpatch-9.c: Likewise.
+	* gcc.target/s390/hotpatch-10.c: Likewise.
+	* gcc.target/s390/hotpatch-11.c: Likewise.
+	* gcc.target/s390/hotpatch-12.c: Likewise.
+	* gcc.target/s390/hotpatch-13.c: Likewise.
+	* gcc.target/s390/hotpatch-14.c: Likewise.
+	* gcc.target/s390/hotpatch-15.c: Likewise.
+	* gcc.target/s390/hotpatch-16.c: Likewise.
+	* gcc.target/s390/hotpatch-17.c: Likewise.
+	* gcc.target/s390/hotpatch-18.c: Likewise.
+	* gcc.target/s390/hotpatch-19.c: Likewise.
+
+2015-03-12  Andreas Krebbel  <Andreas.Krebbel@de.ibm.com>
+
+	Backport from mainline
+	2015-02-27  Andreas Krebbel  <Andreas.Krebbel@de.ibm.com>
+
+	* gcc.target/s390/20140327-1.c: Remove -m31 and guard with ! lp64.
+	* gcc.target/s390/hotpatch-8.c: Likewise.
+	* gcc.target/s390/hotpatch-9.c: Likewise.
+	* gcc.target/s390/pr57960.c: Remove -m64.
+	* gcc.target/s390/pr57559.c: Likewise.
+
+2015-03-11  Marek Polacek  <polacek@redhat.com>
+
+	Backported from mainline
+	2014-12-04  Marek Polacek  <polacek@redhat.com>
+
+	PR middle-end/56917
+	* c-c++-common/ubsan/pr56917.c: New test.
+
 2015-03-10  Paul Thomas  <pault@gcc.gnu.org>
 
 	Backported from mainline
