@@ -1,3 +1,45 @@
+2015-03-12  Dominik Vogt  <vogt@linux.vnet.ibm.com>
+
+	Backport from mainline
+	* config/s390/s390.c (s390_reorg): Move code to output nops after label
+	to s390_reorg ().
+	(s390_asm_output_function_label): Likewise.
+	* config/s390/s390.c (s390_asm_output_function_label):
+	Fix function label alignment with -mhtopatch.
+	* config/s390/s390.md ("unspecv"): New values UNSPECV_NOP_2_BYTE,
+	UNSPECV_NOP_4_BYTE and UNSPECV_NOP_6_BYTE
+	("nop_2_byte"): New define_insn.
+	("nop_4_byte"): Likewise.
+	("nop_6_byte"): Likewise.
+	* doc/extend.texi (hotpatch): hotpatch attribute doc fixes.
+	* doc/invoke.texi (-mhotpatch): -mhotpatch doc fixes.
+
+2015-03-12  Marek Polacek  <polacek@redhat.com>
+
+	Backported from mainline
+	2015-03-11  Marek Polacek  <polacek@redhat.com>
+
+	PR tree-optimization/65388
+	* tree-ssa-tail-merge.c (same_succ_def::equal): Fix typo in comparison.
+
+2015-03-11  Georg-Johann Lay  <avr@gjlay.de>
+
+	PR target/65296
+	* configure.ac [avr]: Check as for option -mrmw.
+	* configure: Regenerate.
+	* config.in: Regenerate.
+	* config/avr/driver-avr.c (avr_device_to_as): Don't add -mrmw to
+	assembler options if not HAVE_AS_AVR_MRMW_OPTION.
+
+2015-03-11  Marek Polacek  <polacek@redhat.com>
+
+	Backported from mainline
+	2014-12-04  Marek Polacek  <polacek@redhat.com>
+
+	PR middle-end/56917
+	* fold-const.c (fold_unary_loc): Perform the negation in A's type
+	when transforming ~ (A - 1) or ~ (A + -1) to -A.
+
 2015-03-10  Yvan Roux  <yvan.roux@linaro.org>
 
 	Backport from trunk r220489.
