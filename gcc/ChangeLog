@@ -1,3 +1,88 @@
+2015-07-30  Uros Bizjak  <ubizjak@gmail.com>
+
+	Backport from mainline:
+	2015-07-17  Uros Bizjak  <ubizjak@gmail.com>
+
+	PR rtl-optimization/66891
+	* calls.c (expand_call): Wrap precompute_register_parameters with
+	NO_DEFER_POP/OK_DEFER_POP to prevent deferred pops.
+
+	2015-07-15  Uros Bizjak  <ubizjak@gmail.com>
+
+	PR target/58066
+	* config/i386/i386.md (*tls_global_dynamic_64_<mode>): Depend on SP_REG.
+	(*tls_local_dynamic_base_64_<mode>): Ditto.
+	(*tls_local_dynamic_base_64_largepic): Ditto.
+	(tls_global_dynamic_64_<mode>): Update expander pattern.
+	(tls_local_dynamic_base_64_<mode>): Ditto.
+
+	2015-07-15  Uros Bizjak  <ubizjak@gmail.com>
+
+	PR rtl-optimization/58066
+	* calls.c (expand_call): Precompute register parameters before stack
+	alignment is performed.
+
+	2014-05-08  Wei Mi  <wmi@google.com>
+
+	PR target/58066
+	* config/i386/i386.c (ix86_compute_frame_layout): Update
+	preferred_stack_boundary for call, expanded from tls descriptor.
+	* config/i386/i386.md (*tls_global_dynamic_32_gnu): Update RTX
+	to depend on SP register.
+	(*tls_local_dynamic_base_32_gnu): Ditto.
+	(*tls_local_dynamic_32_once): Ditto.
+	(tls_global_dynamic_64_<mode>): Set
+	ix86_tls_descriptor_calls_expanded_in_cfun.
+	(tls_local_dynamic_base_64_<mode>): Ditto.
+	(tls_global_dynamic_32): Set
+	ix86_tls_descriptor_calls_expanded_in_cfun. Update RTX
+	to depend on SP register.
+	(tls_local_dynamic_base_32): Ditto.
+
+2015-07-25  Tom de Vries  <tom@codesourcery.com>
+
+	backport from trunk:
+	2015-07-24  Tom de Vries  <tom@codesourcery.com>
+
+	* graphite-sese-to-poly.c (is_reduction_operation_p): Limit
+	flag_associative_math to FLOAT_TYPE_P.  Honour
+	TYPE_OVERFLOW_WRAPS for INTEGRAL_TYPE_P. Don't allow any other types.
+
+2015-07-25  Kaz Kojima  <kkojima@gcc.gnu.org>
+
+	Backport from mainline
+	2015-07-16  Kaz Kojima  <kkojima@gcc.gnu.org>
+
+	PR target/65249
+	* config/sh/sh.md (movdi): Split simple reg move to two movsi
+	when the destination is R0.
+
+2015-07-24  Szabolcs Nagy  <szabolcs.nagy@arm.com>
+
+	Backported from mainline r226159.
+	2015-07-24  Szabolcs Nagy  <szabolcs.nagy@arm.com>
+
+	* config/aarch64/aarch64-elf-raw.h (LINK_SPEC): Handle -h, -static,
+	-shared, -symbolic, -rdynamic.
+
+2015-07-24  Szabolcs Nagy  <szabolcs.nagy@arm.com>
+
+	Backported from mainline r226158.
+	2015-07-24  Szabolcs Nagy  <szabolcs.nagy@arm.com>
+
+	PR target/65711
+	* config/aarch64/aarch64-linux.h (LINUX_TARGET_LINK_SPEC): Move
+	-dynamic-linker within %{!static %{!shared, and -rdynamic within
+	%{!static.
+
+2015-07-21  Georg-Johann Lay  <avr@gjlay.de>
+
+	Backport from 2015-07-21 trunk r226046.
+
+	PR target/66956
+	* config/avr/avr-dimode.md (<extend_u>mulsidi3_insn)
+	(<extend_u>mulsidi3): Don't use if !AVR_HAVE_MUL.
+
 2015-07-18  Uros Bizjak  <ubizjak@gmail.com>
 
 	PR target/66922
