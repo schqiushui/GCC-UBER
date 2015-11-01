@@ -1,3 +1,31 @@
+2015-10-27  Caroline Tice  <cmtice@google.com>
+
+	(from Richard Biener)
+	* tree.c (int_cst_hash_hash):  Replace XORs with more efficient
+	calls to iterative_hash_host_wide_int.
+
+2015-10-27  Kyrylo Tkachov  <kyrylo.tkachov@arm.com>
+
+	Backport from mainline
+	2015-10-26  Kyrylo Tkachov  <kyrylo.tkachov@arm.com>
+
+	PR middle-end/67989
+	* optabs.c (expand_atomic_compare_and_swap): Handle case when
+	ptarget_oval or ptarget_bool are const0_rtx.
+
+2015-10-27  Kyrylo Tkachov  <kyrylo.tkachov@arm.com>
+
+	PR target/67929
+	* config/arm/arm.c (vfp3_const_double_for_bits): Rewrite.
+	* config/arm/constraints.md (Dp): Update callsite.
+	* config/arm/predicates.md (const_double_vcvt_power_of_two): Likewise.
+
+2015-10-25  John David Anglin  <danglin@gcc.gnu.org>
+
+	PR middle-end/68079
+	* dojump.c (do_compare_and_jump): Canonicalize both function and
+	method types.
+
 2015-10-15  Peter Bergner  <bergner@vnet.ibm.com>
 
 	Backport from mainline
