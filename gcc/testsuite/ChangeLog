@@ -1,3 +1,26 @@
+2016-01-14  Kyrylo Tkachov  <kyrylo.tkachov@arm.com>
+
+	PR target/68648
+	* gcc.dg/torture/pr68648.c: New test.
+
+2016-01-12  Jeff Law  <law@redhat.com>
+
+	PR target/63347
+	* gcc.target/m68k/pr63347.c: New test.
+
+2016-01-12  James Greenhalgh  <james.greenhalgh@arm.com>
+
+	Backport from mainline.
+	2015-12-09  James Greenhalgh  <james.greenhalgh@arm.com>
+
+	PR rtl-optimization/67609
+	* gcc.dg/torture/pr67609.c: New.
+
+2016-01-11  Martin Jambor  <mjambor@suse.cz>
+
+	PR ipa/66616
+	* g++.dg/ipa/pr66616.C: New test.
+
 2016-01-08  Martin Jambor  <mjambor@suse.cz>
 
 	Backport from mainline
