@@ -1,3 +1,13 @@
+2016-03-10  Alan Modra  <amodra@gmail.com>
+
+	* gcc.dg/pr69195.c: New.
+	* gcc.dg/pr69238.c: New.
+
+2016-03-04  Jakub Jelinek  <jakub@redhat.com>
+
+	PR target/70059
+	* gcc.target/i386/avx512f-pr70059.c: New test.
+
 2016-03-03  Rainer Orth  <ro@CeBiTec.Uni-Bielefeld.DE>
 
 	* lib/gcc-gdb-test.exp (gdb-test): Make log message match command.
