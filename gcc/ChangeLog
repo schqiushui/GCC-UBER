@@ -1,3 +1,77 @@
+2016-05-22  Iain Sandoe  <iain@codesourcery.com>
+	    Dominique d'Humieres  <dominiq@lps.ens.fr>
+
+	Backport from mainline
+	2015-12-17  Rainer Orth  <ro@CeBiTec.Uni-Bielefeld.DE>
+
+	PR target/67973
+	* configure.ac (gcc_cv_as_stabs_directive): New test.
+	* configure: Regenerate.
+	* config.in: Regenerate.
+	* config/darwin.h (DBX_DEBUGGING_INFO): Wrap in
+	HAVE_AS_STABS_DIRECTIVE.
+	(PREFERRED_DEBUGGING_TYPE): Likewise.
+	* config/i386/darwin.h (PREFERRED_DEBUGGING_TYPE): Only include
+	DBX_DEBUG if HAVE_AS_STABS_DIRECTIVE.
+
+	* doc/sourcebuild.texi (Effective-Target Keywords, Environment
+	attributes): Document stabs.
+
+2016-05-20  Eric Botcazou  <ebotcazou@adacore.com>
+
+	* config/arm/arm.c (arm_expand_prologue): Set the stack usage to 0
+	for naked functions.
+	(thumb1_expand_prologue): Likewise.
+
+2016-05-20  Uros Bizjak  <ubizjak@gmail.com>
+
+	* sched-deps.c (sched_analyze_2) <case TRAP_IF>: Also
+	force pending loads from memory.
+
+2016-05-20  Kyrylo Tkachov  <kyrylo.tkachov@arm.com>
+
+	Backport from mainline
+	2016-05-17  Kyrylo Tkachov  <kyrylo.tkachov@arm.com>
+
+	PR target/70809
+	* config/aarch64/aarch64-simd.md (aarch64_vmls<mode>): Delete.
+
+2016-05-19  Martin Jambor  <mjambor@suse.cz>
+
+	PR ipa/70646
+	* ipa-prop.c (determine_locally_known_aggregate_parts): Bail out early
+	if parameter PARAM_IPA_MAX_AGG_ITEMS is zero.
+
+2016-05-19  Martin Jambor  <mjambor@suse.cz>
+
+	PR ipa/70646
+	* ipa-inline.h (condition): New field size.
+	* ipa-inline-analysis.c (add_condition): New parameter SIZE, use it
+	for comaprison and store it into the new condition.
+	(evaluate_conditions_for_known_args): Use condition size to check
+	access sizes for all but CHANGED conditions.
+	(unmodified_parm_1): New parameter size_p, store access size into it.
+	(unmodified_parm): Likewise.
+	(unmodified_parm_or_parm_agg_item): Likewise.
+	(eliminated_by_inlining_prob): Pass NULL to unmodified_parm as size_p.
+	(set_cond_stmt_execution_predicate): Extract access sizes and store
+	them to conditions.
+	(set_switch_stmt_execution_predicate): Likewise.
+	(will_be_nonconstant_expr_predicate): Likewise.
+	(will_be_nonconstant_predicate): Likewise.
+	(inline_read_section): Stream condition size.
+	(inline_write_summary): Likewise.
+	* lto-streamer.h (LTO_minor_version): Bump.
+	* ipa-prop.c (ipa_load_from_parm_agg): Added size_p parameter, pass it
+	to ipa_load_from_parm_agg_1.
+	* ipa-prop.h (ipa_load_from_parm_agg): Update declaration.
+
+2016-05-18  Uros Bizjak  <ubizjak@gmail.com>
+
+	PR target/71145
+	* config/alpha/alpha.md (trap): Add (use (reg:DI 29)).
+	(*exception_receiver_1): Return "#" for TARGET_EXPLICIT_RELOCS.
+
 2016-05-10  Kyrylo Tkachov  <kyrylo.tkachov@arm.com>
 
 	Backport from mainline

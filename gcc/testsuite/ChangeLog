@@ -1,3 +1,40 @@
+2016-05-22  Iain Sandoe  <iain@codesourcery.com>
+	    Dominique d'Humieres  <dominiq@lps.ens.fr>
+
+	Backport from mainline
+	2015-12-17  Rainer Orth  <ro@CeBiTec.Uni-Bielefeld.DE>
+
+	PR target/67973
+
+	* lib/target-supports.exp (check_effective_target_stabs): New proc.
+	* g++.dg/cpp0x/alias-decl-debug-0.C: Restrict to stabs targets.
+	* g++.dg/other/PR23205.C: Likewise.
+	* g++.dg/other/pr23205-2.C: Likewise.
+	* gcc.dg/20040813-1.c: Likewise.
+	* gcc.dg/darwin-20040809-2.c: Likewise.
+	* objc.dg/stabs-1.m: Likewise.
+
+2016-05-20  Kyrylo Tkachov  <kyrylo.tkachov@arm.com>
+
+	Backport from mainline
+	2016-05-17  Kyrylo Tkachov  <kyrylo.tkachov@arm.com>
+
+	PR target/70809
+	* gcc.target/aarch64/pr70809_1.c: New test.
+
+2016-05-19  Martin Jambor  <mjambor@suse.cz>
+
+	PR ipa/70646
+	* gcc.dg/ipa/pr70646.c: New test.
+
+2016-05-15  Bill Schmidt  <wschmidt@linux.vnet.ibm.com>
+
+	Backport from mainline
+	2016-05-11  Bill Schmidt  <wschmidt@linux.vnet.ibm.com>
+
+	* gcc.target/powerpc/pr70963.c: Require at least power8 at both
+	compile and run time.
+
 2016-05-10  Bill Schmidt  <wschmidt@linux.vnet.ibm.com>
 
 	Backport from mainline
