@@ -1,3 +1,112 @@
+2016-07-08  Martin Liska  <mliska@suse.cz>
+
+	Backported from mainline
+	2016-07-08  Martin Liska  <mliska@suse.cz>
+
+	PR middle-end/71606
+	* fold-const.c (fold_convertible_p): As COMPLEX_TYPE
+	folding produces SAVE_EXPRs, thus return false for the type.
+
+2016-07-07  Jakub Jelinek  <jakub@redhat.com>
+
+	Backported from mainline
+	2016-06-28  Jakub Jelinek  <jakub@redhat.com>
+
+	PR middle-end/71626
+	* config/i386/i386.c (ix86_expand_vector_move): For SUBREG of
+	a constant, force its SUBREG_REG into memory or register instead
+	of whole op1.
+
+	2016-06-21  Jakub Jelinek  <jakub@redhat.com>
+
+	PR tree-optimization/71588
+	* tree-ssa-strlen.c (valid_builtin_call): New function.
+	(adjust_last_stmt, strlen_optimize_stmt): Use it.
+
+	2016-06-10  Jakub Jelinek  <jakub@redhat.com>
+
+	PR middle-end/71494
+	* tree-nested.c (convert_nonlocal_reference_stmt): For GIMPLE_GOTO
+	without LABEL_DECL, set *handled_ops_p to false instead of true.
+
+	2016-03-29  Jakub Jelinek  <jakub@redhat.com>
+
+	PR rtl-optimization/70429
+	* combine.c (simplify_shift_const_1): For ASHIFTRT don't optimize
+	(cst1 >> count) >> cst2 into (cst1 >> cst2) >> count if
+	mode != result_mode.
+
+	2016-03-15  Jakub Jelinek  <jakub@redhat.com>
+
+	PR rtl-optimization/70222
+	* combine.c (simplify_shift_const_1): For A >> B >> C LSHIFTRT
+	optimization if mode is different from result_mode, queue up masking
+	of the result in outer_op.  Formatting fix.
+
+	2016-03-11  Jakub Jelinek  <jakub@redhat.com>
+
+	PR tree-optimization/70169
+	* tree-ssa-loop.c (gen_lsm_tmp_name): Handle FUNCTION_DECL and
+	LABEL_DECL like VAR_DECL.  Emit nothing instead of gcc_unreachable
+	for unknown codes.
+
+	2016-03-09  Jakub Jelinek  <jakub@redhat.com>
+
+	PR tree-optimization/70152
+	* tree-sra.c (replace_removed_params_ssa_names): Copy over
+	SSA_NAME_OCCURS_IN_ABNORMAL_PHI from old_name to new_name.
+
+	2016-02-26  Jakub Jelinek  <jakub@redhat.com>
+		    Eric Botcazou  <ebotcazou@adacore.com>
+
+	PR rtl-optimization/69891
+	* dse.c (scan_insn): If we can't figure out memset arguments
+	or they are non-constant, call clear_rhs_from_active_local_stores.
+
+	2016-02-16  Jakub Jelinek  <jakub@redhat.com>
+
+	PR tree-optimization/69802
+	* tree-ssa-reassoc.c (update_range_test): If op is
+	SSA_NAME_IS_DEFAULT_DEF, give up unless tem is a positive
+	op == 1 test of precision 1 integral op, otherwise handle
+	that case as op itself.  Fix up formatting.
+	(optimize_range_tests_to_bit_test, optimize_range_tests): Fix
+	up formatting.
+
+	2014-12-12  Richard Biener  <rguenther@suse.de>
+
+	PR middle-end/64280
+	* tree-cfg.c (replace_uses_by): Guard assert properly.
+
+2016-07-07  Richard Biener  <rguenther@suse.de>
+
+	Backport from mainline
+	2016-04-04  Richard Biener  <rguenther@suse.de>
+
+	PR rtl-optimization/70484
+	* rtl.h (canon_output_dependence): Declare.
+	* alias.c (canon_output_dependence): New function.
+	* dse.c (record_store): Use canon_output_dependence rather
+	than canon_true_dependence.
+
+	2016-06-08  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/71452
+	* tree-ssa.c (non_rewritable_lvalue_p): Make sure that the
+	type used for the SSA rewrite has enough precision to cover
+	the dynamic type of the location.
+
+	2016-05-06  Richard Biener  <rguenther@suse.de>
+
+	PR middle-end/70931
+	* dwarf2out.c (native_encode_initializer): Skip zero-sized fields.
+
+	2016-03-01  Richard Biener  <rguenther@suse.de>
+
+	PR middle-end/70022
+	* fold-const.c (fold_indirect_ref_1): Fix range checking for
+	vector BIT_FIELD_REF extract.
+
 2016-06-30  Jakub Jelinek  <jakub@redhat.com>
 
 	PR middle-end/71693

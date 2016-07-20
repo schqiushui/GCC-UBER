@@ -1,3 +1,118 @@
+2016-07-15  Jerry DeLisle  <jvdelisle@gcc.gnu.org>
+
+	Backport from trunk:
+	PR fortran/71764
+	* gfortran.dg/pr71764.f90: New test.
+
+2016-07-08  Martin Liska  <mliska@suse.cz>
+
+	Backported from mainline
+	2016-07-08  Martin Liska  <mliska@suse.cz>
+
+	* gcc.dg/torture/pr71606.c: New test.
+
+2016-07-07  Jakub Jelinek  <jakub@redhat.com>
+
+	Backported from mainline
+	2016-06-30  Jakub Jelinek  <jakub@redhat.com>
+
+	PR fortran/71704
+	* gfortran.dg/gomp/pr71704.f90: New test.
+
+	PR fortran/71705
+	* gfortran.dg/gomp/pr71705.f90: New test.
+
+	2016-06-28  Jakub Jelinek  <jakub@redhat.com>
+
+	PR middle-end/71626
+	* gcc.c-torture/execute/pr71626-1.c: New test.
+	* gcc.c-torture/execute/pr71626-2.c: New test.
+
+	2016-06-21  Jakub Jelinek  <jakub@redhat.com>
+
+	PR tree-optimization/71588
+	* gcc.dg/pr71558.c: New test.
+
+	2016-06-10  Jakub Jelinek  <jakub@redhat.com>
+
+	PR middle-end/71494
+	* gcc.c-torture/execute/pr71494.c: New test.
+
+	2016-03-29  Jakub Jelinek  <jakub@redhat.com>
+
+	PR rtl-optimization/70429
+	* gcc.c-torture/execute/pr70429.c: New test.
+
+	2016-03-15  Jakub Jelinek  <jakub@redhat.com>
+
+	PR rtl-optimization/70222
+	* gcc.c-torture/execute/pr70222-1.c: New test.
+	* gcc.c-torture/execute/pr70222-2.c: New test.
+
+	2016-03-11  Jakub Jelinek  <jakub@redhat.com>
+
+	PR tree-optimization/70169
+	* gcc.dg/pr70169.c: New test.
+
+	2016-03-09  Jakub Jelinek  <jakub@redhat.com>
+
+	PR tree-optimization/70152
+	* gcc.dg/pr70152.c: New test.
+
+	2016-02-26  Jakub Jelinek  <jakub@redhat.com>
+		    Eric Botcazou  <ebotcazou@adacore.com>
+
+	PR rtl-optimization/69891
+	* gcc.target/i386/pr69891.c: New test.
+
+	2016-02-19  Jakub Jelinek  <jakub@redhat.com>
+
+	PR c++/67767
+	* g++.dg/cpp0x/pr67767.C: New test.
+
+	2016-02-16  Jakub Jelinek  <jakub@redhat.com>
+
+	PR tree-optimization/69802
+	* gcc.dg/pr69802.c: New test.
+
+	2016-02-15  Jakub Jelinek  <jakub@redhat.com>
+
+	PR c++/69797
+	* c-c++-common/pr69797.c: New test.
+
+	2016-03-02  Jakub Jelinek  <jakub@redhat.com>
+
+	PR middle-end/70022
+	* gcc.dg/pr70022.c: Add -w -Wno-psabi to dg-options.
+
+	2014-12-12  Richard Biener  <rguenther@suse.de>
+
+	PR middle-end/64280
+	* g++.dg/torture/pr64280.C: New testcase.
+
+2016-07-07  Richard Biener  <rguenther@suse.de>
+
+	Backport from mainline
+	2016-04-04  Richard Biener  <rguenther@suse.de>
+
+	PR rtl-optimization/70484
+	* gcc.dg/torture/pr70484.c: New testcase.
+
+	2016-06-08  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/71452
+	* gcc.dg/torture/pr71452.c: New testcase.
+
+	2016-05-06  Richard Biener  <rguenther@suse.de>
+
+	PR middle-end/70931
+	* gfortran.dg/pr70931.f90: New testcase.
+
+	2016-03-01  Richard Biener  <rguenther@suse.de>
+
+	PR middle-end/70022
+	* gcc.dg/pr70022.c: New testcase.
+
 2016-06-30  Jakub Jelinek  <jakub@redhat.com>
 
 	PR middle-end/71693
