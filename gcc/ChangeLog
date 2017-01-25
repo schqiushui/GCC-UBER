@@ -1,3 +1,96 @@
+2017-01-24  Eric Botcazou  <ebotcazou@adacore.com>
+
+	PR target/77439
+	* config/arm/arm.c (arm_function_ok_for_sibcall): Add back restriction
+	for long calls with APCS frame and VFP.
+
+2017-01-24  Uros Bizjak  <ubizjak@gmail.com>
+
+	PR target/78478
+	Revert:
+	2013-11-05  Uros Bizjak  <ubizjak@gmail.com>
+
+	* config/i386/rtemself.h (LONG_DOUBLE_TYPE_SIZE): New define.
+
+2017-01-23  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2017-01-20  Martin Liska  <mliska@suse.cz>
+
+	PR lto/69188
+	* tree-profile.c (init_ic_make_global_vars): Do not call
+	finalize_decl.
+	(gimple_init_gcov_profiler): Likewise.
+
+2017-01-21  Gerald Pfeifer  <gerald@pfeifer.com>
+
+	Backport from mainline
+	2016-12-29  Gerald Pfeifer  <gerald@pfeifer.com>
+
+	* doc/extend.texi (Cilk Plus Builtins): cilkplus.org now uses
+	https by default.
+	* doc/passes.texi (Cilk Plus Transformation): Ditto.
+	* doc/generic.texi (Statements for C++): Ditto, and use @uref.
+
+2017-01-20  Bill Schmidt  <wschmidt@linux.vnet.ibm.com>
+
+	Backport from mainline
+	2017-01-16  Bill Schmidt  <wschmidt@linux.vnet.ibm.com>
+
+	* config/rs6000/rs6000.c (rtx_is_swappable_p): Change
+	UNSPEC_VSX__XXSPLTD to require special splat handling.
+
+2017-01-20  Wilco Dijkstra  <wdijkstr@arm.com>
+
+	Backport from mainline
+	PR target/77455
+	* config/aarch64/aarch64.md (eh_return): Remove pattern and splitter.
+	* config/aarch64/aarch64.h (AARCH64_EH_STACKADJ_REGNUM): Remove.
+	(EH_RETURN_HANDLER_RTX): New define.
+	* config/aarch64/aarch64.c (aarch64_frame_pointer_required):
+	Force frame pointer in EH return functions.
+	(aarch64_expand_epilogue): Add barrier for eh_return.
+	(aarch64_final_eh_return_addr): Remove.
+	(aarch64_eh_return_handler_rtx): New function.
+	* config/aarch64/aarch64-protos.h (aarch64_final_eh_return_addr):
+	Remove.
+	(aarch64_eh_return_handler_rtx): New prototype.
+
+2017-01-20  Richard Earnshaw  <rearnsha@arm.com>
+
+	Backported from mainline
+	2017-01-19  Richard Earnshaw  <rearnsha@arm.com>
+
+	PR rtl-optimization/79121
+	* expr.c (expand_expr_real_2, case LSHIFT_EXPR): Look at the signedness
+	of the inner type when shifting an extended value.
+
+2017-01-20  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2017-01-13  Martin Liska  <mliska@suse.cz>
+
+	PR ipa/79043
+	* function.c (set_cfun): Add new argument force.
+	* function.h (set_cfun): Likewise.
+	* ipa-inline-transform.c (inline_call): Use the function when
+	strict alising from is dropped for function we inline to.
+
+2017-01-20  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2017-01-17  Martin Liska  <mliska@suse.cz>
+
+	PR ipa/71207
+	* ipa-polymorphic-call.c (contains_type_p): Fix wrong
+	assumption and add comment.
+
+2017-01-19  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/72488
+	* tree-ssa-sccvn.c (run_scc_vn): When we abort the VN make
+	sure to restore SSA info.
+
 2017-01-17  Jakub Jelinek  <jakub@redhat.com>
 
 	PR debug/78839

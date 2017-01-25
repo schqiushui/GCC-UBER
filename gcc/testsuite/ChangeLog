@@ -1,3 +1,70 @@
+2017-01-24  Eric Botcazou  <ebotcazou@adacore.com>
+
+	* gcc.target/arm/vfp-longcall-apcs.c: New test.
+
+2017-01-23  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2016-01-23  Kyrylo Tkachov  <kyrylo.tkachov@arm.com>
+
+	* gcc.dg/lto/pr69188_0.c: Require profiling support for testcase.
+
+2017-01-23  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2017-01-20  Martin Liska  <mliska@suse.cz>
+
+	PR lto/69188
+	* gcc.dg/lto/pr69188_0.c: New test.
+	* gcc.dg/lto/pr69188_1.c: New test.
+
+2017-01-20  Bill Schmidt  <wschmidt@linux.vnet.ibm.com>
+
+	Backport from mainline
+	2017-01-16  Bill Schmidt  <wschmidt@linux.vnet.ibm.com>
+
+	* gcc.target/powerpc/swaps-p8-27.c: New.
+
+2017-01-20  Wilco Dijkstra  <wdijkstr@arm.com>
+
+	Backport from mainline
+	PR target/77455
+	* gcc.target/aarch64/eh_return.c: New test.
+
+2017-01-20  Marek Polacek  <polacek@redhat.com>
+
+	Backported from mainline
+	2017-01-04  Marek Polacek  <polacek@redhat.com>
+
+	PR c++/77545
+	PR c++/77284
+	* g++.dg/cpp0x/range-for32.C: New test.
+	* g++.dg/cpp0x/range-for33.C: New test.
+
+2017-01-20  Richard Earnshaw  <rearnsha@arm.com>
+
+	Backported from mainline
+	2017-01-19  Richard Earnshaw  <rearnsha@arm.com>
+
+	PR rtl-optimization/79121
+	* gcc.c-torture/execute/pr79121.c: New test.
+
+2017-01-20  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2017-01-13  Martin Liska  <mliska@suse.cz>
+
+	PR ipa/79043
+	* gcc.c-torture/execute/pr79043.c: New test.
+
+2017-01-20  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2017-01-17  Martin Liska  <mliska@suse.cz>
+
+	PR ipa/71207
+	* g++.dg/ipa/pr71207.C: New test.
+
 2017-01-17  Jakub Jelinek  <jakub@redhat.com>
 
 	Backported from mainline
