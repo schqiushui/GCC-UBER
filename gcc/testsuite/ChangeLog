@@ -1,3 +1,102 @@
+2017-01-24  Wilco Dijkstra  <wdijkstr@arm.com>
+
+	Backport from mainline
+	PR target/78041
+	* gcc.target/arm/pr78041.c: New test.
+
+2017-01-24  Richard Biener  <rguenther@suse.de>
+
+	Backport from mainline
+	2016-09-20  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/77646
+	* gcc.dg/torture/pr77646.c: New testcase.
+
+	2016-11-05  David Edelsohn  <dje.gcc@gmail.com>
+		Richard Biener  <rguenther@suse.de>
+
+	PR bootstrap/78188
+	PR c++/71848
+	* g++.dg/ipa/pr78188.C: New test.	
+
+	2016-09-21  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/77648
+	* gcc.dg/torture/pr77648-1.c: New testcase.
+	* gcc.dg/torture/pr77648-2.c: Likewise.
+
+2017-01-24  Richard Biener  <rguenther@suse.de>
+
+	Backport from mainline
+	2016-10-06  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/77855
+	* gcc.dg/torture/pr77855.c: New testcase.
+
+	2016-09-01  Richard Biener  <rguenther@suse.de>
+
+	PR middle-end/77436
+	* gcc.dg/torture/pr77436.c: New testcase.
+
+	2016-09-06  Richard Biener  <rguenther@suse.de>
+
+	PR c/77450
+	* gcc.dg/pr77450.c: New testcase.
+
+	2016-09-19  Richard Biener  <rguenther@suse.de>
+
+	PR middle-end/77605
+	* gcc.dg/torture/pr77605.c: New testcase.
+
+	2016-11-02  Richard Biener  <rguenther@suse.de>
+
+	PR middle-end/78185
+	* gcc.dg/pr78185.c: New testcase.
+
+	2016-11-16  Richard Biener  <rguenther@suse.de>
+
+	PR middle-end/78333
+	* gcc.dg/pr78333.c: New testcase.
+
+2017-01-23  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2016-01-23  Kyrylo Tkachov  <kyrylo.tkachov@arm.com>
+
+	* gcc.dg/lto/pr69188_0.c: Require profiling support for testcase.
+
+2017-01-23  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2017-01-20  Martin Liska  <mliska@suse.cz>
+
+	PR lto/69188
+	* gcc.dg/lto/pr69188_0.c: New test.
+	* gcc.dg/lto/pr69188_1.c: New test.
+
+2017-01-20  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2017-01-13  Martin Liska  <mliska@suse.cz>
+
+	PR ipa/79043
+	* gcc.c-torture/execute/pr79043.c: New test.
+
+2017-01-20  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2015-12-01  Jan Hubicka  <hubicka@ucw.cz>
+
+	* gcc.c-torture/execute/alias-1.c: New testcase.
+
+2017-01-20  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2017-01-17  Martin Liska  <mliska@suse.cz>
+
+	PR ipa/71207
+	* g++.dg/ipa/pr71207.C: New test.
+
 2017-01-17 Thomas Preud'homme <thomas.preudhomme@arm.com>
 
 	Backport from mainline
