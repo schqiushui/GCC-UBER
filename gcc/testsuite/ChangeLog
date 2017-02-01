@@ -1,3 +1,72 @@
+2017-01-31  Bill Schmidt  <wschmidt@linux.vnet.ibm.com>
+
+	Backport from mainline
+	2017-01-29  Bill Schmidt  <wschmidt@linux.vnet.ibm.com>
+
+	PR target/79268
+	* gcc.target/powerpc/pr79268.c: New file.
+	* gcc.target/powerpc/vsx-elemrev-1.c: Delete file.
+	* gcc.target/powerpc/vsx-elemrev-2.c: Likewise.
+	* gcc.target/powerpc/vsx-elemrev-3.c: Likewise.
+	* gcc.target/powerpc/vsx-elemrev-4.c: Likewise.
+
+2017-01-29  Andre Vehreschild  <vehre@gcc.gnu.org>
+
+	Backport from trunk
+	2017-01-13  Andre Vehreschild  <vehre@gcc.gnu.org>
+
+	PR fortran/70697
+	* gfortran.dg/coarray/event_4.f08: New test.
+
+2017-01-29  Andre Vehreschild  <vehre@gcc.gnu.org>
+
+	Backport from trunk
+	2017-01-19  Andre Vehreschild  <vehre@gcc.gnu.org>
+
+	PR fortran/70696
+	* gfortran.dg/coarray_43.f90: New test.
+
+	2017-01-18  Andre Vehreschild  <vehre@gcc.gnu.org>
+
+	PR fortran/70696
+	* gfortran.dg/coarray_event_1.f08: New test.
+
+	2017-01-13  Andre Vehreschild  <vehre@gcc.gnu.org>
+
+	PR fortran/70696
+	* gfortran.dg/coarray/event_3.f08: New test.
+
+2017-01-28  John David Anglin  <danglin@gcc.gnu.org>
+
+	PR testsuite/70583
+	* g++.old-deja/g++.abi/vtable2.C: Adjust CMP_VPTR define on hppa.
+
+2017-01-26  Eric Botcazou  <ebotcazou@adacore.com>
+
+	2017-01-09  Eric Botcazou  <ebotcazou@adacore.com>
+
+	* g++.dg/opt/call2.C: New test.
+	* g++.dg/opt/call3.C: Likewise.
+	* gnat.dg/array26.adb: New test.
+	* gnat.dg/array26_pkg.ad[sb]: New helper.
+	* gnat.dg/array27.adb: New test.
+	* gnat.dg/array27_pkg.ad[sb]: New helper.
+	* gnat.dg/array28.adb: New test.
+	* gnat.dg/array28_pkg.ad[sb]: New helper.
+
+2017-01-26  Richard Biener  <rguenther@suse.de>
+
+	Backport from mainline
+	2016-01-10  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/79034
+	* g++.dg/torture/pr79034.C: New testcase.
+
+	2016-12-13  Richard Biener  <rguenther@suse.de>
+
+	PR middle-end/78742
+	* gcc.dg/torture/pr78742.c: New testcase.
+
 2017-01-24  Eric Botcazou  <ebotcazou@adacore.com>
 
 	* gcc.target/arm/vfp-longcall-apcs.c: New test.
