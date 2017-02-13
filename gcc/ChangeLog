@@ -1,3 +1,71 @@
+2017-02-13  Gerald Pfeifer  <gerald@pfeifer.com>
+
+	Backport from mainline
+	2016-12-11  Roger Pau Monné  <roger.pau@citrix.com>
+
+	* config/i386/x86-64.h: Append --32 to the assembler options when
+	-m16 is used on non-glibc systems as well.
+
+2017-02-08  Segher Boessenkool  <segher@kernel.crashing.org>
+
+	PR translation/79397
+	* config/rs6000/rs6000.opt (maltivec=le, maltivec=be): Fix spelling
+	of AltiVec.
+
+2017-02-08  Richard Biener  <rguenther@suse.de>
+
+	Backport from mainline
+	2017-02-08  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/71824
+	* graphite-scop-detection.c (scop_detection::build_scop_breadth):
+	Check all loops contained in the merged region.
+
+	2017-02-01  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/71824
+	* graphite-scop-detection.c (scop_detection::build_scop_breadth):
+	Verify the loops are valid in the merged SESE region.
+	(scop_detection::can_represent_loop_1): Check analyzing the
+	evolution of the number of iterations in the region succeeds.
+
+	2017-01-31  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/77318
+	* graphite-sese-to-poly.c (extract_affine): Fix assert.
+	(create_pw_aff_from_tree): Take loop parameter.
+	(add_condition_to_pbb): Pass loop of the condition to
+	create_pw_aff_from_tree.
+
+2017-02-06  Dominique d'Humieres  <dominiq@lps.ens.fr>
+
+	PR target/71017
+	* config/i386/cpuid.h: Fix undefined behavior.
+
+2017-02-03  Carl Love  <cel@us.ibm.com>
+
+	Backport of two commits from mainline, r244943 and r244904,
+	dated 017-01-26 and 2017-01-25 respectively
+
+	* config/rs6000/rs6000-c (altivec_overloaded_builtins): Fix order
+	of entries for ALTIVEC_BUILTIN_VEC_PACKS.  Remove bogus entries
+	for P8V_BUILTIN_VEC_VGBBD.
+
+2017-02-03  Walter Lee  <walt@tilera.com>
+
+	Backport from mainline
+	2017-02-03  Walter Lee  <walt@tilera.com>
+
+	PR target/78862
+	* config/tilegx/tilegx.md (tilegx_expand_prologue): Add blockage
+	after initial stackframe link reg save.
+	* config/tilepro/tilepro.md (tilepro_expand_prologue): Likewise.
+
+2017-02-03  Maxim Ostapenko  <m.ostapenko@samsung.com>
+
+	PR lto/79061
+	* asan.c (asan_add_global): Force has_dynamic_init to zero in LTO mode.
+
 2017-01-31  Bill Schmidt  <wschmidt@linux.vnet.ibm.com>
 
 	Backport from mainline

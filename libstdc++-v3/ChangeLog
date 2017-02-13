@@ -1,3 +1,31 @@
+2017-02-01  Jonathan Wakely  <jwakely@redhat.com>
+
+	PR libstdc++/78346
+	* include/bits/predefined_ops.h (_Iter_equals_iter): Store iterator
+	not its referent.
+	(_Iter_comp_to_iter): Likewise.
+	* testsuite/25_algorithms/search/78346.cc: New test.
+
+	PR libstdc++/79195
+	* include/experimental/array (make_array): Use common_type<_Dest>
+	and delay instantiation of common_type until after conditional_t.
+	Qualify std::forward call.
+	(to_array): Add exception specification.
+	* testsuite/experimental/array/make_array.cc: Test argument types
+	without a common type.
+
+	PR libstdc++/79254
+	* include/bits/basic_string.h [_GLIBCXX_USE_CXX11_ABI]
+	(basic_string::operator=(const basic_string&)): If source object is
+	small just deallocate, otherwise perform new allocation before
+	making any changes.
+	* testsuite/21_strings/basic_string/allocator/wchar_t/copy_assign.cc:
+	Test exception-safety of copy assignment when allocator propagates.
+	* testsuite/21_strings/basic_string/allocator/char/copy_assign.cc:
+	Likewise.
+	* testsuite/util/testsuite_allocator.h (uneq_allocator::swap): Make
+	std::swap visible.
+
 2017-01-22  Gerald Pfeifer  <gerald@pfeifer.com>
 
 	Backport from mainline

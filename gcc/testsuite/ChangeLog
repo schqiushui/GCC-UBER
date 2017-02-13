@@ -1,3 +1,37 @@
+2017-02-08  Richard Biener  <rguenther@suse.de>
+
+	Backport from mainline
+	2017-02-08  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/71824
+	PR tree-optimization/79409
+	* gcc.dg/graphite/pr71824-3.c: New testcase.
+
+	2017-02-08  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/71824
+	* gcc.dg/graphite/pr71824-2.c: New testcase.
+
+	2017-02-01  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/71824
+	* gcc.dg/graphite/pr71824.c: New testcase.
+
+2017-02-03  Carl Love  <cel@us.ibm.com>
+
+	* gcc.target/powerpc/builtins-3-p8.c:  Add new testfile for missing
+	vec_packs built-in tests.
+
+2017-02-03  Bill Schmidt  <wschmidt@linux.vnet.ibm.com>
+
+	Backport from mainline
+	2017-01-27  Bill Schmidt  <wschmidt@linux.vnet.ibm.com>
+
+	PR target/65484
+	* g++.dg/vect/pr36648.cc: Modify to reflect that the loop is not
+	vectorized on POWER unless hardware misaligned loads are
+	available.
+
 2017-01-31  Bill Schmidt  <wschmidt@linux.vnet.ibm.com>
 
 	Backport from mainline
