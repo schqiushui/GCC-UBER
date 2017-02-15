@@ -1,7 +1,4 @@
-// { dg-options "-std=gnu++14" }
-// { dg-do compile }
-
-// Copyright (C) 2014-2015 Free Software Foundation, Inc.
+// Copyright (C) 2017 Free Software Foundation, Inc.
 //
 // This file is part of the GNU ISO C++ Library.  This library is free
 // software; you can redistribute it and/or modify it under the
@@ -18,13 +15,43 @@
 // with this library; see the file COPYING3.  If not see
 // <http://www.gnu.org/licenses/>.
 
-#include <experimental/any>
+// { dg-options "-std=gnu++11" }
+// { dg-require-atomic-builtins "" }
 
-void test01()
+#include <atomic>
+#include <testsuite_hooks.h>
+
+struct NonDefaultConstructible
 {
-  using std::experimental::any;
-  using std::experimental::any_cast;
+  NonDefaultConstructible(int i) : val(i) { }
+  int val;
+};
 
-  const any y(1);
-  any_cast<int&>(y); // { dg-error "qualifiers" "" { target { *-*-* } } 304 }
+template class std::atomic<NonDefaultConstructible>;
+
+void
+test01()
+{
+  std::atomic<NonDefaultConstructible> a(1);
+  const auto n1 = a.exchange(2);
+  VERIFY( n1.val == 1 );
+  const auto n2 = a.load();
+  VERIFY( n2.val == 2 );
+}
+
+void
+test02()
+{
+  volatile std::atomic<NonDefaultConstructible> a(1);
+  const auto n1 = a.exchange(2);
+  VERIFY( n1.val == 1 );
+  const auto n2 = a.load();
+  VERIFY( n2.val == 2 );
+}
+
+int
+main()
+{
+  test01();
+  test02();
 }
