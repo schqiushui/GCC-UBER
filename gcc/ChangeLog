@@ -1,3 +1,42 @@
+2017-03-01  Pat Haugen  <pthaugen@us.ibm.com>
+
+	Backport from mainline:
+	2017-02-27  Pat Haugen  <pthaugen@us.ibm.com>
+
+	PR target/79544
+	* rs6000/rs6000-c.c (struct altivec_builtin_types): Use VSRAD for
+	arithmetic shift of unsigned V2DI.
+
+2017-03-01  Martin Jambor  <mjambor@suse.cz>
+
+	Backport from mainline
+	2017-02-21  Martin Jambor  <mjambor@suse.cz>
+
+	PR lto/79579
+	* ipa-prop.c (ipa_prop_write_jump_functions): Bail out if no edges
+	have been analyzed.
+
+2017-02-28  Eric Botcazou  <ebotcazou@adacore.com>
+
+	PR target/79749
+	* config/sparc/sparc.c (sparc_frame_pointer_required): Add missing
+	condition on optimize for the leaf function test.
+
+2017-02-22  Bill Schmidt  <wschmidt@linux.vnet.ibm.com>
+
+	Backport from mainline
+	2017-02-17  Bill Schmidt  <wschmidt@linux.vnet.ibm.com>
+
+	PR target/79261
+	* config/rs6000/rs6000.c (rs6000_expand_ternop_builtin): Add
+	support for CODE_FOR_vsx_xxpermdi_v2d[fi]_be.
+	* config/rs6000/rs6000.md (reload_gpr_from_vsx<mode>): Call
+	generator for vsx_xxpermdi_<mode>_be.
+	* config/rs6000/vsx.md (vsx_xxpermdi_<mode>): Remove logic to
+	force big-endian semantics.
+	(vsx_xxpermdi_<mode>_be): New define_expand with same
+	implementation as previous version of vsx_xxpermdi_<mode>.
+
 2017-02-19  Dominique d'Humieres  <dominiq@lps.ens.fr>
 
 	PR target/71017
