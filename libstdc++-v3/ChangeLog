@@ -1,3 +1,27 @@
+2017-03-14  Jonathan Wakely  <jwakely@redhat.com>
+
+	* testsuite/17_intro/names.cc: Undefine macros that clash with
+	identifiers in AIX system headers.
+
+2017-03-13  Ville Voutilainen  <ville.voutilainen@gmail.com>
+
+	PR libstdc++/80034
+	* include/bits/list.tcc (merge(list&&)): Use const for the size_t
+	in the function and in the catch-block, qualify uses of std::distance.
+	(merge(list&&, _StrictWeakOrdering)): Likewise.
+	* testsuite/23_containers/list/operations/80034.cc: New.
+
+2017-03-02  Jonathan Wakely  <jwakely@redhat.com>
+
+	PR libstdc++/79789
+	* include/bits/ios_base.h (make_error_code, make_error_condition):
+	Likewise.
+	* include/bits/mask_array.h (mask_array): Likewise.
+	* include/bits/regex.h (regex_token_iterator): Likewise.
+	* include/bits/slice_array.h (slice_array): Likewise.
+	* include/std/memory (undeclare_no_pointers): Likewise.
+	* testsuite/17_intro/names.cc: New test.
+
 2017-02-14  Jonathan Wakely  <jwakely@redhat.com>
 
 	Backport from mainline

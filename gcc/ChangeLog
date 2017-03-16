@@ -1,3 +1,44 @@
+2017-03-15  Matthias Klose  <doko@ubuntu.com>
+
+	Backport from mainline
+	2017-03-14  Martin Liska  <mliska@suse.cz>
+
+	* Makefile.in: Install gcov-dump.
+
+2017-03-15  Uros Bizjak  <ubizjak@gmail.com>
+
+	PR target/80019
+	* config/i386/i386.c (ix86_vector_duplicate_value): Create
+	subreg of inner mode for values already in registers.
+
+2017-03-10  Michael Meissner  <meissner@linux.vnet.ibm.com>
+
+	Back port from trunk
+	2017-03-01  Michael Meissner  <meissner@linux.vnet.ibm.com>
+
+	PR target/79439
+	* config/rs6000/predicates.md (current_file_function_operand): Do
+	not allow self calls to be local if the function is replaceable.
+
+2017-03-07  Uros Bizjak  <ubizjak@gmail.com>
+
+	Backport from mainline
+	2017-03-07  Segher Boessenkool  <segher@kernel.crashing.org>
+
+	* config/i386/i386.c (ix86_local_alignment): Align most aggregates
+	of 16 bytes and more to 16 bytes, not those of 16 bits and more.
+
+2017-03-06  John David Anglin  <danglin@gcc.gnu.org>
+
+	PR target/77850
+	* config/pa/pa-64.h (PAD_VARARGS_DOWN): Don't pad down complex and
+	vector types.
+
+2017-03-02  Uros Bizjak  <ubizjak@gmail.com>
+
+	PR target/79514
+	* config/i386/i386.md (*pushxf_rounded): New insn_and_split pattern.
+
 2017-03-01  Pat Haugen  <pthaugen@us.ibm.com>
 
 	Backport from mainline:
