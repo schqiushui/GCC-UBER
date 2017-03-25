@@ -1,3 +1,165 @@
+2017-03-22  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2017-02-22  Martin Liska  <mliska@suse.cz>
+
+	PR lto/79587
+	* data-streamer-in.c (streamer_read_gcov_count): Remove assert.
+	* data-streamer-out.c (streamer_write_gcov_count_stream):
+	Likewise.
+	* value-prof.c (stream_out_histogram_value): Make assert more
+	precise based on type of counter.
+
+2017-03-22  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2017-03-22  Martin Liska  <mliska@suse.cz>
+
+	PR target/79906
+	* config/rs6000/rs6000.c (rs6000_inner_target_options): Show
+	error message instead of an ICE.
+
+2017-03-22  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2017-03-21  Martin Liska  <mliska@suse.cz>
+
+	PR gcov-profile/80081
+	* Makefile.in: Add gcov-dump and fix installation of gcov-tool.
+	* doc/gcc.texi: Include gcov-dump stuff.
+	* doc/gcov-dump.texi: New file.
+
+2017-03-22  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2017-03-20  Martin Liska  <mliska@suse.cz>
+
+	PR middle-end/79753
+	* tree-chkp.c (chkp_build_returned_bound): Do not build
+	returned bounds for a LHS that's not a BOUNDED_P type.
+
+2017-03-22  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2017-03-20  Martin Liska  <mliska@suse.cz>
+
+	PR target/79769
+	PR target/79770
+	* tree-chkp.c (chkp_find_bounds_1): Handle REAL_CST,
+	COMPLEX_CST and VECTOR_CST.
+
+2017-03-22  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2017-03-14  Martin Liska  <mliska@suse.cz>
+
+	PR middle-end/79831
+	* doc/invoke.texi (-Wchkp): Document the option.
+
+2017-03-22  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2017-03-13  Martin Liska  <mliska@suse.cz>
+
+	PR middle-end/78339
+	* ipa-pure-const.c (warn_function_noreturn): If the declarations
+	is a CHKP clone, use original declaration.
+
+2017-03-22  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2016-06-13  Martin Liska  <mliska@suse.cz>
+
+	PR target/65705
+	PR target/69804
+	PR sanitizer/71458
+
+	* toplev.c (process_options): Enable MPX with LSAN and UBSAN.
+	* tree-chkp.c (chkp_walk_pointer_assignments): Verify that
+	FIELD != NULL.
+
+2017-03-22  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2017-03-09  Martin Liska  <mliska@suse.cz>
+
+	PR tree-optimization/79631
+	* tree-chkp-opt.c (chkp_is_constant_addr): Call
+	tree_int_cst_sign_bit just for INTEGER constants.
+
+2017-03-22  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2017-03-09  Martin Liska  <mliska@suse.cz>
+
+	PR ipa/79761
+	* tree-chkp.c (chkp_get_bound_for_parm): Get bounds for a param.
+	(chkp_find_bounds_1): Remove gcc_unreachable.
+
+2017-03-22  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2017-03-03  Martin Liska  <mliska@suse.cz>
+
+	PR tree-optimization/79803
+	* tree-ssa-loop-prefetch.c (tree_ssa_prefetch_arrays): Remove
+	assert.
+	(pass_loop_prefetch::execute): Disabled optimization if an
+	assumption about L1 cache size is not met.
+
+2017-03-22  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2017-03-03  Martin Liska  <mliska@suse.cz>
+
+	PR rtl-optimization/79574
+	* gcse.c (struct gcse_expr): Use HOST_WIDE_INT instead of int.
+	(hash_scan_set): Likewise.
+	(dump_hash_table): Likewise.
+	(hoist_code): Likewise.
+
+2017-03-22  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2017-02-17  Martin Liska  <mliska@suse.cz>
+
+	PR rtl-optimization/79574
+	* gcse.c (want_to_gcse_p): Prevent integer overflow.
+
+2017-03-22  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2017-02-17  Martin Liska  <mliska@suse.cz>
+
+	PR rtl-optimization/79577
+	* params.def (selsched-max-sched-times): Increase minimum to 1.
+
+2017-03-21  Pat Haugen  <pthaugen@us.ibm.com>
+
+	Backport from mainline:
+	2017-03-17  Pat Haugen  <pthaugen@us.ibm.com>
+
+	PR target/79951
+	* config/rs6000/rs6000.md (copysign<mode>3_fcpsgn): Test
+	for VECTOR_UNIT_VSX_P (<MODE>mode) too.
+
+2017-03-21  Tamar Christina  <tamar.christina@arm.com>
+
+	* config/aarch64/aarch64-simd.md (*aarch64_simd_mov<mode>)
+	Change ins into fmov.
+
+2017-03-19  Dominique d'Humieres  <dominiq@lps.ens.fr>
+
+	PR target/71017
+	* config/i386/cpuid.h: Fix another undefined behavior.
+
+2017-03-17  Tom de Vries  <tom@codesourcery.com>
+
+	backport from trunk:
+	2017-03-17  Tom de Vries  <tom@codesourcery.com>
+
+	* gcov-dump.c (print_usage): Print bug_report_url.
+
 2017-03-15  Matthias Klose  <doko@ubuntu.com>
 
 	Backport from mainline
