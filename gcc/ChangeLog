@@ -1,3 +1,103 @@
+2017-03-31  Richard Sandiford  <richard.sandiford@arm.com>
+
+	PR tree-optimization/80218
+	* tree-call-cdce.c (shrink_wrap_one_built_in_call_with_conds):
+	Update block frequencies and counts.
+
+2017-03-30  Peter Bergner  <bergner@vnet.ibm.com>
+
+	Backport from mainline
+	2017-03-30  Peter Bergner  <bergner@vnet.ibm.com>
+
+	PR target/80246
+	* config/rs6000/dfp.md (dfp_dxex_<mode>): Update mode of operand 0.
+	(dfp_diex_<mode>): Update mode of operand 1.
+	* doc/extend.texi (dxex, dxexq): Document change to return type.
+	(diex, diexq): Document change to argument type.
+
+2017-03-29  Michael Meissner  <meissner@linux.vnet.ibm.com>
+
+	Back port from trunk
+	2017-03-21  Aaron Sawdey  <acsawdey@linux.vnet.ibm.com>
+
+	PR target/80123
+	* doc/md.texi (Constraints): Document wA constraint.
+	* config/rs6000/constraints.md (wA): New.
+	* config/rs6000/rs6000.c (rs6000_debug_reg_global): Add wA reg_class.
+	(rs6000_init_hard_regno_mode_ok): Init wA constraint.
+	* config/rs6000/rs6000.h (RS6000_CONSTRAINT_wA): New.
+	* config/rs6000/vsx.md (vsx_splat_<mode>): Use wA constraint.
+
+	2017-03-16  Michael Meissner  <meissner@linux.vnet.ibm.com>
+
+	PR target/71294
+	* config/rs6000/vsx.md (vsx_splat_<mode>, VSX_D iterator): Allow a
+	SPLAT operation on ISA 2.07 64-bit systems that have direct move,
+	but no MTVSRDD support, by doing MTVSRD and XXPERMDI.
+
+2017-03-29  Richard Biener  <rguenther@suse.de>
+
+	Backport from mainline
+	2017-03-28  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/78644
+	* tree-ssa-ccp.c (evaluate_stmt): When we may not use the value
+	of a simplification result we may not use it at all.
+
+	2017-03-27  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/80181
+	* tree-ssa-ccp.c (likely_value): UNDEFINED ^ X is UNDEFINED.
+
+2017-03-28  Marek Polacek  <polacek@redhat.com>
+
+	Backport from mainline
+	2017-03-28  Marek Polacek  <polacek@redhat.com>
+
+	PR sanitizer/80067
+	* fold-const.c (fold_comparison): Use protected_set_expr_location
+	instead of SET_EXPR_LOCATION.
+
+2017-03-27  Michael Meissner  <meissner@linux.vnet.ibm.com>
+
+	Back port from trunk
+	2017-03-27  Michael Meissner  <meissner@linux.vnet.ibm.com>
+
+	PR target/78543
+	* config/rs6000/rs6000.md (bswaphi2_extenddi): Combine bswap
+	HImode and SImode with zero extend to DImode to one insn.
+	(bswap<mode>2_extenddi): Likewise.
+	(bswapsi2_extenddi): Likewise.
+	(bswaphi2_extendsi): Likewise.
+	(bswaphi2): Combine bswap HImode and SImode into one insn.
+	Separate memory insns from swapping register.
+	(bswapsi2): Likewise.
+	(bswap<mode>2): Likewise.
+	(bswaphi2_internal): Delete, no longer used.
+	(bswapsi2_internal): Likewise.
+	(bswap<mode>2_load): Split bswap HImode/SImode into separate load,
+	store, and gpr<-gpr swap insns.
+	(bswap<mode>2_store): Likewise.
+	(bswaphi2_reg): Register only splitter, combine with the splitter.
+	(bswaphi2 splitter): Likewise.
+	(bswapsi2_reg): Likewise.
+	(bswapsi2 splitter): Likewise.
+	(bswapdi2): If we have the LDBRX and STDBRX instructions, split
+	the insns into load, store, and register/register insns.
+	(bswapdi2_ldbrx): Likewise.
+	(bswapdi2_load): Likewise.
+	(bswapdi2_store): Likewise.
+	(bswapdi2_reg): Likewise.
+
+2017-03-25  Uros Bizjak  <ubizjak@gmail.com>
+
+	PR target/80180
+	* config/i386/i386.c (ix86_expand_builtin)
+	<IX86_BUILTIN_RDSEED{16,32,64}_STEP>: Do not expand arg0 between
+	flags reg setting and flags reg using instructions.
+	<IX86_BUILTIN_RDRAND{16,32,64}_STEP>: Ditto.  Use non-flags reg
+	clobbering instructions to zero extend op2.
+
 2017-03-22  Martin Liska  <mliska@suse.cz>
 
 	Backport from mainline
