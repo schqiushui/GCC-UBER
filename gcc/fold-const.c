@@ -3920,9 +3920,19 @@ optimize_bit_field_compare (location_t loc, enum tree_code code,
        return 0;
    }
 
+  /* Honor the C++ memory model and mimic what RTL expansion does.  */
+  unsigned HOST_WIDE_INT bitstart = 0;
+  unsigned HOST_WIDE_INT bitend = 0;
+  if (TREE_CODE (lhs) == COMPONENT_REF)
+    {
+      get_bit_range (&bitstart, &bitend, lhs, &lbitpos, &offset);
+      if (offset != NULL_TREE)
+	return 0;
+    }
+
   /* See if we can find a mode to refer to this field.  We should be able to,
      but fail if we can't.  */
-  nmode = get_best_mode (lbitsize, lbitpos, 0, 0,
+  nmode = get_best_mode (lbitsize, lbitpos, bitstart, bitend,
 			 const_p ? TYPE_ALIGN (TREE_TYPE (linner))
 			 : MIN (TYPE_ALIGN (TREE_TYPE (linner)),
 				TYPE_ALIGN (TREE_TYPE (rinner))),
@@ -10474,7 +10484,7 @@ fold_binary_loc (location_t loc,
       /* Convert -A / -B to A / B when the type is signed and overflow is
 	 undefined.  */
       if ((!INTEGRAL_TYPE_P (type) || TYPE_OVERFLOW_UNDEFINED (type))
-	  && TREE_CODE (arg0) == NEGATE_EXPR
+	  && TREE_CODE (op0) == NEGATE_EXPR
 	  && negate_expr_p (op1))
 	{
 	  if (INTEGRAL_TYPE_P (type))
@@ -14587,6 +14597,24 @@ split_address_to_core_and_offset (tree exp,
 				  poffset, &mode, &unsignedp, &reversep,
 				  &volatilep, false);
       core = build_fold_addr_expr_loc (loc, core);
+    }
+  else if (TREE_CODE (exp) == POINTER_PLUS_EXPR)
+    {
+      core = TREE_OPERAND (exp, 0);
+      STRIP_NOPS (core);
+      *pbitpos = 0;
+      *poffset = TREE_OPERAND (exp, 1);
+      if (TREE_CODE (*poffset) == INTEGER_CST)
+	{
+	  offset_int tem = wi::sext (wi::to_offset (*poffset),
+				     TYPE_PRECISION (TREE_TYPE (*poffset)));
+	  tem = wi::lshift (tem, LOG2_BITS_PER_UNIT);
+	  if (wi::fits_shwi_p (tem))
+	    {
+	      *pbitpos = tem.to_shwi ();
+	      *poffset = NULL_TREE;
+	    }
+	}
     }
   else
     {
