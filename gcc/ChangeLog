@@ -1,3 +1,25 @@
+2017-07-06  Andrew Pinski  <apinski@cavium.com>
+
+	* config/aarch64/aarch64.c (aarch64_load_symref_appropriately):
+	Access the lower part of RTX appropriately.
+
+2017-07-04  Richard Biener  <rguenther@suse.de>
+
+	* BASE-VER: Bump to 6.4.1.
+
+2017-07-04  Release Manager
+
+	* GCC 6.4.0 released.
+
+2017-07-03  Segher Boessenkool  <segher@kernel.crashing.org>
+
+	Backport from trunk:
+
+	2017-06-15  Segher Boessenkool  <segher@kernel.crashing.org>
+
+	* config/rs6000/rs6000.md (add<mode>3): Use reg_or_subregno instead
+	of REGNO.
+
 2017-06-30  Michael Meissner  <meissner@linux.vnet.ibm.com>
 
 	Backport from mainline
@@ -70,7 +92,7 @@
 	Backport from mainline
 	2017-05-04  Prakhar Bahuguna  <prakhar.bahuguna@arm.com>
 
-	* gcc/config/arm/arm-builtins.c (arm_init_builtins): Rename
+	* config/arm/arm-builtins.c (arm_init_builtins): Rename
 	__builtin_arm_ldfscr to __builtin_arm_get_fpscr, and rename
 	__builtin_arm_stfscr to __builtin_arm_set_fpscr.
 
