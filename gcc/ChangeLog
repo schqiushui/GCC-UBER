@@ -1,3 +1,18 @@
+2017-08-15  Joseph Myers  <joseph@codesourcery.com>
+
+	PR target/78460
+	PR target/67712
+	* config/sh/sh-mem.cc (sh_expand_cmpnstr): Only unroll for
+	constant count if that count is less than 32.
+
+2017-08-14  Richard Biener  <rguenther@suse.de>
+
+	* BASE-VER: Set to 7.2.1.
+
+2017-08-14  Release Manager
+
+	* GCC 7.2.0 released.
+
 2017-08-08  Richard Biener  <rguenther@suse.de>
 
 	PR middle-end/81766
