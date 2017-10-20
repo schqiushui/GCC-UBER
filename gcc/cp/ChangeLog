@@ -1,3 +1,31 @@
+2017-10-17  Nathan Sidwell  <nathan@acm.org>
+
+	PR c++/82560
+	* call.c (build_over_call): Don't pass tf_no_cleanup to nested
+	calls.
+
+2017-10-06  Jakub Jelinek  <jakub@redhat.com>
+
+	PR c++/82299
+	* decl.c (reshape_init): Suppress warn_useless_cast for direct enum
+	init.
+	* typeck.c (convert_for_assignment): Likewise.
+
+2017-10-05  Jason Merrill  <jason@redhat.com>
+
+	* call.c (convert_arg_to_ellipsis): Use the result of force_rvalue.
+
+2017-10-04  Jason Merrill  <jason@redhat.com>
+
+	PR c++/82406 - C++ error with noexcept function type
+	PR c++/70029 - ICE with ref-qualifier and -flto
+	* tree.c (cxx_copy_lang_qualifiers): New.
+	* cp-tree.h: Declare it.
+	* cp-objcp-common.h: Define LANG_HOOKS_COPY_LANG_QUALIFIERS.
+
+	PR c++/81525 - broken handling of auto in generic lambda.
+	* pt.c (tsubst_decl) [VAR_DECL]: Use strip_innermost_template_args.
+
 2017-09-22  Eric Botcazou  <ebotcazou@adacore.com>
 
 	PR bootstrap/81926

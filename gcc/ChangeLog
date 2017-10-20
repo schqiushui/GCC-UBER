@@ -1,3 +1,103 @@
+2017-10-20  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/82603
+	* tree-if-conv.c (predicate_mem_writes): Make sure to only
+	remove false predicated stores.
+
+2017-10-20  Richard Biener  <rguenther@suse.de>
+
+	Backport from mainline
+	2017-10-06  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/82436
+	* tree-vect-slp.c (vect_supported_load_permutation_p): More
+	conservatively choose the vectorization factor when checking
+	whether we can perform the required load permutation.
+	(vect_transform_slp_perm_load): Assert when we may not fail.
+
+2017-10-19  Richard Earnshaw  <rearnsha@arm.com>
+
+	PR target/82445
+	* config/arm/arm.c (align_ok_ldrd_strd): New function.
+	(mem_ok_for_ldrd_strd): New parameter align.  Extract the alignment of
+	the mem into it.
+	(gen_operands_ldrd_strd): Validate the alignment of the accesses.
+
+2017-10-18  Segher Boessenkool  <segher@kernel.crashing.org>
+
+	PR rtl-optimization/82602
+	* ira.c (rtx_moveable_p): Return false for volatile asm.
+
+2017-10-18  Vladimir Makarov  <vmakarov@redhat.com>
+
+	PR middle-end/82556
+	* lra-constraints.c (curr_insn_transform): Use non-input operand
+	instead of output one for matched reload.
+
+2017-10-17  Jakub Jelinek  <jakub@redhat.com>
+
+	PR tree-optimization/82549
+	* fold-const.c (optimize_bit_field_compare, fold_truth_andor_1):
+	Formatting fixes.  Instead of calling make_bit_field_ref with negative
+	bitpos return 0.
+
+2017-10-13  Jakub Jelinek  <jakub@redhat.com>
+
+	PR target/82274
+	* internal-fn.c (expand_mul_overflow): If both operands have
+	the same highpart of -1 or 0 and the topmost bit of lowpart
+	is different, overflow is if res <= 0 rather than res < 0.
+
+	PR target/82524
+	* config/i386/i386.md (addqi_ext_1, andqi_ext_1,
+	*andqi_ext_1_cc, *<code>qi_ext_1, *xorqi_ext_1_cc): Change
+	=Q constraints to +Q and into insn condition add check
+	that operands[0] and operands[1] are equal.
+	(*addqi_ext_2, *andqi_ext_2, *<code>qi_ext_2): Change
+	=Q constraints to +Q and into insn condition add check
+	that operands[0] is equal to either operands[1] or operands[2].
+
+2017-10-10  Andreas Tobler  <andreast@gcc.gnu.org>
+
+	Backported from mainline r253602
+	2017-10-10  Andreas Tobler  <andreast@gcc.gnu.org>
+
+	* config.gcc: (armv7*-*-freebsd*): New target.
+	(armv6*-*-freebsd*): Remove obsolete TARGET_FREEBSD_ARMv6 define.
+
+2017-10-06  Christophe Lyon  <christophe.lyon@linaro.org>
+
+	Backport from mainline r253242.
+	2017-09-27  Christophe Lyon  <christophe.lyon@linaro.org>
+
+	PR target/71727
+	* config/aarch64/aarch64.c
+	(aarch64_builtin_support_vector_misalignment): Always return false
+	when misalignment is unknown.
+
+2017-10-04  Jason Merrill  <jason@redhat.com>
+
+	PR c++/82406 - C++ error with noexcept function type
+	PR c++/70029 - ICE with ref-qualifier and -flto
+	* langhooks.h (struct lang_hooks_for_types): Add
+	copy_lang_qualifiers.
+	* attribs.c (build_type_attribute_qual_variant): Use it.
+	* langhooks-def.h (LANG_HOOKS_COPY_LANG_QUALIFIERS): Default to
+	NULL.
+	(LANG_HOOKS_FOR_TYPES_INITIALIZER): Use it.
+	* tree.c (verify_type): Re-enable TYPE_CANONICAL main variant check.
+
+2017-10-02  Bill Schmidt  <wschmidt@linux.vnet.ibm.com>
+
+	Backport from mainline
+	2017-09-29  Bill Schmidt  <wschmidt@linux.vnet.ibm.com>
+
+	PR tree-optimization/82337
+	* gimple-ssa-strength-reduction.c (find_phi_def): Don't record a
+	phi definition if the PHI result appears in an abnormal PHI.
+	(find_basis_for_base_expr): Don't record a basis if the LHS of the
+	basis appears in an abnormal PHI.
+
 2017-09-30  Jakub Jelinek  <jakub@redhat.com>
 
 	* config/i386/i386.c (ix86_split_idivmod): Use mode instead of
