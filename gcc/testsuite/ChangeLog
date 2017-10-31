@@ -1,3 +1,60 @@
+2017-10-30  Paolo Carlini  <paolo.carlini@oracle.com>
+
+	PR c++/82085
+	* g++.dg/cpp1y/var-templ56.C: New.
+
+2017-10-28  Paul Thomas  <pault@gcc.gnu.org>
+
+	Backported from trunk
+	PR fortran/81758
+	* gfortran.dg/class_63.f90: New test.
+
+2017-10-27  Jakub Jelinek  <jakub@redhat.com>
+
+	Backported from mainline
+	2017-10-12  Jakub Jelinek  <jakub@redhat.com>
+
+	PR c++/82159
+	* g++.dg/opt/pr82159-2.C: New test.
+
+	2017-10-04  Jakub Jelinek  <jakub@redhat.com>
+
+	PR c++/82373
+	* g++.dg/cpp1y/pr82373.C: New test.
+
+	2017-09-21  Jakub Jelinek  <jakub@redhat.com>
+
+	PR sanitizer/81715
+	* g++.dg/asan/pr81715.C: New test.
+
+	2017-09-15  Jakub Jelinek  <jakub@redhat.com>
+
+	PR rtl-optimization/82192
+	* gcc.c-torture/execute/pr82192.c: New test.
+
+2017-10-27  Jakub Jelinek  <jakub@redhat.com>
+
+	PR target/82703
+	* gcc.dg/pr82703.c: New test.
+
+2017-10-24  Qing Zhao <qing.zhao@oracle.com>
+	    Wilco Dijkstra  <wilco.dijkstra@arm.com>
+
+        PR middle-end/80295
+        * gcc.target/aarch64/pr80295.c: New test.
+
+2017-10-21  Paul Thomas  <pault@gcc.gnu.org>
+
+	Backport from trunk
+	PR fortran/82312
+	* gfortran.dg/typebound_proc_36.f90 : New test.
+
+2017-10-20  Thomas Koenig  <tkoenig@gcc.gnu.org>
+
+	Backport from trunk
+	PR fortran/79795
+	* gfortran.dg/assumed_size_2.f90: New test.
+
 2017-10-20  Richard Biener  <rguenther@suse.de>
 
 	PR tree-optimization/82603

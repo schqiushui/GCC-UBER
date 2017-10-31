@@ -11017,11 +11017,8 @@ start:
 
 	    /* Assigning a class object always is a regular assign.  */
 	    if (code->expr2->ts.type == BT_CLASS
+		&& code->expr1->ts.type == BT_CLASS
 		&& !CLASS_DATA (code->expr2)->attr.dimension
-		&& !(UNLIMITED_POLY (code->expr2)
-		     && code->expr1->ts.type == BT_DERIVED
-		     && (code->expr1->ts.u.derived->attr.sequence
-			 || code->expr1->ts.u.derived->attr.is_bind_c))
 		&& !(gfc_expr_attr (code->expr1).proc_pointer
 		     && code->expr2->expr_type == EXPR_VARIABLE
 		     && code->expr2->symtree->n.sym->attr.flavor
@@ -14244,7 +14241,23 @@ resolve_symbol (gfc_symbol *sym)
 
   if (as)
     {
-      gcc_assert (as->type != AS_IMPLIED_SHAPE);
+      /* If AS_IMPLIED_SHAPE makes it to here, it must be a bad
+	 specification expression.  */
+      if (as->type == AS_IMPLIED_SHAPE)
+	{
+	  int i;
+	  for (i=0; i<as->rank; i++)
+	    {
+	      if (as->lower[i] != NULL && as->upper[i] == NULL)
+		{
+		  gfc_error ("Bad specification for assumed size array at %L",
+			     &as->lower[i]->where);
+		  return;
+		}
+	    }
+	  gcc_unreachable();
+	}
+
       if (((as->type == AS_ASSUMED_SIZE && !as->cp_was_assumed)
 	   || as->type == AS_ASSUMED_SHAPE)
 	  && !sym->attr.dummy && !sym->attr.select_type_temporary)
