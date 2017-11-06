@@ -1871,12 +1871,21 @@ conv_caf_send (gfc_code *code) {
   gfc_init_se (&lhs_se, NULL);
   if (lhs_expr->rank == 0)
     {
-      symbol_attribute attr;
-      gfc_clear_attr (&attr);
-      gfc_conv_expr (&lhs_se, lhs_expr);
-      lhs_type = TREE_TYPE (lhs_se.expr);
-      lhs_se.expr = gfc_conv_scalar_to_descriptor (&lhs_se, lhs_se.expr, attr);
-      lhs_se.expr = gfc_build_addr_expr (NULL_TREE, lhs_se.expr);
+      if (lhs_expr->ts.type == BT_CHARACTER && lhs_expr->ts.deferred)
+	{
+	  lhs_se.expr = gfc_get_tree_for_caf_expr (lhs_expr);
+	  lhs_se.expr = gfc_build_addr_expr (NULL_TREE, lhs_se.expr);
+	}
+      else
+	{
+	  symbol_attribute attr;
+	  gfc_clear_attr (&attr);
+	  gfc_conv_expr (&lhs_se, lhs_expr);
+	  lhs_type = TREE_TYPE (lhs_se.expr);
+	  lhs_se.expr = gfc_conv_scalar_to_descriptor (&lhs_se, lhs_se.expr,
+						       attr);
+	  lhs_se.expr = gfc_build_addr_expr (NULL_TREE, lhs_se.expr);
+	}
     }
   else if ((lhs_caf_attr.alloc_comp || lhs_caf_attr.pointer_comp)
 	   && lhs_caf_attr.codimension)
@@ -2235,8 +2244,9 @@ trans_this_image (gfc_se * se, gfc_expr *expr)
 
       if (INTEGER_CST_P (dim_arg))
 	{
-	  if (wi::ltu_p (dim_arg, 1)
-	      || wi::gtu_p (dim_arg, GFC_TYPE_ARRAY_CORANK (TREE_TYPE (desc))))
+	  if (wi::ltu_p (wi::to_wide (dim_arg), 1)
+	      || wi::gtu_p (wi::to_wide (dim_arg),
+			    GFC_TYPE_ARRAY_CORANK (TREE_TYPE (desc))))
 	    gfc_error ("%<dim%> argument of %s intrinsic at %L is not a valid "
 		       "dimension index", expr->value.function.isym->name,
 		       &expr->where);
@@ -2657,8 +2667,9 @@ gfc_conv_intrinsic_bound (gfc_se * se, gfc_expr * expr, int upper)
   if (INTEGER_CST_P (bound))
     {
       if (((!as || as->type != AS_ASSUMED_RANK)
-	   && wi::geu_p (bound, GFC_TYPE_ARRAY_RANK (TREE_TYPE (desc))))
-	  || wi::gtu_p (bound, GFC_MAX_DIMENSIONS))
+	   && wi::geu_p (wi::to_wide (bound),
+			 GFC_TYPE_ARRAY_RANK (TREE_TYPE (desc))))
+	  || wi::gtu_p (wi::to_wide (bound), GFC_MAX_DIMENSIONS))
 	gfc_error ("%<dim%> argument of %s intrinsic at %L is not a valid "
 		   "dimension index", upper ? "UBOUND" : "LBOUND",
 		   &expr->where);
@@ -2853,8 +2864,9 @@ conv_intrinsic_cobound (gfc_se * se, gfc_expr * expr)
 
       if (INTEGER_CST_P (bound))
 	{
-	  if (wi::ltu_p (bound, 1)
-	      || wi::gtu_p (bound, GFC_TYPE_ARRAY_CORANK (TREE_TYPE (desc))))
+	  if (wi::ltu_p (wi::to_wide (bound), 1)
+	      || wi::gtu_p (wi::to_wide (bound),
+			    GFC_TYPE_ARRAY_CORANK (TREE_TYPE (desc))))
 	    gfc_error ("%<dim%> argument of %s intrinsic at %L is not a valid "
 		       "dimension index", expr->value.function.isym->name,
 		       &expr->where);

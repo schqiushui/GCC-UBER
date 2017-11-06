@@ -102,7 +102,7 @@
   [(set_attr "type" "neon_dup<q>")]
 )
 
-(define_insn "*aarch64_simd_mov<mode>"
+(define_insn "*aarch64_simd_mov<VD:mode>"
   [(set (match_operand:VD 0 "nonimmediate_operand"
 		"=w, m,  m,  w, ?r, ?w, ?r, w")
 	(match_operand:VD 1 "general_operand"
@@ -126,12 +126,12 @@
      default: gcc_unreachable ();
      }
 }
-  [(set_attr "type" "neon_load1_1reg<q>, neon_stp, neon_store1_1reg<q>,\
+  [(set_attr "type" "neon_load1_1reg<q>, store_8, neon_store1_1reg<q>,\
 		     neon_logic<q>, neon_to_gp<q>, f_mcr,\
 		     mov_reg, neon_move<q>")]
 )
 
-(define_insn "*aarch64_simd_mov<mode>"
+(define_insn "*aarch64_simd_mov<VQ:mode>"
   [(set (match_operand:VQ 0 "nonimmediate_operand"
 		"=w, Umq,  m,  w, ?r, ?w, ?r, w")
 	(match_operand:VQ 1 "general_operand"
@@ -160,8 +160,8 @@
 	gcc_unreachable ();
     }
 }
-  [(set_attr "type" "neon_load1_1reg<q>, neon_store1_1reg<q>,\
-		     neon_stp, neon_logic<q>, multiple, multiple,\
+  [(set_attr "type" "neon_load1_1reg<q>, store_16, neon_store1_1reg<q>,\
+		     neon_logic<q>, multiple, multiple,\
 		     multiple, neon_move<q>")
    (set_attr "length" "4,4,4,4,8,8,8,4")]
 )
@@ -393,6 +393,87 @@
 }
 )
 
+;; These instructions map to the __builtins for the Dot Product operations.
+(define_insn "aarch64_<sur>dot<vsi2qi>"
+  [(set (match_operand:VS 0 "register_operand" "=w")
+	(plus:VS (match_operand:VS 1 "register_operand" "0")
+		(unspec:VS [(match_operand:<VSI2QI> 2 "register_operand" "w")
+			    (match_operand:<VSI2QI> 3 "register_operand" "w")]
+		DOTPROD)))]
+  "TARGET_DOTPROD"
+  "<sur>dot\\t%0.<Vtype>, %2.<Vdottype>, %3.<Vdottype>"
+  [(set_attr "type" "neon_dot")]
+)
+
+;; These expands map to the Dot Product optab the vectorizer checks for.
+;; The auto-vectorizer expects a dot product builtin that also does an
+;; accumulation into the provided register.
+;; Given the following pattern
+;;
+;; for (i=0; i<len; i++) {
+;;     c = a[i] * b[i];
+;;     r += c;
+;; }
+;; return result;
+;;
+;; This can be auto-vectorized to
+;; r  = a[0]*b[0] + a[1]*b[1] + a[2]*b[2] + a[3]*b[3];
+;;
+;; given enough iterations.  However the vectorizer can keep unrolling the loop
+;; r += a[4]*b[4] + a[5]*b[5] + a[6]*b[6] + a[7]*b[7];
+;; r += a[8]*b[8] + a[9]*b[9] + a[10]*b[10] + a[11]*b[11];
+;; ...
+;;
+;; and so the vectorizer provides r, in which the result has to be accumulated.
+(define_expand "<sur>dot_prod<vsi2qi>"
+  [(set (match_operand:VS 0 "register_operand")
+	(plus:VS (unspec:VS [(match_operand:<VSI2QI> 1 "register_operand")
+			    (match_operand:<VSI2QI> 2 "register_operand")]
+		 DOTPROD)
+		(match_operand:VS 3 "register_operand")))]
+  "TARGET_DOTPROD"
+{
+  emit_insn (
+    gen_aarch64_<sur>dot<vsi2qi> (operands[3], operands[3], operands[1],
+				    operands[2]));
+  emit_insn (gen_rtx_SET (operands[0], operands[3]));
+  DONE;
+})
+
+;; These instructions map to the __builtins for the Dot Product
+;; indexed operations.
+(define_insn "aarch64_<sur>dot_lane<vsi2qi>"
+  [(set (match_operand:VS 0 "register_operand" "=w")
+	(plus:VS (match_operand:VS 1 "register_operand" "0")
+		(unspec:VS [(match_operand:<VSI2QI> 2 "register_operand" "w")
+			    (match_operand:V8QI 3 "register_operand" "<h_con>")
+			    (match_operand:SI 4 "immediate_operand" "i")]
+		DOTPROD)))]
+  "TARGET_DOTPROD"
+  {
+    operands[4]
+      = GEN_INT (ENDIAN_LANE_N (V8QImode, INTVAL (operands[4])));
+    return "<sur>dot\\t%0.<Vtype>, %2.<Vdottype>, %3.4b[%4]";
+  }
+  [(set_attr "type" "neon_dot")]
+)
+
+(define_insn "aarch64_<sur>dot_laneq<vsi2qi>"
+  [(set (match_operand:VS 0 "register_operand" "=w")
+	(plus:VS (match_operand:VS 1 "register_operand" "0")
+		(unspec:VS [(match_operand:<VSI2QI> 2 "register_operand" "w")
+			    (match_operand:V16QI 3 "register_operand" "<h_con>")
+			    (match_operand:SI 4 "immediate_operand" "i")]
+		DOTPROD)))]
+  "TARGET_DOTPROD"
+  {
+    operands[4]
+      = GEN_INT (ENDIAN_LANE_N (V16QImode, INTVAL (operands[4])));
+    return "<sur>dot\\t%0.<Vtype>, %2.<Vdottype>, %3.4b[%4]";
+  }
+  [(set_attr "type" "neon_dot")]
+)
+
 (define_expand "copysign<mode>3"
   [(match_operand:VHSDF 0 "register_operand")
    (match_operand:VHSDF 1 "register_operand")
@@ -558,21 +639,45 @@
   [(set_attr "type" "neon_fp_abd_<stype><q>")]
 )
 
+;; For AND (vector, register) and BIC (vector, immediate)
 (define_insn "and<mode>3"
-  [(set (match_operand:VDQ_I 0 "register_operand" "=w")
-        (and:VDQ_I (match_operand:VDQ_I 1 "register_operand" "w")
-		 (match_operand:VDQ_I 2 "register_operand" "w")))]
+  [(set (match_operand:VDQ_I 0 "register_operand" "=w,w")
+	(and:VDQ_I (match_operand:VDQ_I 1 "register_operand" "w,0")
+		   (match_operand:VDQ_I 2 "aarch64_reg_or_bic_imm" "w,Db")))]
   "TARGET_SIMD"
-  "and\t%0.<Vbtype>, %1.<Vbtype>, %2.<Vbtype>"
+  {
+    switch (which_alternative)
+      {
+      case 0:
+	return "and\t%0.<Vbtype>, %1.<Vbtype>, %2.<Vbtype>";
+      case 1:
+	return aarch64_output_simd_mov_immediate (operands[2],
+	   <MODE>mode, GET_MODE_BITSIZE (<MODE>mode), AARCH64_CHECK_BIC);
+      default:
+	gcc_unreachable ();
+      }
+  }
   [(set_attr "type" "neon_logic<q>")]
 )
 
+;; For ORR (vector, register) and ORR (vector, immediate)
 (define_insn "ior<mode>3"
-  [(set (match_operand:VDQ_I 0 "register_operand" "=w")
-        (ior:VDQ_I (match_operand:VDQ_I 1 "register_operand" "w")
-		 (match_operand:VDQ_I 2 "register_operand" "w")))]
+  [(set (match_operand:VDQ_I 0 "register_operand" "=w,w")
+	(ior:VDQ_I (match_operand:VDQ_I 1 "register_operand" "w,0")
+		   (match_operand:VDQ_I 2 "aarch64_reg_or_orr_imm" "w,Do")))]
   "TARGET_SIMD"
-  "orr\t%0.<Vbtype>, %1.<Vbtype>, %2.<Vbtype>"
+  {
+    switch (which_alternative)
+      {
+      case 0:
+	return "orr\t%0.<Vbtype>, %1.<Vbtype>, %2.<Vbtype>";
+      case 1:
+	return aarch64_output_simd_mov_immediate (operands[2],
+		<MODE>mode, GET_MODE_BITSIZE (<MODE>mode), AARCH64_CHECK_ORR);
+      default:
+	gcc_unreachable ();
+      }
+  }
   [(set_attr "type" "neon_logic<q>")]
 )
 
@@ -5264,6 +5369,9 @@
 [(set_attr "type" "multiple")]
 )
 
+;; This instruction's pattern is generated directly by
+;; aarch64_expand_vec_perm_const, so any changes to the pattern would
+;; need corresponding changes there.
 (define_insn "aarch64_<PERMUTE:perm_insn><PERMUTE:perm_hilo><mode>"
   [(set (match_operand:VALL_F16 0 "register_operand" "=w")
 	(unspec:VALL_F16 [(match_operand:VALL_F16 1 "register_operand" "w")
@@ -5274,7 +5382,10 @@
   [(set_attr "type" "neon_permute<q>")]
 )
 
-;; Note immediate (third) operand is lane index not byte index.
+;; This instruction's pattern is generated directly by
+;; aarch64_expand_vec_perm_const, so any changes to the pattern would
+;; need corresponding changes there.  Note that the immediate (third)
+;; operand is a lane index not a byte index.
 (define_insn "aarch64_ext<mode>"
   [(set (match_operand:VALL_F16 0 "register_operand" "=w")
         (unspec:VALL_F16 [(match_operand:VALL_F16 1 "register_operand" "w")
@@ -5290,6 +5401,9 @@
   [(set_attr "type" "neon_ext<q>")]
 )
 
+;; This instruction's pattern is generated directly by
+;; aarch64_expand_vec_perm_const, so any changes to the pattern would
+;; need corresponding changes there.
 (define_insn "aarch64_rev<REVERSE:rev_op><mode>"
   [(set (match_operand:VALL_F16 0 "register_operand" "=w")
 	(unspec:VALL_F16 [(match_operand:VALL_F16 1 "register_operand" "w")]

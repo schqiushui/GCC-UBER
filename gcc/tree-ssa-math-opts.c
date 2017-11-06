@@ -515,6 +515,7 @@ internal_fn_reciprocal (gcall *call)
   switch (gimple_call_combined_fn (call))
     {
     CASE_CFN_SQRT:
+    CASE_CFN_SQRT_FN:
       ifn = IFN_RSQRT;
       break;
 
@@ -2138,7 +2139,7 @@ find_bswap_or_nop_load (gimple *stmt, tree ref, struct symbolic_number *n)
       if (wi::neg_p (bit_offset))
 	{
 	  offset_int mask = wi::mask <offset_int> (LOG2_BITS_PER_UNIT, false);
-	  offset_int tem = bit_offset.and_not (mask);
+	  offset_int tem = wi::bit_and_not (bit_offset, mask);
 	  /* TEM is the bitpos rounded to BITS_PER_UNIT towards -Inf.
 	     Subtract it to BIT_OFFSET and add it (scaled) to OFFSET.  */
 	  bit_offset -= tem;
@@ -3242,7 +3243,7 @@ convert_mult_to_widen (gimple *stmt, gimple_stmt_iterator *gsi)
 {
   tree lhs, rhs1, rhs2, type, type1, type2;
   enum insn_code handler;
-  machine_mode to_mode, from_mode, actual_mode;
+  scalar_int_mode to_mode, from_mode, actual_mode;
   optab op;
   int actual_precision;
   location_t loc = gimple_location (stmt);
@@ -3269,7 +3270,7 @@ convert_mult_to_widen (gimple *stmt, gimple_stmt_iterator *gsi)
     op = usmul_widen_optab;
 
   handler = find_widening_optab_handler_and_mode (op, to_mode, from_mode,
-						  0, &actual_mode);
+						  &actual_mode);
 
   if (handler == CODE_FOR_nothing)
     {
@@ -3290,7 +3291,7 @@ convert_mult_to_widen (gimple *stmt, gimple_stmt_iterator *gsi)
 
 	  op = smul_widen_optab;
 	  handler = find_widening_optab_handler_and_mode (op, to_mode,
-							  from_mode, 0,
+							  from_mode,
 							  &actual_mode);
 
 	  if (handler == CODE_FOR_nothing)
@@ -3350,8 +3351,7 @@ convert_plusminus_to_widen (gimple_stmt_iterator *gsi, gimple *stmt,
   optab this_optab;
   enum tree_code wmult_code;
   enum insn_code handler;
-  scalar_mode to_mode, from_mode;
-  machine_mode actual_mode;
+  scalar_mode to_mode, from_mode, actual_mode;
   location_t loc = gimple_location (stmt);
   int actual_precision;
   bool from_unsigned1, from_unsigned2;
@@ -3509,7 +3509,7 @@ convert_plusminus_to_widen (gimple_stmt_iterator *gsi, gimple *stmt,
      this transformation is likely to pessimize code.  */
   this_optab = optab_for_tree_code (wmult_code, optype, optab_default);
   handler = find_widening_optab_handler_and_mode (this_optab, to_mode,
-						  from_mode, 0, &actual_mode);
+						  from_mode, &actual_mode);
 
   if (handler == CODE_FOR_nothing)
     return false;

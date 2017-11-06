@@ -1225,6 +1225,15 @@ package body Sprint is
 
             Write_Char (';');
 
+         when N_Call_Marker =>
+            null;
+
+            --  Enable the following code for debugging purposes only
+
+            --  Write_Indent_Str ("#");
+            --  Write_Id (Target (Node));
+            --  Write_Char ('#');
+
          when N_Case_Expression =>
             declare
                Has_Parens : constant Boolean := Paren_Count (Node) > 0;
@@ -3752,7 +3761,7 @@ package body Sprint is
       --  Ignore if there is no current source file, or we're not in dump
       --  source text mode, or if in freeze actions.
 
-      if Current_Source_File /= No_Source_File
+      if Current_Source_File > No_Source_File
         and then Dump_Source_Text
         and then Freeze_Indent = 0
       then

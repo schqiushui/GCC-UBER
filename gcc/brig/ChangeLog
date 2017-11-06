@@ -1,3 +1,40 @@
+2017-10-31  Henry Linjamäki  <henry.linjamaki@parmance.com>
+
+	* brig-lang.c (brig_langhook_type_for_mode): Fix PR 82771.
+
+2017-10-23  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	* brig-lang.c (brig_langhook_type_for_mode): Use scalar_int_mode
+	and scalar_float_mode.
+
+2017-10-09  Pekka Jääskeläinen  <pekka.jaaskelainen@parmance.com>
+
+	* brigfrontend/brig-to-generic.cc: Support BRIG_KIND_NONE
+	directives.  These directives are legal everywhere.  They
+	can be used to patch away BRIG entries at the binary level.
+	Also add extra error detection for zeroed regions: make sure
+	the byteCount field is never zero.
+	* brig/brigfrontend/phsa.h: Added a new error prefix for
+	errors which are due to corrupted BRIG modules.
+
+2017-10-09  Henry Linjamäki  <henry.linjamaki@parmance.com>
+
+	* brigfrontend/brig-branch-inst-handler.cc: The call code
+	still failed a few test cases. Now all PRM cases pass again.
+
+2017-10-03  Henry Linjamäki  <henry.linjamaki@parmance.com>
+
+	* brigfrontend/brig-branch-inst-handler.cc: Fix (more) crash with
+	calls with more than 4 args.  It missed a reference which is required
+	because vector expansion can move the object to another location.
+
+2017-09-29  Henry Linjamäki  <henry.linjamaki@parmance.com>
+
+	* brigfrontend/brig-branch-inst-handler.cc: Fix crash with
+	calls with more than 4 args. Also fix a misexecution issue
+	with kernels that have both unexpanded ID functions and
+	calls to subfunctions.
+
 2017-09-28  Henry Linjamäki  <henry.linjamaki@parmance.com>
 
 	* brig-lang.c: Added function attributes and their handlers.

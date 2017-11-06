@@ -6586,7 +6586,6 @@ gimple_get_virt_method_for_vtable (HOST_WIDE_INT token,
   gcc_assert (init);
   if (init == error_mark_node)
     {
-      gcc_assert (in_lto_p);
       /* Pass down that we lost track of the target.  */
       if (can_refer)
 	*can_refer = false;
@@ -6784,7 +6783,7 @@ gimple_fold_indirect_ref (tree t)
 	  || DECL_P (TREE_OPERAND (addr, 0)))
 	return fold_build2 (MEM_REF, type,
 			    addr,
-			    wide_int_to_tree (ptype, off));
+			    wide_int_to_tree (ptype, wi::to_wide (off)));
     }
 
   /* *(foo *)fooarrptr => (*fooarrptr)[0] */

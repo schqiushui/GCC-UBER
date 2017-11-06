@@ -1562,7 +1562,7 @@ cxx_sizeof_or_alignof_type (tree type, enum tree_code op, bool complain)
       if (complain)
 	pedwarn (input_location, OPT_Wpointer_arith, 
 		 "invalid application of %qs to a member function", 
-		 operator_name_info[(int) op].name);
+		 OVL_OP_INFO (false, op)->name);
       else
 	return error_mark_node;
       value = size_one_node;
@@ -2677,8 +2677,8 @@ access_failure_info::maybe_suggest_accessor (bool const_p) const
   pretty_printer pp;
   pp_printf (&pp, "%s()", IDENTIFIER_POINTER (DECL_NAME (accessor)));
   richloc.add_fixit_replace (pp_formatted_text (&pp));
-  inform_at_rich_loc (&richloc, "field %q#D can be accessed via %q#D",
-		      m_field_decl, accessor);
+  inform (&richloc, "field %q#D can be accessed via %q#D",
+	  m_field_decl, accessor);
 }
 
 /* This function is called by the parser to process a class member
@@ -2883,12 +2883,12 @@ finish_class_member_access_expr (cp_expr object, tree name, bool template_p,
 		      gcc_rich_location rich_loc (bogus_component_loc);
 		      rich_loc.add_fixit_misspelled_id (bogus_component_loc,
 							guessed_id);
-		      error_at_rich_loc
-			(&rich_loc,
-			 "%q#T has no member named %qE; did you mean %qE?",
-			 TREE_CODE (access_path) == TREE_BINFO
-			 ? TREE_TYPE (access_path) : object_type, name,
-			 guessed_id);
+		      error_at (&rich_loc,
+				"%q#T has no member named %qE;"
+				" did you mean %qE?",
+				TREE_CODE (access_path) == TREE_BINFO
+				? TREE_TYPE (access_path) : object_type,
+				name, guessed_id);
 		    }
 		  else
 		    error ("%q#T has no member named %qE",
@@ -5603,8 +5603,9 @@ tree
 condition_conversion (tree expr)
 {
   tree t;
-  if (processing_template_decl)
-    return expr;
+  /* Anything that might happen in a template should go through
+     maybe_convert_cond.  */
+  gcc_assert (!processing_template_decl);
   t = perform_implicit_conversion_flags (boolean_type_node, expr,
 					 tf_warning_or_error, LOOKUP_NORMAL);
   t = fold_build_cleanup_point_expr (boolean_type_node, t);
@@ -5653,6 +5654,9 @@ cp_build_addr_expr_1 (tree arg, bool strict_lvalue, tsubst_flags_t complain)
     return error_mark_node;
 
   arg = mark_lvalue_use (arg);
+  if (error_operand_p (arg))
+    return error_mark_node;
+
   argtype = lvalue_type (arg);
 
   gcc_assert (!(identifier_p (arg) && IDENTIFIER_ANY_OP_P (arg)));
@@ -7058,11 +7062,7 @@ build_static_cast (tree type, tree oexpr, tsubst_flags_t complain)
   if (dependent)
     {
     tmpl:
-      expr = oexpr;
-      if (dependent)
-	/* Handle generic lambda capture.  */
-	expr = mark_lvalue_use (expr);
-      expr = build_min (STATIC_CAST_EXPR, type, expr);
+      expr = build_min (STATIC_CAST_EXPR, type, oexpr);
       /* We don't know if it will or will not have side effects.  */
       TREE_SIDE_EFFECTS (expr) = 1;
       return convert_from_reference (expr);
@@ -7701,6 +7701,8 @@ tree
 cp_build_modify_expr (location_t loc, tree lhs, enum tree_code modifycode,
 		      tree rhs, tsubst_flags_t complain)
 {
+  lhs = mark_lvalue_use_nonread (lhs);
+
   tree result = NULL_TREE;
   tree newrhs = rhs;
   tree lhstype = TREE_TYPE (lhs);
@@ -7923,6 +7925,8 @@ cp_build_modify_expr (location_t loc, tree lhs, enum tree_code modifycode,
 	     operator. -- end note ]  */
 	  lhs = cp_stabilize_reference (lhs);
 	  rhs = rvalue (rhs);
+	  if (rhs == error_mark_node)
+	    return error_mark_node;
 	  rhs = stabilize_expr (rhs, &init);
 	  newrhs = cp_build_binary_op (loc, modifycode, lhs, rhs, complain);
 	  if (newrhs == error_mark_node)
@@ -8527,7 +8531,10 @@ convert_for_assignment (tree type, tree rhs,
     {
       tree elt = CONSTRUCTOR_ELT (rhs, 0)->value;
       if (check_narrowing (ENUM_UNDERLYING_TYPE (type), elt, complain))
-	rhs = cp_build_c_cast (type, elt, complain);
+	{
+	  warning_sentinel w (warn_useless_cast);
+	  rhs = cp_build_c_cast (type, elt, complain);
+	}
       else
 	rhs = error_mark_node;
     }
@@ -8954,10 +8961,14 @@ check_return_expr (tree retval, bool *no_warning)
       if (check_for_bare_parameter_packs (retval))
 	return error_mark_node;
 
-      if (WILDCARD_TYPE_P (TREE_TYPE (DECL_RESULT (current_function_decl)))
+      /* If one of the types might be void, we can't tell whether we're
+	 returning a value.  */
+      if ((WILDCARD_TYPE_P (TREE_TYPE (DECL_RESULT (current_function_decl)))
+	   && !current_function_auto_return_pattern)
 	  || (retval != NULL_TREE
-	      && type_dependent_expression_p (retval)))
-        return retval;
+	      && (TREE_TYPE (retval) == NULL_TREE
+		  || WILDCARD_TYPE_P (TREE_TYPE (retval)))))
+	goto dependent;
     }
 
   functype = TREE_TYPE (TREE_TYPE (current_function_decl));
@@ -9034,10 +9045,11 @@ check_return_expr (tree retval, bool *no_warning)
 	/* You can return a `void' value from a function of `void'
 	   type.  In that case, we have to evaluate the expression for
 	   its side-effects.  */
-	  finish_expr_stmt (retval);
+	finish_expr_stmt (retval);
       else
-	permerror (input_location, "return-statement with a value, in function "
-		   "returning 'void'");
+	permerror (input_location,
+		   "return-statement with a value, in function "
+		   "returning %qT", valtype);
       current_function_returns_null = 1;
 
       /* There's really no value to return, after all.  */
@@ -9061,8 +9073,7 @@ check_return_expr (tree retval, bool *no_warning)
     }
 
   /* Only operator new(...) throw(), can return NULL [expr.new/13].  */
-  if ((DECL_OVERLOADED_OPERATOR_P (current_function_decl) == NEW_EXPR
-       || DECL_OVERLOADED_OPERATOR_P (current_function_decl) == VEC_NEW_EXPR)
+  if (IDENTIFIER_NEW_OP_P (DECL_NAME (current_function_decl))
       && !TYPE_NOTHROW_P (TREE_TYPE (current_function_decl))
       && ! flag_check_new
       && retval && null_ptr_cst_p (retval))
@@ -9071,7 +9082,7 @@ check_return_expr (tree retval, bool *no_warning)
 
   /* Effective C++ rule 15.  See also start_function.  */
   if (warn_ecpp
-      && DECL_NAME (current_function_decl) == cp_assignment_operator_id (NOP_EXPR))
+      && DECL_NAME (current_function_decl) == assign_op_identifier)
     {
       bool warn = true;
 
@@ -9095,11 +9106,13 @@ check_return_expr (tree retval, bool *no_warning)
 	warning (OPT_Weffc__, "%<operator=%> should return a reference to %<*this%>");
     }
 
-  if (processing_template_decl)
+  if (dependent_type_p (functype)
+      || type_dependent_expression_p (retval))
     {
+    dependent:
       /* We should not have changed the return value.  */
       gcc_assert (retval == saved_retval);
-      return retval;
+      return do_dependent_capture (retval, /*force*/true);
     }
 
   /* The fabled Named Return Value optimization, as per [class.copy]/15:
@@ -9123,6 +9136,7 @@ check_return_expr (tree retval, bool *no_warning)
 
   named_return_value_okay_p = 
     (retval != NULL_TREE
+     && !processing_template_decl
      /* Must be a local, automatic variable.  */
      && VAR_P (retval)
      && DECL_CONTEXT (retval) == current_function_decl
@@ -9214,10 +9228,14 @@ check_return_expr (tree retval, bool *no_warning)
 	       && TREE_CODE (TREE_OPERAND (retval, 1)) == AGGR_INIT_EXPR)
 	retval = build2 (COMPOUND_EXPR, TREE_TYPE (retval), retval,
 			 TREE_OPERAND (retval, 0));
-      else if (maybe_warn_about_returning_address_of_local (retval))
+      else if (!processing_template_decl
+	       && maybe_warn_about_returning_address_of_local (retval))
 	retval = build2 (COMPOUND_EXPR, TREE_TYPE (retval), retval,
 			 build_zero_cst (TREE_TYPE (retval)));
     }
+
+  if (processing_template_decl)
+    return saved_retval;
 
   /* Actually copy the value returned into the appropriate location.  */
   if (retval && retval != result)

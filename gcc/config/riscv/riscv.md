@@ -259,6 +259,9 @@
 ;; Iterator for QImode extension patterns.
 (define_mode_iterator SUPERQI [HI SI (DI "TARGET_64BIT")])
 
+;; Iterator for extending loads.
+(define_mode_iterator ZERO_EXTEND_LOAD [QI HI (SI "TARGET_64BIT")])
+
 ;; Iterator for hardware integer modes narrower than XLEN.
 (define_mode_iterator SUBX [QI HI (SI "TARGET_64BIT")])
 
@@ -411,7 +414,7 @@
 	(plus:SI (match_operand:SI 1 "register_operand" " r,r")
 		 (match_operand:SI 2 "arith_operand"    " r,I")))]
   ""
-  { return TARGET_64BIT ? "addw\t%0,%1,%2" : "add\t%0,%1,%2"; }
+  { return TARGET_64BIT ? "add%i2w\t%0,%1,%2" : "add%i2\t%0,%1,%2"; }
   [(set_attr "type" "arith")
    (set_attr "mode" "SI")])
 
@@ -420,7 +423,7 @@
 	(plus:DI (match_operand:DI 1 "register_operand" " r,r")
 		 (match_operand:DI 2 "arith_operand"    " r,I")))]
   "TARGET_64BIT"
-  "add\t%0,%1,%2"
+  "add%i2\t%0,%1,%2"
   [(set_attr "type" "arith")
    (set_attr "mode" "DI")])
 
@@ -430,7 +433,7 @@
 	     (plus:SI (match_operand:SI 1 "register_operand" " r,r")
 		      (match_operand:SI 2 "arith_operand"    " r,I"))))]
   "TARGET_64BIT"
-  "addw\t%0,%1,%2"
+  "add%i2w\t%0,%1,%2"
   [(set_attr "type" "arith")
    (set_attr "mode" "SI")])
 
@@ -441,7 +444,7 @@
 			      (match_operand:DI 2 "arith_operand"    " r,I"))
 		     0)))]
   "TARGET_64BIT"
-  "addw\t%0,%1,%2"
+  "add%i2w\t%0,%1,%2"
   [(set_attr "type" "arith")
    (set_attr "mode" "SI")])
 
@@ -702,7 +705,7 @@
 	(any_div:SI (match_operand:SI 1 "register_operand" " r")
 		    (match_operand:SI 2 "register_operand" " r")))]
   "TARGET_DIV"
-  { return TARGET_64BIT ? "<insn>w\t%0,%1,%2" : "<insn>\t%0,%1,%2"; }
+  { return TARGET_64BIT ? "<insn>%i2w\t%0,%1,%2" : "<insn>%i2\t%0,%1,%2"; }
   [(set_attr "type" "idiv")
    (set_attr "mode" "SI")])
 
@@ -711,7 +714,7 @@
 	(any_div:DI (match_operand:DI 1 "register_operand" " r")
 		    (match_operand:DI 2 "register_operand" " r")))]
   "TARGET_DIV && TARGET_64BIT"
-  "<insn>\t%0,%1,%2"
+  "<insn>%i2\t%0,%1,%2"
   [(set_attr "type" "idiv")
    (set_attr "mode" "DI")])
 
@@ -721,7 +724,7 @@
 	    (any_div:SI (match_operand:SI 1 "register_operand" " r")
 			(match_operand:SI 2 "register_operand" " r"))))]
   "TARGET_DIV && TARGET_64BIT"
-  "<insn>w\t%0,%1,%2"
+  "<insn>%i2w\t%0,%1,%2"
   [(set_attr "type" "idiv")
    (set_attr "mode" "DI")])
 
@@ -925,7 +928,7 @@
 	(any_bitwise:X (match_operand:X 1 "register_operand" "%r,r")
 		       (match_operand:X 2 "arith_operand"    " r,I")))]
   ""
-  "<insn>\t%0,%1,%2"
+  "<insn>%i2\t%0,%1,%2"
   [(set_attr "type" "logical")
    (set_attr "mode" "<MODE>")])
 
@@ -934,7 +937,7 @@
 	(any_bitwise:SI (match_operand:SI 1 "register_operand" "%r,r")
 			(match_operand:SI 2 "arith_operand"    " r,I")))]
   "TARGET_64BIT"
-  "<insn>\t%0,%1,%2"
+  "<insn>%i2\t%0,%1,%2"
   [(set_attr "type" "logical")
    (set_attr "mode" "SI")])
 
@@ -1022,7 +1025,7 @@
 	    (match_operand:QI 1 "nonimmediate_operand" " r,m")))]
   ""
   "@
-   and\t%0,%1,0xff
+   andi\t%0,%1,0xff
    lbu\t%0,%1"
   [(set_attr "move_type" "andi,load")
    (set_attr "mode" "<SUPERQI:MODE>")])
@@ -1315,7 +1318,7 @@
 	(plus:HI (match_operand:HISI 1 "register_operand" " r,r")
 		 (match_operand:HISI 2 "arith_operand"    " r,I")))]
   ""
-  { return TARGET_64BIT ? "addw\t%0,%1,%2" : "add\t%0,%1,%2"; }
+  { return TARGET_64BIT ? "add%i2w\t%0,%1,%2" : "add%i2\t%0,%1,%2"; }
   [(set_attr "type" "arith")
    (set_attr "mode" "HI")])
 
@@ -1324,7 +1327,7 @@
 	(xor:HI (match_operand:HISI 1 "register_operand" " r,r")
 		(match_operand:HISI 2 "arith_operand"    " r,I")))]
   ""
-  "xor\t%0,%1,%2"
+  "xor%i2\t%0,%1,%2"
   [(set_attr "type" "logical")
    (set_attr "mode" "HI")])
 
@@ -1472,7 +1475,7 @@
     operands[2] = GEN_INT (INTVAL (operands[2])
 			   & (GET_MODE_BITSIZE (SImode) - 1));
 
-  return TARGET_64BIT ? "<insn>w\t%0,%1,%2" : "<insn>\t%0,%1,%2";
+  return TARGET_64BIT ? "<insn>%i2w\t%0,%1,%2" : "<insn>%i2\t%0,%1,%2";
 }
   [(set_attr "type" "shift")
    (set_attr "mode" "SI")])
@@ -1488,7 +1491,7 @@
     operands[2] = GEN_INT (INTVAL (operands[2])
 			   & (GET_MODE_BITSIZE (DImode) - 1));
 
-  return "<insn>\t%0,%1,%2";
+  return "<insn>%i2\t%0,%1,%2";
 }
   [(set_attr "type" "shift")
    (set_attr "mode" "DI")])
@@ -1503,7 +1506,7 @@
   if (GET_CODE (operands[2]) == CONST_INT)
     operands[2] = GEN_INT (INTVAL (operands[2]) & 0x1f);
 
-  return "<insn>w\t%0,%1,%2";
+  return "<insn>%i2w\t%0,%1,%2";
 }
   [(set_attr "type" "shift")
    (set_attr "mode" "SI")])
@@ -1722,7 +1725,7 @@
 	(any_ge:GPR (match_operand:X 1 "register_operand" " r")
 		    (const_int 1)))]
   ""
-  "slt<u>\t%0,zero,%1"
+  "slt%i2<u>\t%0,zero,%1"
   [(set_attr "type" "slt")
    (set_attr "mode" "<MODE>")])
 
@@ -1731,7 +1734,7 @@
 	(any_lt:GPR (match_operand:X 1 "register_operand" "  r")
 		    (match_operand:X 2 "arith_operand"    " rI")))]
   ""
-  "slt<u>\t%0,%1,%2"
+  "slt%i2<u>\t%0,%1,%2"
   [(set_attr "type" "slt")
    (set_attr "mode" "<MODE>")])
 
@@ -1742,7 +1745,7 @@
   ""
 {
   operands[2] = GEN_INT (INTVAL (operands[2]) + 1);
-  return "slt<u>\t%0,%1,%2";
+  return "slt%i2<u>\t%0,%1,%2";
 }
   [(set_attr "type" "slt")
    (set_attr "mode" "<MODE>")])

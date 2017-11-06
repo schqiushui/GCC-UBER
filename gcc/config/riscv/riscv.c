@@ -1332,6 +1332,22 @@ riscv_legitimize_move (machine_mode mode, rtx dest, rtx src)
       return true;
     }
 
+  /* RISC-V GCC may generate non-legitimate address due to we provide some
+     pattern for optimize access PIC local symbol and it's make GCC generate
+     unrecognizable instruction during optmizing.  */
+
+  if (MEM_P (dest) && !riscv_legitimate_address_p (mode, XEXP (dest, 0),
+						   reload_completed))
+    {
+      XEXP (dest, 0) = riscv_force_address (XEXP (dest, 0), mode);
+    }
+
+  if (MEM_P (src) && !riscv_legitimate_address_p (mode, XEXP (src, 0),
+						  reload_completed))
+    {
+      XEXP (src, 0) = riscv_force_address (XEXP (src, 0), mode);
+    }
+
   return false;
 }
 
@@ -2717,7 +2733,8 @@ riscv_memmodel_needs_release_fence (enum memmodel model)
    'C'	Print the integer branch condition for comparison OP.
    'A'	Print the atomic operation suffix for memory model OP.
    'F'	Print a FENCE if the memory model requires a release.
-   'z'	Print x0 if OP is zero, otherwise print OP normally.  */
+   'z'	Print x0 if OP is zero, otherwise print OP normally.
+   'i'	Print i if the operand is not a register.  */
 
 static void
 riscv_print_operand (FILE *file, rtx op, int letter)
@@ -2750,6 +2767,11 @@ riscv_print_operand (FILE *file, rtx op, int letter)
     case 'F':
       if (riscv_memmodel_needs_release_fence ((enum memmodel) INTVAL (op)))
 	fputs ("fence iorw,ow; ", file);
+      break;
+
+    case 'i':
+      if (code != REG)
+        fputs ("i", file);
       break;
 
     default:
@@ -3756,9 +3778,13 @@ riscv_option_override (void)
 
   /* Use -mtune's setting for slow_unaligned_access, even when optimizing
      for size.  For architectures that trap and emulate unaligned accesses,
-     the performance cost is too great, even for -Os.  */
+     the performance cost is too great, even for -Os.  Similarly, if
+     -m[no-]strict-align is left unspecified, heed -mtune's advice.  */
   riscv_slow_unaligned_access_p = (cpu->tune_info->slow_unaligned_access
 				   || TARGET_STRICT_ALIGN);
+  if ((target_flags_explicit & MASK_STRICT_ALIGN) == 0
+      && cpu->tune_info->slow_unaligned_access)
+    target_flags |= MASK_STRICT_ALIGN;
 
   /* If the user hasn't specified a branch cost, use the processor's
      default.  */

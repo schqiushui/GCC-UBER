@@ -2446,7 +2446,7 @@ throw_bad_array_new_length (void)
     {
       tree name = get_identifier ("__cxa_throw_bad_array_new_length");
 
-      fn = IDENTIFIER_GLOBAL_VALUE (name);
+      fn = get_global_binding (name);
       if (!fn)
 	fn = push_throw_library_fn
 	  (name, build_function_type_list (sizetype, NULL_TREE));
@@ -3055,7 +3055,7 @@ build_new_1 (vec<tree, va_gc> **placement, tree type, tree nelts,
   tree fnname;
   tree fns;
 
-  fnname = cp_operator_id (array_p ? VEC_NEW_EXPR : NEW_EXPR);
+  fnname = ovl_op_identifier (false, array_p ? VEC_NEW_EXPR : NEW_EXPR);
 
   member_new_p = !globally_qualified_p
 		 && CLASS_TYPE_P (elt_type)

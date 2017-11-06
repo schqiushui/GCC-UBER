@@ -2861,7 +2861,7 @@ gfc_conv_cst_int_power (gfc_se * se, tree lhs, tree rhs)
   HOST_WIDE_INT m;
   unsigned HOST_WIDE_INT n;
   int sgn;
-  wide_int wrhs = rhs;
+  wi::tree_to_wide_ref wrhs = wi::to_wide (rhs);
 
   /* If exponent is too large, we won't expand it anyway, so don't bother
      with large integer values.  */
@@ -5173,10 +5173,39 @@ gfc_conv_procedure_call (gfc_se * se, gfc_symbol * sym,
 			}
 		      else
 			{
-			  gfc_add_modify (&parmse.pre, var,
-					  fold_build1_loc (input_location,
-							   VIEW_CONVERT_EXPR,
-							   type, parmse.expr));
+			  /* Since the internal representation of unlimited
+			     polymorphic expressions includes an extra field
+			     that other class objects do not, a cast to the
+			     formal type does not work.  */
+			  if (!UNLIMITED_POLY (e) && UNLIMITED_POLY (fsym))
+			    {
+			      tree efield;
+
+			      /* Set the _data field.  */
+			      tmp = gfc_class_data_get (var);
+			      efield = fold_convert (TREE_TYPE (tmp),
+					gfc_class_data_get (parmse.expr));
+			      gfc_add_modify (&parmse.pre, tmp, efield);
+
+			      /* Set the _vptr field.  */
+			      tmp = gfc_class_vptr_get (var);
+			      efield = fold_convert (TREE_TYPE (tmp),
+					gfc_class_vptr_get (parmse.expr));
+			      gfc_add_modify (&parmse.pre, tmp, efield);
+
+			      /* Set the _len field.  */
+			      tmp = gfc_class_len_get (var);
+			      gfc_add_modify (&parmse.pre, tmp,
+					      build_int_cst (TREE_TYPE (tmp), 0));
+			    }
+			  else
+			    {
+			      tmp = fold_build1_loc (input_location,
+						     VIEW_CONVERT_EXPR,
+						     type, parmse.expr);
+			      gfc_add_modify (&parmse.pre, var, tmp);
+					      ;
+			    }
 			  parmse.expr = gfc_build_addr_expr (NULL_TREE, var);
 			}
 		    }
@@ -8053,7 +8082,7 @@ trans_class_vptr_len_assignment (stmtblock_t *block, gfc_expr * le,
     {
       /* Get the vptr from the rhs expression only, when it is variable.
 	 Functions are expected to be assigned to a temporary beforehand.  */
-      vptr_expr = re->expr_type == EXPR_VARIABLE
+      vptr_expr = (re->expr_type == EXPR_VARIABLE && re->ts.type == BT_CLASS)
 	  ? gfc_find_and_cut_at_last_class_ref (re)
 	  : NULL;
       if (vptr_expr != NULL && vptr_expr->ts.type == BT_CLASS)
@@ -8207,6 +8236,39 @@ pointer_assignment_is_proc_pointer (gfc_expr * expr1, gfc_expr * expr2)
 }
 
 
+/* Do everything that is needed for a CLASS function expr2.  */
+
+static tree
+trans_class_pointer_fcn (stmtblock_t *block, gfc_se *lse, gfc_se *rse,
+			 gfc_expr *expr1, gfc_expr *expr2)
+{
+  tree expr1_vptr = NULL_TREE;
+  tree tmp;
+
+  gfc_conv_function_expr (rse, expr2);
+  rse->expr = gfc_evaluate_now (rse->expr, &rse->pre);
+
+  if (expr1->ts.type != BT_CLASS)
+      rse->expr = gfc_class_data_get (rse->expr);
+  else
+    {
+      expr1_vptr = trans_class_vptr_len_assignment (block, expr1,
+						    expr2, rse,
+						    NULL, NULL);
+      gfc_add_block_to_block (block, &rse->pre);
+      tmp = gfc_create_var (TREE_TYPE (rse->expr), "ptrtemp");
+      gfc_add_modify (&lse->pre, tmp, rse->expr);
+
+      gfc_add_modify (&lse->pre, expr1_vptr,
+		      fold_convert (TREE_TYPE (expr1_vptr),
+		      gfc_class_vptr_get (tmp)));
+      rse->expr = gfc_class_data_get (tmp);
+    }
+
+  return expr1_vptr;
+}
+
+
 tree
 gfc_trans_pointer_assign (gfc_code * code)
 {
@@ -8224,6 +8286,7 @@ gfc_trans_pointer_assignment (gfc_expr * expr1, gfc_expr * expr2)
   stmtblock_t block;
   tree desc;
   tree tmp;
+  tree expr1_vptr = NULL_TREE;
   bool scalar, non_proc_pointer_assign;
   gfc_ss *ss;
 
@@ -8257,7 +8320,10 @@ gfc_trans_pointer_assignment (gfc_expr * expr1, gfc_expr * expr2)
       gfc_conv_expr (&lse, expr1);
       gfc_init_se (&rse, NULL);
       rse.want_pointer = 1;
-      gfc_conv_expr (&rse, expr2);
+      if (expr2->expr_type == EXPR_FUNCTION && expr2->ts.type == BT_CLASS)
+	trans_class_pointer_fcn (&block, &lse, &rse, expr1, expr2);
+      else
+	gfc_conv_expr (&rse, expr2);
 
       if (non_proc_pointer_assign && expr1->ts.type == BT_CLASS)
 	{
@@ -8269,12 +8335,12 @@ gfc_trans_pointer_assignment (gfc_expr * expr1, gfc_expr * expr2)
       if (expr1->symtree->n.sym->attr.proc_pointer
 	  && expr1->symtree->n.sym->attr.dummy)
 	lse.expr = build_fold_indirect_ref_loc (input_location,
-					    lse.expr);
+						lse.expr);
 
       if (expr2->symtree && expr2->symtree->n.sym->attr.proc_pointer
 	  && expr2->symtree->n.sym->attr.dummy)
 	rse.expr = build_fold_indirect_ref_loc (input_location,
-					    rse.expr);
+						rse.expr);
 
       gfc_add_block_to_block (&block, &lse.pre);
       gfc_add_block_to_block (&block, &rse.pre);
@@ -8320,7 +8386,6 @@ gfc_trans_pointer_assignment (gfc_expr * expr1, gfc_expr * expr2)
     {
       gfc_ref* remap;
       bool rank_remap;
-      tree expr1_vptr = NULL_TREE;
       tree strlen_lhs;
       tree strlen_rhs = NULL_TREE;
 
@@ -8355,26 +8420,8 @@ gfc_trans_pointer_assignment (gfc_expr * expr1, gfc_expr * expr2)
 	  rse.byref_noassign = 1;
 
 	  if (expr2->expr_type == EXPR_FUNCTION && expr2->ts.type == BT_CLASS)
-	    {
-	      gfc_conv_function_expr (&rse, expr2);
-
-	      if (expr1->ts.type != BT_CLASS)
-		rse.expr = gfc_class_data_get (rse.expr);
-	      else
-		{
-		  expr1_vptr = trans_class_vptr_len_assignment (&block, expr1,
-								expr2, &rse,
-								NULL, NULL);
-		  gfc_add_block_to_block (&block, &rse.pre);
-		  tmp = gfc_create_var (TREE_TYPE (rse.expr), "ptrtemp");
-		  gfc_add_modify (&lse.pre, tmp, rse.expr);
-
-		  gfc_add_modify (&lse.pre, expr1_vptr,
-				  fold_convert (TREE_TYPE (expr1_vptr),
-						gfc_class_vptr_get (tmp)));
-		  rse.expr = gfc_class_data_get (tmp);
-		}
-	    }
+	    expr1_vptr = trans_class_pointer_fcn (&block, &lse, &rse,
+						  expr1, expr2);
 	  else if (expr2->expr_type == EXPR_FUNCTION)
 	    {
 	      tree bound[GFC_MAX_DIMENSIONS];
@@ -10037,12 +10084,16 @@ gfc_trans_assignment_1 (gfc_expr * expr1, gfc_expr * expr2, bool init_flag,
      NOTE: This relies on having the exact dependence of the length type
      parameter available to the caller; gfortran saves it in the .mod files.
      NOTE ALSO: The concatenation operation generates a temporary pointer,
-     whose allocation must go to the innermost loop.  */
+     whose allocation must go to the innermost loop.
+     NOTE ALSO (2): A character conversion may generate a temporary, too.  */
   if (flag_realloc_lhs
       && expr2->ts.type == BT_CHARACTER && expr1->ts.deferred
       && !(lss != gfc_ss_terminator
-	   && expr2->expr_type == EXPR_OP
-	   && expr2->value.op.op == INTRINSIC_CONCAT))
+	   && ((expr2->expr_type == EXPR_OP
+		&& expr2->value.op.op == INTRINSIC_CONCAT)
+	       || (expr2->expr_type == EXPR_FUNCTION
+		   && expr2->value.function.isym != NULL
+		   && expr2->value.function.isym->id == GFC_ISYM_CONVERSION))))
     gfc_add_block_to_block (&block, &rse.pre);
 
   /* Nullify the allocatable components corresponding to those of the lhs

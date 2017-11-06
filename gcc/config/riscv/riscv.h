@@ -446,8 +446,6 @@ enum reg_class
 
 #define FRAME_GROWS_DOWNWARD 1
 
-#define STARTING_FRAME_OFFSET 0
-
 #define RETURN_ADDR_RTX riscv_return_addr
 
 #define ELIMINABLE_REGS							\
@@ -617,7 +615,12 @@ typedef struct {
 #define MOVE_MAX UNITS_PER_WORD
 #define MAX_MOVE_MAX 8
 
-#define SLOW_BYTE_ACCESS 0
+/* The SPARC port says:
+   Nonzero if access to memory by bytes is slow and undesirable.
+   For RISC chips, it means that access to memory by bytes is no
+   better than access by words when possible, so grab a whole word
+   and maybe make use of that.  */
+#define SLOW_BYTE_ACCESS 1
 
 #define SHIFT_COUNT_TRUNCATED 1
 
