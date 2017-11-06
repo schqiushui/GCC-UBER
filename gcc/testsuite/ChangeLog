@@ -1,3 +1,52 @@
+2017-11-04  Steven G. Kargl  <kargl@gcc.gnu.org>
+
+	PR fortran/82796
+	* gfortran.dg/equiv_pure.f90: New test.
+
+2017-11-04  Andre Vehreschild  <vehre@gcc.gnu.org>
+
+	* gfortran.dg/coarray/send_char_array_1.f90: New test.
+
+2017-11-03  Paul Thomas  <pault@gcc.gnu.org>
+
+	PR fortran/81735
+	* gfortran.dg/pr81735.f90: New test.
+
+2017-11-01  Tamar Christina  <tamar.christina@arm.com>
+
+	Backported from trunk
+	* gcc.dg/vect/vect-align-1.c: Fix vect_hw_misalign condition.
+	* gcc.dg/vect/vect-align-2.c: Likewise.
+	* gcc.dg/vect/vect-multitypes-1.c: Likewise
+
+2017-11-01  Tamar Christina  <tamar.christina@arm.com>
+
+	Backported from trunk
+	* gcc.dg/vect/vect-multitypes-1.c: Correct target selector.
+
+2017-11-01  Christophe Lyon  <christophe.lyon@linaro.org>
+
+	Backported from trunk
+	* lib/target-supports.exp (check_effective_target_vect_hw_misalign):
+	Fix arm check.
+
+2017-11-01  Paul Thomas  <pault@gcc.gnu.org>
+
+	Backported from trunk
+	PR fortran/80554
+	* gfortran.dg/submodule_29.f08: New test.
+
+2017-11-01  Martin Jambor  <mjambor@suse.cz>
+
+	PR c++/81702
+	* g++.dg/tree-ssa/pr81702.C: New test.
+
+2017-11-01  Paul Thomas  <pault@gcc.gnu.org>
+
+	Backported from trunk
+	PR fortran/80850
+	* gfortran.dg/class_64_f90 : New test.
+
 2017-10-30  Paolo Carlini  <paolo.carlini@oracle.com>
 
 	PR c++/82085
@@ -4065,6 +4114,11 @@
 
 	PR lto/79587
 	* gcc.dg/tree-prof/pr79587.c: New test.
+
+2017-02-22  Bill Schmidt  <wschmidt@linux.vnet.ibm.com>
+
+	PR tree-optimization/68644
+	* gcc.dg/tree-ssa/ivopts-lt-2.c: Skip for powerpc*-*-*.
 
 2017-02-21  Marek Polacek  <polacek@redhat.com>
 

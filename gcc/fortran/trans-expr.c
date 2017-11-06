@@ -5173,10 +5173,39 @@ gfc_conv_procedure_call (gfc_se * se, gfc_symbol * sym,
 			}
 		      else
 			{
-			  gfc_add_modify (&parmse.pre, var,
-					  fold_build1_loc (input_location,
-							   VIEW_CONVERT_EXPR,
-							   type, parmse.expr));
+			  /* Since the internal representation of unlimited
+			     polymorphic expressions includes an extra field
+			     that other class objects do not, a cast to the
+			     formal type does not work.  */
+			  if (!UNLIMITED_POLY (e) && UNLIMITED_POLY (fsym))
+			    {
+			      tree efield;
+
+			      /* Set the _data field.  */
+			      tmp = gfc_class_data_get (var);
+			      efield = fold_convert (TREE_TYPE (tmp),
+					gfc_class_data_get (parmse.expr));
+			      gfc_add_modify (&parmse.pre, tmp, efield);
+
+			      /* Set the _vptr field.  */
+			      tmp = gfc_class_vptr_get (var);
+			      efield = fold_convert (TREE_TYPE (tmp),
+					gfc_class_vptr_get (parmse.expr));
+			      gfc_add_modify (&parmse.pre, tmp, efield);
+
+			      /* Set the _len field.  */
+			      tmp = gfc_class_len_get (var);
+			      gfc_add_modify (&parmse.pre, tmp,
+					      build_int_cst (TREE_TYPE (tmp), 0));
+			    }
+			  else
+			    {
+			      tmp = fold_build1_loc (input_location,
+						     VIEW_CONVERT_EXPR,
+						     type, parmse.expr);
+			      gfc_add_modify (&parmse.pre, var, tmp);
+					      ;
+			    }
 			  parmse.expr = gfc_build_addr_expr (NULL_TREE, var);
 			}
 		    }
@@ -10037,12 +10066,16 @@ gfc_trans_assignment_1 (gfc_expr * expr1, gfc_expr * expr2, bool init_flag,
      NOTE: This relies on having the exact dependence of the length type
      parameter available to the caller; gfortran saves it in the .mod files.
      NOTE ALSO: The concatenation operation generates a temporary pointer,
-     whose allocation must go to the innermost loop.  */
+     whose allocation must go to the innermost loop.
+     NOTE ALSO (2): A character conversion may generate a temporary, too.  */
   if (flag_realloc_lhs
       && expr2->ts.type == BT_CHARACTER && expr1->ts.deferred
       && !(lss != gfc_ss_terminator
-	   && expr2->expr_type == EXPR_OP
-	   && expr2->value.op.op == INTRINSIC_CONCAT))
+	   && ((expr2->expr_type == EXPR_OP
+		&& expr2->value.op.op == INTRINSIC_CONCAT)
+	       || (expr2->expr_type == EXPR_FUNCTION
+		   && expr2->value.function.isym != NULL
+		   && expr2->value.function.isym->id == GFC_ISYM_CONVERSION))))
     gfc_add_block_to_block (&block, &rse.pre);
 
   /* Nullify the allocatable components corresponding to those of the lhs
