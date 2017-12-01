@@ -2591,6 +2591,8 @@ generic:
       if (!gfc_convert_to_structure_constructor (expr, intr->sym, NULL,
 						 NULL, false))
 	return false;
+      if (!gfc_use_derived (expr->ts.u.derived))
+	return false;
       return resolve_structure_cons (expr, 0);
     }
 
@@ -10124,7 +10126,8 @@ resolve_ordinary_assign (gfc_code *code, gfc_namespace *ns)
 
   /* Assign the 'data' of a class object to a derived type.  */
   if (lhs->ts.type == BT_DERIVED
-      && rhs->ts.type == BT_CLASS)
+      && rhs->ts.type == BT_CLASS
+      && rhs->expr_type != EXPR_ARRAY)
     gfc_add_data_component (rhs);
 
   bool caf_convert_to_send = flag_coarray == GFC_FCOARRAY_LIB
@@ -13298,7 +13301,11 @@ resolve_component (gfc_component *c, gfc_symbol *sym)
   if (c->attr.artificial)
     return true;
 
-  if (sym->attr.vtype && sym->attr.use_assoc)
+  /* Do not allow vtype components to be resolved in nameless namespaces
+     such as block data because the procedure pointers will cause ICEs
+     and vtables are not needed in these contexts.  */
+  if (sym->attr.vtype && sym->attr.use_assoc
+      && sym->ns->proc_name == NULL)
     return true;
 
   /* F2008, C442.  */
