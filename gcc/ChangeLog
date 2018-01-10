@@ -1,3 +1,506 @@
+2018-01-09  Richard Biener  <rguenther@suse.de>
+
+	Backport from mainline
+	2018-01-08  Richard Biener  <rguenther@suse.de>
+
+	PR middle-end/83713
+	* convert.c (do_narrow): Properly guard TYPE_OVERFLOW_WRAPS checks.
+
+2018-01-08  Jim Wilson  <jimw@sifive.com>
+
+	Backport from mainline
+	2018-01-08  Monk Chiang  <sh.chiang04@gmail.com>
+		    Kito Cheng  <kito.cheng@gmail.com>
+
+	* config/riscv/riscv.c (machine_function::is_leaf): Remove field.
+	(riscv_leaf_function_p): Delete.
+	(riscv_function_ok_for_sibcall): Return false when TARGET_SAVE_RESTORE.
+
+2018-01-08  Kyrylo Tkachov  <kyrylo.tkachov@arm.com>
+
+	Backport from mainline
+	2017-12-20  Kyrylo Tkachov  <kyrylo.tkachov@arm.com>
+
+	PR target/82975
+	* config/arm/arm.h (TEST_REGNO): Adjust comment as expected in r255830.
+
+2018-01-08  Sebastian Huber  <sebastian.huber@embedded-brains.de>
+
+	Backported from mainline
+	2018-01-05  Sebastian Huber  <sebastian.huber@embedded-brains.de>
+
+	* config.gcc (epiphany-*-elf*): Add (epiphany-*-rtems*) configuration.
+	* config/epiphany/rtems.h: New file.
+
+2018-01-04  Uros Bizjak  <ubizjak@gmail.com>
+
+	PR target/83628
+	* config/alpha/alpha.md (*sadd<modesuffix>): Use ASHIFT
+	instead of MULT rtx.  Update all corresponding splitters.
+	(*saddl_se): Ditto.
+	(*ssub<modesuffix>): Ditto.
+	(*ssubl_se): Ditto.
+	(*cmp_sadd_di): Update split patterns.
+	(*cmp_sadd_si): Ditto.
+	(*cmp_sadd_sidi): Ditto.
+	(*cmp_ssub_di): Ditto.
+	(*cmp_ssub_si): Ditto.
+	(*cmp_ssub_sidi): Ditto.
+	* config/alpha/predicates.md (const23_operand): New predicate.
+	* config/alpha/alpha.c (alpha_rtx_costs) [PLUS, MINUS]:
+	Look for ASHIFT, not MULT inner operand.
+	(alpha_split_conditional_move): Update for *sadd<modesuffix> change.
+
+2018-01-02  Andrew Waterman  <andrew@sifive.com>
+
+	* config/riscv/linux.h (ICACHE_FLUSH_FUNC): New.
+	* config/riscv/riscv.md (clear_cache): Use it.
+
+2018-01-01  Jakub Jelinek  <jakub@redhat.com>
+
+	PR middle-end/83608
+	* expr.c (store_expr_with_bounds): Use simplify_gen_subreg instead of
+	convert_modes if target mode has the right side, but different mode
+	class.
+
+	PR middle-end/83609
+	* expr.c (expand_assignment): Fix up a typo in simplify_gen_subreg
+	last argument when extracting from CONCAT.  If either from_real or
+	from_imag is NULL, use expansion through memory.  If result is not
+	a CONCAT and simplify_gen_subreg fails, try to simplify_gen_subreg
+	the parts directly to inner mode, if even that fails, use expansion
+	through memory.
+
+	PR middle-end/83623
+	* expmed.c (expand_shift_1): For 2-byte rotates by BITS_PER_UNIT,
+	check for bswap in mode rather than HImode and use that in expand_unop
+	too.
+
+2017-12-23  Jakub Jelinek  <jakub@redhat.com>
+
+	PR c++/83553
+	* fold-const.c (struct contains_label_data): New type.
+	(contains_label_1): Return non-NULL even for CASE_LABEL_EXPR, unless
+	inside of a SWITCH_BODY seen during the walk.
+	(contains_label_p): Use walk_tree instead of
+	walk_tree_without_duplicates, prepare data for contains_label_1 and
+	provide own pset.
+
+2017-12-22  Martin Jambor  <mjambor@suse.cz>
+
+	PR lto/82027
+	* lto-cgraph.c (output_cgraph_opt_summary_p): Also check former
+	clones.
+
+2017-12-22  Jakub Jelinek  <jakub@redhat.com>
+
+	Backported from mainline
+	2017-12-21  Jakub Jelinek  <jakub@redhat.com>
+
+	PR c/83448
+	* gimple-ssa-sprintf.c (maybe_warn): Don't call set_caret_index
+	if navail is >= dir.len.
+
+	PR rtl-optimization/80747
+	PR rtl-optimization/83512
+	* cfgrtl.c (force_nonfallthru_and_redirect): When splitting
+	succ edge from ENTRY, copy partition from e->dest to the newly
+	created bb.
+	* bb-reorder.c (reorder_basic_blocks_simple): If last_tail is
+	ENTRY, use BB_PARTITION of its successor block as current_partition.
+	Don't copy partition when splitting succ edge from ENTRY.
+
+	PR tree-optimization/83523
+	* tree-ssa-math-opts.c (is_widening_mult_p): Return false if
+	for INTEGER_TYPE TYPE_OVERFLOW_TRAPS.
+	(convert_mult_to_fma): Likewise.
+
+	PR tree-optimization/83521
+	* tree-ssa-phiopt.c (factor_out_conditional_conversion): Use
+	gimple_build_assign without code on result of
+	fold_build1 (VIEW_CONVERT_EXPR, ...), as it might not create
+	a VIEW_CONVERT_EXPR.
+
+	2017-12-19  Jakub Jelinek  <jakub@redhat.com>
+
+	PR ipa/82801
+	PR ipa/83346
+	* ipa-inline.c (flatten_remove_node_hook): New function.
+	(ipa_inline): Keep only nodes with flatten attribute at the end of
+	the array in the order from ipa_reverse_postorder, only walk that
+	portion of array for flattening, if there is more than one such
+	node, temporarily register a removal hook and ignore removed nodes.
+
+2017-12-21  Uros Bizjak  <ubizjak@gmail.com>
+
+	PR target/83467
+	* config/i386/i386.md (*ashl<mode>3_mask): Add operand
+	constraints to operand 2.
+	(*<shift_insn><mode>3_mask): Ditto.
+	(*<rotate_insn><mode>3_mask): Ditto.
+
+2017-12-19  Bin Cheng  <bin.cheng@arm.com>
+
+	Backport from mainline
+	2017-11-15  Bin Cheng  <bin.cheng@arm.com>
+
+	PR tree-optimization/82726
+	PR tree-optimization/70754
+	* tree-predcom.c (order_drefs_by_pos): New function.
+	(combine_chains): Move code setting has_max_use_after to...
+	(try_combine_chains): ...here.  New parameter.  Sort combined chains
+	according to position information.
+	(tree_predictive_commoning_loop): Update call to above function.
+	(update_pos_for_combined_chains, pcom_stmt_dominates_stmt_p): New.
+
+	2017-11-15  Bin Cheng  <bin.cheng@arm.com>
+
+	PR tree-optimization/82726
+	Revert
+	2017-01-23  Bin Cheng  <bin.cheng@arm.com>
+
+	PR tree-optimization/70754
+	* tree-predcom.c (stmt_combining_refs): New parameter INSERT_BEFORE.
+	(reassociate_to_the_same_stmt): New parameter INSERT_BEFORE.  Insert
+	combined stmt before it if not NULL.
+	(combine_chains): Process refs reversely and compute dominance point
+	for root ref.
+
+	Revert
+	2017-02-23  Bin Cheng  <bin.cheng@arm.com>
+
+	PR tree-optimization/79663
+	* tree-predcom.c (combine_chains): Process refs in reverse order
+	only for ZERO length chains, and add explaining comment.
+
+2017-12-19  Sebastian Huber  <sebastian.huber@embedded-brains.de>
+
+	Backport from mainline
+	2017-12-19  Sebastian Huber  <sebastian.huber@embedded-brains.de>
+
+	PR target/83387
+	* config/rs6000/t-rtems (MULTILIB_REQUIRED): Remove 64-bit soft-float
+	multilib.
+
+2017-12-19  Daniel Cederman  <cederman@gaisler.com>
+
+	Backport from mainline
+	2017-12-19  Daniel Cederman  <cederman@gaisler.com>
+
+	* config/sparc/sparc.c (sparc_do_work_around_errata): Make sure
+	the jump is to a label.
+
+2017-12-17  John David Anglin  <danglin@gcc.gnu.org>
+
+	Backport from mainline
+	2017-12-03  John David Anglin  <danglin@gcc.gnu.org>
+
+	* config/pa/pa.c (pa_legitimate_address_p): For scaled indexing,
+	require base operand is a REG_POINTER prior to reload on targets
+	with non-equivalent space registers.
+
+2017-12-15  Jakub Jelinek  <jakub@redhat.com>
+
+	PR tree-optimization/83269
+	* fold-const.c (fold_binary_loc): Perform (-A) - B -> (-B) - A
+	subtraction in arg0's type if type is signed and arg0 is unsigned.
+	Formatting fix.
+
+	Backported from mainline
+	2017-12-14  Jakub Jelinek  <jakub@redhat.com>
+
+	PR tree-optimization/83198
+	* gimple-ssa-sprintf.c (format_floating): Set type solely based on
+	dir.modifier, regardless of TREE_TYPE (arg).  Assume non-REAL_CST
+	value if arg is a REAL_CST with incompatible type.
+
+	2017-12-12  Jakub Jelinek  <jakub@redhat.com>
+
+	PR tree-optimization/80631
+	* tree-vect-loop.c (get_initial_def_for_reduction): Fix comment typo.
+	(vect_create_epilog_for_reduction): Add INDUC_VAL argument, for
+	INTEGER_INDUC_COND_REDUCTION use INDUC_VAL instead of
+	hardcoding zero as the value if COND_EXPR is never true.  For
+	INTEGER_INDUC_COND_REDUCTION don't emit the final COND_EXPR if
+	INDUC_VAL is equal to INITIAL_DEF.
+	(vectorizable_reduction): Compute INDUC_VAL for
+	vect_create_epilog_for_reduction, if no value is suitable, don't
+	use INTEGER_INDUC_COND_REDUCTION for now.  Formatting fixes.
+
+	2017-12-08  Joseph Myers  <joseph@codesourcery.com>
+		    Alexander Monakov  <amonakov@ispras.ru>
+		    Jakub Jelinek  <jakub@redhat.com>
+
+	PR target/81906
+	* config/i386/i386.c (ix86_expand_rint): Handle flag_rounding_math.
+
+	2017-12-02  Jakub Jelinek  <jakub@redhat.com>
+
+	PR c++/81212
+	* tree-cfg.c (pass_warn_function_return::execute): Handle
+	__builtin_ubsan_handle_missing_return like __builtin_unreachable
+	with BUILTINS_LOCATION.
+
+	PR target/78643
+	PR target/80583
+	* expr.c (get_inner_reference): If DECL_MODE of a non-bitfield
+	is BLKmode for vector field with vector raw mode, use TYPE_MODE
+	instead of DECL_MODE.
+
+	2017-11-29  Jakub Jelinek  <jakub@redhat.com>
+
+	PR target/80819
+	* config/i386/sse.md (vec_concatv2di): Remove * from (=Yr,0,*rm)
+	alternative.
+
+	2017-11-25  Jakub Jelinek  <jakub@redhat.com>
+
+	PR rtl-optimization/81553
+	* combine.c (simplify_if_then_else): In (if_then_else COND (OP Z C1) Z)
+	to (OP Z (mult COND (C1 * STORE_FLAG_VALUE))) optimization, if OP
+	is a shift where C1 has different mode than the whole shift, use C1's
+	mode for MULT rather than the shift's mode.
+
+	2017-11-24  Jakub Jelinek  <jakub@redhat.com>
+
+	PR sanitizer/83014
+	* ubsan.c (ubsan_type_descriptor): Use pp_unsigned_wide_integer
+	instead of pp_printf with HOST_WIDE_INT_PRINT_DEC.  Avoid calling
+	tree_to_uhwi twice.
+
+	* tree-object-size.c (pass_through_call): Do not handle
+	BUILT_IN_STPNCPY_CHK which is not a pass through call.
+
+	2017-11-23  Jakub Jelinek  <jakub@redhat.com>
+
+	PR middle-end/82253
+	* expr.c (expand_assignment): For CONCAT to_rtx, complex type from and
+	bitpos/bitsize covering the whole destination, use store_expr only if
+	the complex mode is the same.  Otherwise, use expand_normal and if
+	it returns CONCAT, subreg each part separately instead of trying to
+	subreg the whole result.
+
+	2017-11-22  Jakub Jelinek  <jakub@redhat.com>
+
+	PR debug/83084
+	* valtrack.c (propagate_for_debug_subst, propagate_for_debug): Reset
+	debug insns if they would contain UNSPEC_VOLATILE or volatile asm.
+	(dead_debug_insert_temp): Likewise, but also ignore even non-volatile
+	asm.
+
+	2017-11-21  James Cowgill  <James.Cowgill@imgtec.com>
+		    Jakub Jelinek  <jakub@redhat.com>
+
+	PR target/82880
+	* config/mips/frame-header-opt.c (mips_register_frame_header_opt):
+	Remove static keyword from f variable.
+
+2017-12-15  Richard Biener  <rguenther@suse.de>
+
+	PR bootstrap/83439
+	* tree-ssa-pre.c (eliminate_dom_walker::before_dom_children):
+	Adjust remaining gimple_set_modified to use the modified
+	variable instead.
+
+2017-12-15  Eric Botcazou  <ebotcazou@adacore.com>
+
+	PR target/66488
+	* ggc-page.c (HOST_BITS_PER_PTR): Do not define here...
+	* hwint.h (HOST_BITS_PER_PTR): ...but here instead.
+	* config/i386/xm-mingw32.h (HOST_BITS_PER_PTR): Delete.
+
+2017-12-15  Richard Biener  <rguenther@suse.de>
+
+	Backport from mainline
+	PR tree-optimization/82060
+	* tree-ssa-pre.c (eliminate_dom_walker::before_dom_children):
+	Move devirtualization after stmt folding and before EH/AB/noreturn
+	cleanup to get the stmt refs canonicalized.  Use a bool instead
+	of gimple_modified_p since that doesn't work for NOPs.  Schedule
+	NOPs generated by folding for removal.
+
+2017-12-15  Richard Biener  <rguenther@suse.de>
+
+	Backport from mainline
+	2017-09-05  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/82102
+	* tree-ssa-pre.c (eliminate): Check if lhs is NULL.
+
+	2017-09-13  Richard Biener  <rguenther@suse.de>
+
+	PR middle-end/82128
+	* gimple-fold.c (gimple_fold_call): Update SSA name in-place to
+	default-def to avoid breaking iterator update with the weird
+	interaction with cgraph_update_edges_for_call_stmt_node.
+
+2017-12-15  Richard Biener  <rguenther@suse.de>
+
+	Backport from mainline
+	2017-11-24  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/82402
+	* tree-vect-loop-manip.c (create_lcssa_for_virtual_phi): Properly
+	set SSA_NAME_OCCURS_IN_ABNORMAL_PHI.
+
+	2017-10-24  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/82697
+	* tree-ssa-phiopt.c (cond_store_replacement): Use alias-set
+	zero for conditional load and unconditional store.
+
+	2017-11-02  Richard Biener  <rguenther@suse.de>
+
+	PR middle-end/82765
+	* varasm.c (decode_addr_const): Make offset HOST_WIDE_INT.
+	Truncate ARRAY_REF index and element size.
+
+	2017-11-09  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/82902
+	* tree-ssa-phiprop.c (propagate_with_phi): Test proper type.
+
+2017-12-14  Peter Bergner  <bergner@vnet.ibm.com>
+
+	Backport from mainline
+	2017-10-02  Peter Bergner  <bergner@vnet.ibm.com>
+
+	PR target/80210
+	* config/rs6000/rs6000.c (rs6000_option_override_internal): Rewrite
+	function to not use the have_cpu variable.  Do not set cpu_index,
+	rs6000_cpu_index or rs6000_tune_index if we end up using TARGET_DEFAULT
+	or the default cpu.
+	(rs6000_valid_attribute_p): Remove duplicate initializations of
+	old_optimize and func_optimize.
+	(rs6000_pragma_target_parse): Call rs6000_activate_target_options ().
+	(rs6000_activate_target_options): Make global.
+	* config/rs6000/rs6000-protos.h (rs6000_activate_target_options): Add
+	prototype.
+
+2017-12-13  Peter Bergner  <bergner@vnet.ibm.com>
+
+	Backport from mainline
+	2017-12-13  Peter Bergner  <bergner@vnet.ibm.com>
+
+	* config/rs6000/ppc-auxv.h (PPC_FEATURE2_HTM_NO_SUSPEND): New define.
+	* config/rs6000/rs6000.c (cpu_supports_info): Use it.
+
+2017-12-11  Michael Meissner  <meissner@linux.vnet.ibm.com>
+
+	Back port from trunk
+	2017-12-01  Michael Meissner  <meissner@linux.vnet.ibm.com>
+
+	PR target/81959
+	* config/rs6000/rs6000.c (rs6000_address_for_fpconvert): Check for
+	whether we can allocate pseudos before trying to fix an address.
+	* config/rs6000/rs6000.md (float_<mode>si2_hw): Make sure the
+	memory address is indexed or indirect.
+	(floatuns_<mode>si2_hw2): Likewise.
+
+2017-12-11  Sudakshina Das  <sudi.das@arm.com>
+
+	Backported from trunk
+	2017-12-01  Sudakshina Das  <sudi.das@arm.com>
+
+	* config/arm/vfp.md (*movhf_vfp_fp16): Add conds attribute.
+
+2017-12-07  Kelvin Nilsen  <kelvin@gcc.gnu.org>
+
+	Backport from trunk
+	2017-05-08  Kelvin Nilsen  <kelvin@gcc.gnu.org>
+
+	PR target/80101
+	* config/rs6000/power6.md: Replace store_data_bypass_p calls with
+	rs6000_store_data_bypass_p in seven define_bypass directives and
+	in several comments.
+	* config/rs6000/rs6000-protos.h: Add prototype for
+	rs6000_store_data_bypass_p function.
+	* config/rs6000/rs6000.c (rs6000_store_data_bypass_p): New
+	function implements slightly different (rs6000-specific) semantics
+	than store_data_bypass_p, returning false rather than aborting
+	with assertion error when arguments do not satisfy the
+	requirements of store data bypass.
+	(rs6000_adjust_cost): Replace six calls of store_data_bypass_p with
+	rs6000_store_data_bypass_p.
+
+2017-12-06  Eric Botcazou  <ebotcazou@adacore.com>
+
+	Revert
+	2017-11-29  Martin Aberg  <maberg@gaisler.com>
+
+	* config/sparc/sparc.md (divdf3_fix): Add NOP and adjust length
+	to prevent b2bst errata sequence.
+	(sqrtdf2_fix): Likewise.
+
+2017-12-05  Max Filippov  <jcmvbkbc@gmail.com>
+
+	Backport from mainline
+	2017-12-05  Max Filippov  <jcmvbkbc@gmail.com>
+	* config/xtensa/xtensa.c (xtensa_asan_shadow_offset): New
+	function.
+	(TARGET_ASAN_SHADOW_OFFSET): New macro definition.
+	* config/xtensa/xtensa.h (FRAME_GROWS_DOWNWARD): Set to 1 if
+	ASAN is enabled.
+
+2017-12-05  Max Filippov  <jcmvbkbc@gmail.com>
+
+	Backport from mainline
+	2017-05-08  Max Filippov  <jcmvbkbc@gmail.com>
+	* config/xtensa/xtensa-protos.h
+	(xtensa_initial_elimination_offset): New declaration.
+	* config/xtensa/xtensa.c (xtensa_initial_elimination_offset):
+	New function. Move its body from the INITIAL_ELIMINATION_OFFSET
+	macro definition, add case for FRAME_POINTER_REGNUM when
+	FRAME_GROWS_DOWNWARD.
+	* config/xtensa/xtensa.h (FRAME_GROWS_DOWNWARD): New macro
+	definition.
+	(INITIAL_ELIMINATION_OFFSET): Replace body with call to
+	xtensa_initial_elimination_offset.
+
+2017-12-04  Eric Botcazou  <ebotcazou@adacore.com>
+
+	* config/sparc/sparc.c (sparc_do_work_around_errata): Use mem_ref
+	instead of MEM_P in a couple more places.  Fix formatting issues.
+
+2017-12-04  Sebastian Peryt  <sebastian.peryt@intel.com>
+	H.J. Lu  <hongjiu.lu@intel.com>
+
+	Bakcported from trunk
+	PR target/82941
+	PR target/82942
+	PR target/82990
+	* config/i386/i386.c (pass_insert_vzeroupper): Remove
+	TARGET_AVX512F check from gate condition.
+	(ix86_check_avx256_register): Changed to ...
+	(ix86_check_avx_upper_register): ... this. Add extra check for
+	VALID_AVX512F_REG_OR_XI_MODE.
+	(ix86_avx_u128_mode_needed): Changed
+	ix86_check_avx256_register to ix86_check_avx_upper_register.
+	(ix86_check_avx256_stores): Changed to ...
+	(ix86_check_avx_upper_stores): ... this. Changed
+	ix86_check_avx256_register to ix86_check_avx_upper_register.
+	(ix86_avx_u128_mode_after): Changed
+	avx_reg256_found to avx_upper_reg_found. Changed
+	ix86_check_avx256_stores to ix86_check_avx_upper_stores.
+	(ix86_avx_u128_mode_entry): Changed
+	ix86_check_avx256_register to ix86_check_avx_upper_register.
+	(ix86_avx_u128_mode_exit): Ditto.
+	(ix86_option_override_internal): Set MASK_VZEROUPPER if
+	neither -mzeroupper nor -mno-zeroupper is used and
+	TARGET_EMIT_VZEROUPPER is set.
+	* config/i386/i386.h: (host_detect_local_cpu): New define.
+	(TARGET_EMIT_VZEROUPPER): New.
+	* config/i386/x86-tune.def: Add X86_TUNE_EMIT_VZEROUPPER
+
+2017-12-01  Segher Boessenkool  <segher@kernel.crashing.org>
+
+	Backport from mainline
+	2017-11-28  Segher Boessenkool  <segher@kernel.crashing.org>
+
+	PR 81288/target
+	* config/rs6000/rs6000.c (rs6000_rtx_costs): Do not handle
+	TARGET_ISEL && !TARGET_MFCRF differently.  Simplify code.
+
 2017-11-30  Jim Wilson  <jimw@sifive.com>
 
 	Backport from mainline
@@ -26,21 +529,18 @@
 
 2017-11-29  Daniel Cederman  <cederman@gaisler.com>
 
-	Backport from mainline
 	* config/sparc/sparc.c (sparc_do_work_around_errata): Treat the
-        movsi_pic_gotdata_op instruction as a load for the UT699 errata
-        workaround.
+	movsi_pic_gotdata_op instruction as a load for the UT699 errata
+	workaround.
 
 2017-11-29  Martin Aberg  <maberg@gaisler.com>
 
-	Backport from mainline
 	* config/sparc/sparc.md (divdf3_fix): Add NOP and adjust length
-        to prevent b2bst errata sequence.
-        (sqrtdf2_fix): Likewise.
+	to prevent b2bst errata sequence.
+	(sqrtdf2_fix): Likewise.
 
 2017-11-29  Daniel Cederman  <cederman@gaisler.com>
 
-	Backport from mainline
 	* config/sparc/sparc.c (fpop_reg_depend_p): New function.
 	(div_sqrt_insn_p): New function.
 	(sparc_do_work_around_errata): Insert NOP instructions to
@@ -55,7 +555,6 @@
 
 2017-11-29  Daniel Cederman  <cederman@gaisler.com>
 
-	Backport from mainline
 	* config/sparc/sparc.c (atomic_insn_p): New function.
 	(sparc_do_work_around_errata): Insert NOP instructions to
 	prevent sequences that could trigger the TN-0010 errata for
@@ -65,14 +564,12 @@
 
 2017-11-29  Daniel Cederman  <cederman@gaisler.com>
 
-	Backport from mainline
 	* config/sparc/sync.md (swapsi): 16-byte align if sparc_fix_gr712rc.
 	(atomic_compare_and_swap_leon3_1): Likewise.
 	(ldstub): Likewise.
 
 2017-11-29  Daniel Cederman  <cederman@gaisler.com>
 
-	Backport from mainline
 	* config/sparc/sparc.c (fpop_insn_p): New function.
 	(sparc_do_work_around_errata): Insert NOP instructions to
 	prevent sequences that could trigger the TN-0012 errata for
@@ -154,7 +651,7 @@
 
 	Revert
 	2017-11-21  Martin Liska  <mliska@suse.cz>
- 
+
 	Backport from mainline
 	2017-11-21  Martin Liska  <mliska@suse.cz>
 
