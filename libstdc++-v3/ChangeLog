@@ -1,3 +1,86 @@
+2018-01-29  Jonathan Wakely  <jwakely@redhat.com>
+
+	PR libstdc++/83833
+	* testsuite/26_numerics/random/chi_squared_distribution/83833.cc:
+	Add -ffloat-store to options for m68k and ia32.
+
+	PR libstdc++/83658
+	* include/std/any (any::__do_emplace): Only set _M_manager after
+	constructing the contained object.
+	* testsuite/20_util/any/misc/any_cast_neg.cc: Adjust dg-error line.
+	* testsuite/20_util/any/modifiers/83658.cc: New test.
+
+	Backport from mainline
+	2018-01-15  Jonathan Wakely  <jwakely@redhat.com>
+
+	PR libstdc++/83833
+	* include/bits/random.h (chi_squared_distribution::param): Update
+	gamma distribution parameter.
+	* testsuite/26_numerics/random/chi_squared_distribution/83833.cc: New
+	test.
+
+2018-01-25  Jonathan Wakely  <jwakely@redhat.com>
+
+	PR libstdc++/81076
+	* include/c_global/cstddef (__byte_operand): Define primary template.
+	* testsuite/18_support/byte/81076.cc: New test.
+
+	Backport from mainline
+	2018-01-15  Jonathan Wakely  <jwakely@redhat.com>
+
+	PR libstdc++/83830
+	* include/std/type_traits (has_unique_object_representations_v): Add
+	variable template.
+	* testsuite/20_util/has_unique_object_representations/value.cc: Check
+	variable template.
+
+2018-01-25  Release Manager
+
+	* GCC 7.3.0 released.
+
+2018-01-19  Jonathan Wakely  <jwakely@redhat.com>
+
+	Backport from mainline
+	2018-01-16  Jonathan Wakely  <jwakely@redhat.com>
+
+	PR libstdc++/83834
+	* config/abi/pre/gnu.ver (GLIBCXX_3.4): Replace std::c[a-g]* wildcard
+	pattern with exact match for std::cerr.
+
+2018-01-18  Jonathan Wakely  <jwakely@redhat.com>
+
+	Backport from mainline
+	2017-10-23  Jonathan Wakely  <jwakely@redhat.com>
+
+	* doc/xml/manual/intro.xml: Include new section.
+	* doc/xml/manual/status_cxxis29124.xml: New section on IS 29124
+	status.
+	* doc/html/*: Regenerate.
+
+	Backport from mainline
+	2017-10-19  Jonathan Wakely  <jwakely@redhat.com>
+
+	* doc/xml/manual/status_cxx2017.xml: Update references to C++17
+	section numbers.
+
+2018-01-16  Eric Botcazou  <ebotcazou@adacore.com>
+
+	* testsuite/17_intro/names.cc: Undefine 'y' on SPARC/Linux.
+
+2018-01-13  Jonathan Wakely  <jwakely@redhat.com>
+
+	* python/libstdcxx/v6/printers.py (register_type_printers): Remove
+	printer for experimental::any. Fix printers for experimental::optional
+	and experimental::basic_string_view.
+
+	Backport from mainline
+	2018-01-05  Jonathan Wakely  <jwakely@redhat.com>
+
+	PR libstdc++/83626
+	* src/filesystem/ops.cc (remove(const path&, error_code&)): Remove
+	unnecessary symlink_status call.
+	(remove_all(const path&, error_code&)): Use filesystem::remove.
+
 2018-01-05  Jonathan Wakely  <jwakely@redhat.com>
 
 	Backport from mainline

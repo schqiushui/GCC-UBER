@@ -375,18 +375,10 @@ build_call_a (tree function, int n, tree *argarray)
 
   TREE_HAS_CONSTRUCTOR (function) = (decl && DECL_CONSTRUCTOR_P (decl));
 
-  if (current_function_decl && decl
-      && flag_new_inheriting_ctors
-      && DECL_INHERITED_CTOR (current_function_decl)
-      && (DECL_INHERITED_CTOR (current_function_decl)
-	  == DECL_CLONED_FUNCTION (decl)))
-    /* Pass arguments directly to the inherited constructor.  */
-    CALL_FROM_THUNK_P (function) = true;
-
   /* Don't pass empty class objects by value.  This is useful
      for tags in STL, which are used to control overload resolution.
      We don't need to handle other cases of copying empty classes.  */
-  else if (! decl || ! DECL_BUILT_IN (decl))
+  if (! decl || ! DECL_BUILT_IN (decl))
     for (i = 0; i < n; i++)
       {
 	tree arg = CALL_EXPR_ARG (function, i);
@@ -4345,6 +4337,8 @@ build_operator_new_call (tree fnname, vec<tree, va_gc> **args,
 	= vec_copy_and_insert (*args, align_arg, 1);
       cand = perform_overload_resolution (fns, align_args, &candidates,
 					  &any_viable_p, tf_none);
+      if (cand)
+	*args = align_args;
       /* If no aligned allocation function matches, try again without the
 	 alignment.  */
     }

@@ -1,3 +1,37 @@
+2018-01-29  Jason Merrill  <jason@redhat.com>
+
+	PR c++/82461 - constexpr list-initialized member
+	* constexpr.c (potential_constant_expression_1): Check
+	TARGET_EXPR_DIRECT_INIT_P.
+
+2018-01-26  Nathan Sidwell  <nathan@acm.org>
+
+	PR c++/82878
+	PR c++/78495
+	* call.c (build_call_a): Don't set CALL_FROM_THUNK_P for inherited
+	ctor.
+	* cp-gimplify.c	(cp_genericize_r): Restore THUNK dereference
+	inhibibition check removed in previous c++/78495 change.
+
+2018-01-25  Release Manager
+
+	* GCC 7.3.0 released.
+
+2018-01-17  Jason Merrill  <jason@redhat.com>
+
+	PR c++/81843 - ICE with variadic member template.
+	PR c++/72801
+	* pt.c (unify_pack_expansion): Don't try to deduce enclosing
+	template args.
+
+	PR c++/82331 - ICE with variadic partial specialization of auto
+	* pt.c (unify) [TEMPLATE_PARM_INDEX]: Set processing_template_decl
+	around call to tsubst.
+
+	PR c++/82760 - memory corruption with aligned new.
+	* call.c (build_operator_new_call): Update *args if we add the
+	align_arg.
+
 2018-01-02  Jakub Jelinek  <jakub@redhat.com>
 
 	PR c++/83556

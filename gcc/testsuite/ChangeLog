@@ -1,3 +1,504 @@
+2017-02-02  Uros Bizjak  <ubizjak@gmail.com>
+
+	* gfortran.dg/dec_parameter_1.f (sub1): Remove statement with no effect.
+	* gfortran.dg/dec_parameter_2.f90 (sub1): Ditto.
+
+2018-02-01  Renlin Li  <renlin.li@arm.com>
+
+	Backport from mainline
+	2018-02-01  Richard Sandiford  <richard.sandiford@linaro.org>
+
+	PR target/83370
+	* gcc.target/aarch64/pr83370.c: New.
+
+2018-02-01  Richard Biener  <rguenther@suse.de>
+
+	Backport from mainline
+	2017-11-02  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/82795
+	* gcc.target/i386/pr82795.c: New testcase.
+
+2018-02-01  Rainer Orth  <ro@CeBiTec.Uni-Bielefeld.DE>
+
+	Backport from mainline
+	2018-01-12  Rainer Orth  <ro@CeBiTec.Uni-Bielefeld.DE>
+
+	* lib/target-supports.exp (check_effective_target_avx512f): Also
+	check for __builtin_ia32_addsd_round,
+	__builtin_ia32_getmantsd_round.
+	* gcc.target/i386/i386.exp (check_effective_target_avx512f):
+	Remove.
+
+2018-01-31  Eric Botcazou  <ebotcazou@adacore.com>
+
+	* gcc.c-torture/execute/20180131-1.c: New test.
+
+2018-01-29  Alan Modra  <amodra@gmail.com>
+
+	PR target/84033
+	* gcc.target/powerpc/swaps-p8-46.c: New.
+
+2018-01-26  Segher Boessenkool  <segher@kernel.crashing.org>
+
+	Backport from trunk
+	2018-01-26  Segher Boessenkool  <segher@kernel.crashing.org>
+
+	* gcc.target/powerpc/safe-indirect-jump-1.c: Build on all targets.
+	Make expected output depend on whether we expect sibcalls or not.
+	* gcc.target/powerpc/safe-indirect-jump-8.c: Delete (merged into
+	safe-indirect-jump-1.c).
+
+	Backport from trunk
+	2018-01-21  Bill Schmidt  <wschmidt@linux.vnet.ibm.com>
+
+	PR target/83946
+	* gcc.target/powerpc/safe-indirect-jump-8.c: Skip for AIX.
+
+2018-01-26  Nathan Sidwell  <nathan@acm.org>
+
+	PR c++/82878
+	* g++.dg/cpp0x/pr82878.C: New.
+	* g++.dg/cpp1z/inh-ctor38.C: Check moves too.
+
+2018-01-26  Jakub Jelinek  <jakub@redhat.com>
+
+	PR rtl-optimization/83985
+	* gcc.dg/pr83985.c: New test.
+
+2018-01-25  Michael Meissner  <meissner@linux.vnet.ibm.com>
+
+	Back port from trunk
+	2018-01-22  Michael Meissner  <meissner@linux.vnet.ibm.com>
+
+	PR target/83862
+	* gcc.target/powerpc/pr83862.c: New test.
+
+2018-01-25  Peter Bergner  <bergner@vnet.ibm.com>
+
+	Back port from mainline
+	2018-01-10  Peter Bergner  <bergner@vnet.ibm.com>
+
+	PR target/83399
+	* gcc.target/powerpc/pr83399.c: New test.
+
+2018-01-25  Release Manager
+
+	* GCC 7.3.0 released.
+
+2018-01-21  Bill Schmidt  <wschmidt@linux.vnet.ibm.com>
+
+	Backport from mainline
+	2018-01-21  Bill Schmidt  <wschmidt@linux.vnet.ibm.com>
+		    David Edelsohn  <dje.gcc@gmail.com>
+
+	PR target/83946
+	* gcc.target/powerpc/safe-indirect-jump-1.c: Change expected
+	assembly output from "crset eq" to "crset 2".
+	* gcc.target/powerpc/safe-indirect-jump-2.c: Change expected
+	assembly output from . to $.
+	* gcc.target/powerpc/safe-indirect-jump-3.c: Likewise.
+	* gcc.target/powerpc/safe-indirect-jump-1.c: Change expected
+	assembly output from "crset eq" to "crset 2".
+	* gcc.target/powerpc/safe-indirect-jump-8.c: Change expected
+	assembly output from "crset eq" to "crset 2", and from . to $.
+
+2018-01-20  Steven G. Kargl  <kargl@gcc.gnu.org>
+
+	PR fortran/83900
+	* gfortran.dg/matmul_18.f90: New test.
+
+2018-01-19  Steven G. Kargl  <kargl@gcc.gnu.org>
+
+	PR fortran/83900
+	* gfortran.dg/matmul_17.f90: New test.
+
+2018-01-19  Steven G. Kargl  <kargl@gcc.gnu.org>
+
+	PR fortran/80768
+	* gfortran.dg/num_images_1.f90:  New test that tests fix in r250734.
+
+2018-01-18  Harald Anlauf  <anlauf@gmx.de>
+
+	Backport from mainline
+	PR fortran/83864
+	* gfortran.dg/pr83864.f90: New test.
+
+2018-01-17  Bill Schmidt  <wschmidt@linux.vnet.ibm.com>
+
+	Backport from mainline
+	2018-01-16  Bill Schmidt  <wschmidt@linux.vnet.ibm.com>
+
+	* gcc.target/powerpc/safe-indirect-jump-1.c: New file.
+	* gcc.target/powerpc/safe-indirect-jump-2.c: New file.
+	* gcc.target/powerpc/safe-indirect-jump-3.c: New file.
+	* gcc.target/powerpc/safe-indirect-jump-4.c: New file.
+	* gcc.target/powerpc/safe-indirect-jump-5.c: New file.
+	* gcc.target/powerpc/safe-indirect-jump-6.c: New file.
+
+	Backport from mainline
+	2018-01-17  Bill Schmidt  <wschmidt@linux.vnet.ibm.com>
+
+	* gcc.target/powerpc/safe-indirect-jump-1.c: Remove endian
+	restriction, but still restrict to 64-bit.
+	* gcc.target/powerpc/safe-indirect-jump-7.c: New file.
+	* gcc.target/powerpc/safe-indirect-jump-8.c: New file.
+
+2018-01-17  Harald Anlauf  <anlauf@gmx.de>
+
+	Backport from mainline
+	PR fortran/83874
+	* gfortran.dg/pr83874.f90: New test.
+
+2018-01-17  Richard Biener  <rguenther@suse.de>
+
+	Backport from mainline
+	2017-12-18  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/81877
+	* g++.dg/torture/pr81877.C: New testcase.
+	* g++.dg/vect/pr70729.cc: XFAIL.
+	* g++.dg/vect/pr70729-nest.cc: XFAIL.
+
+	2017-12-08  Richard Biener  <rguenther@suse.de>
+
+	PR middle-end/81782
+	* gcc.dg/uninit-pr81782.c: New testcase.
+
+2018-01-17  Kyrylo Tkachov  <kyrylo.tkachov@arm.com>
+
+	Backport from mainline
+	2018-01-15  Kyrylo Tkachov  <kyrylo.tkachov@arm.com>
+
+	PR target/83687
+	* gcc.target/arm/neon-combine-sub-abs-into-vabd.c: Delete integer
+	tests.
+	* gcc.target/arm/pr83687.c: New test.
+
+2018-01-17  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2018-01-04  Jakub Jelinek  <jakub@redhat.com>
+
+	PR ipa/82352
+	* g++.dg/ipa/pr82352.C (size_t): Define to __SIZE_TYPE__ instead of
+	long unsigned int.
+
+2018-01-17  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2018-01-04  Martin Liska  <mliska@suse.cz>
+
+	PR ipa/82352
+	* g++.dg/ipa/pr82352.C: New test.
+
+2018-01-17  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2018-01-03  Martin Liska  <mliska@suse.cz>
+
+	PR ipa/83549
+	* g++.dg/ipa/pr83549.C: New test.
+
+2018-01-17  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2017-12-27  Martin Liska  <mliska@suse.cz>
+
+	PR tree-optimization/83552
+	* gcc.dg/pr83552.c: New test.
+
+2018-01-16  Eric Botcazou  <ebotcazou@adacore.com>
+
+	PR testsuite/77734
+	* gcc.dg/plugin/must-tail-call-1.c: Pass -fdelayed-branch on SPARC.
+
+2018-01-16  Segher Boessenkool  <segher@kernel.crashing.org>
+
+	Backport from mainline
+	2017-12-18  Segher Boessenkool  <segher@kernel.crashing.org>
+
+	PR rtl-optimization/83424
+	* gcc.dg/pr83424.c: New testsuite.
+
+2018-01-16  H.J. Lu  <hongjiu.lu@intel.com>
+
+	Backport from mainline
+	2018-01-14  H.J. Lu  <hongjiu.lu@intel.com>
+
+	* gcc.target/i386/indirect-thunk-10.c: New test.
+	* gcc.target/i386/indirect-thunk-8.c: Likewise.
+	* gcc.target/i386/indirect-thunk-9.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-10.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-11.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-9.c: Likewise.
+	* gcc.target/i386/ret-thunk-17.c: Likewise.
+	* gcc.target/i386/ret-thunk-18.c: Likewise.
+	* gcc.target/i386/ret-thunk-19.c: Likewise.
+	* gcc.target/i386/ret-thunk-20.c: Likewise.
+	* gcc.target/i386/ret-thunk-21.c: Likewise.
+
+2018-01-16  H.J. Lu  <hongjiu.lu@intel.com>
+
+	Backport from mainline
+	2018-01-14  H.J. Lu  <hongjiu.lu@intel.com>
+
+	* gcc.target/i386/indirect-thunk-register-4.c: New test.
+
+2018-01-16  H.J. Lu  <hongjiu.lu@intel.com>
+
+	Backport from mainline
+	2018-01-14  H.J. Lu  <hongjiu.lu@intel.com>
+
+	* gcc.target/i386/indirect-thunk-1.c (dg-options): Add
+	-mno-indirect-branch-register.
+	* gcc.target/i386/indirect-thunk-2.c: Likewise.
+	* gcc.target/i386/indirect-thunk-3.c: Likewise.
+	* gcc.target/i386/indirect-thunk-4.c: Likewise.
+	* gcc.target/i386/indirect-thunk-5.c: Likewise.
+	* gcc.target/i386/indirect-thunk-6.c: Likewise.
+	* gcc.target/i386/indirect-thunk-7.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-1.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-2.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-3.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-4.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-5.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-6.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-7.c: Likewise.
+	* gcc.target/i386/indirect-thunk-bnd-1.c: Likewise.
+	* gcc.target/i386/indirect-thunk-bnd-2.c: Likewise.
+	* gcc.target/i386/indirect-thunk-bnd-3.c: Likewise.
+	* gcc.target/i386/indirect-thunk-bnd-4.c: Likewise.
+	* gcc.target/i386/indirect-thunk-extern-1.c: Likewise.
+	* gcc.target/i386/indirect-thunk-extern-2.c: Likewise.
+	* gcc.target/i386/indirect-thunk-extern-3.c: Likewise.
+	* gcc.target/i386/indirect-thunk-extern-4.c: Likewise.
+	* gcc.target/i386/indirect-thunk-extern-5.c: Likewise.
+	* gcc.target/i386/indirect-thunk-extern-6.c: Likewise.
+	* gcc.target/i386/indirect-thunk-extern-7.c: Likewise.
+	* gcc.target/i386/indirect-thunk-inline-1.c: Likewise.
+	* gcc.target/i386/indirect-thunk-inline-2.c: Likewise.
+	* gcc.target/i386/indirect-thunk-inline-3.c: Likewise.
+	* gcc.target/i386/indirect-thunk-inline-4.c: Likewise.
+	* gcc.target/i386/indirect-thunk-inline-5.c: Likewise.
+	* gcc.target/i386/indirect-thunk-inline-6.c: Likewise.
+	* gcc.target/i386/indirect-thunk-inline-7.c: Likewise.
+	* gcc.target/i386/ret-thunk-10.c: Likewise.
+	* gcc.target/i386/ret-thunk-11.c: Likewise.
+	* gcc.target/i386/ret-thunk-12.c: Likewise.
+	* gcc.target/i386/ret-thunk-13.c: Likewise.
+	* gcc.target/i386/ret-thunk-14.c: Likewise.
+	* gcc.target/i386/ret-thunk-15.c: Likewise.
+	* gcc.target/i386/ret-thunk-9.c: Likewise.
+	* gcc.target/i386/indirect-thunk-register-1.c: New test.
+	* gcc.target/i386/indirect-thunk-register-2.c: Likewise.
+	* gcc.target/i386/indirect-thunk-register-3.c: Likewise.
+
+2018-01-16  H.J. Lu  <hongjiu.lu@intel.com>
+
+	Backport from mainline
+	2018-01-15  H.J. Lu  <hongjiu.lu@intel.com>
+
+	PR target/83839
+	* gcc.target/i386/indirect-thunk-1.c: Scan for "push" only on
+	Linux.
+	* gcc.target/i386/indirect-thunk-2.c: Likewise.
+	* gcc.target/i386/indirect-thunk-3.c: Likewise.
+	* gcc.target/i386/indirect-thunk-4.c: Likewise.
+	* gcc.target/i386/indirect-thunk-7.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-1.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-2.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-5.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-6.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-7.c: Likewise.
+	* gcc.target/i386/indirect-thunk-extern-1.c: Likewise.
+	* gcc.target/i386/indirect-thunk-extern-2.c: Likewise.
+	* gcc.target/i386/indirect-thunk-extern-3.c: Likewise.
+	* gcc.target/i386/indirect-thunk-extern-4.c: Likewise.
+	* gcc.target/i386/indirect-thunk-extern-7.c: Likewise.
+	* gcc.target/i386/indirect-thunk-register-1.c: Likewise.
+	* gcc.target/i386/indirect-thunk-register-3.c: Likewise.
+	* gcc.target/i386/indirect-thunk-register-4.c: Likewise.
+	* gcc.target/i386/ret-thunk-10.c: Likewise.
+	* gcc.target/i386/ret-thunk-11.c: Likewise.
+	* gcc.target/i386/ret-thunk-12.c: Likewise.
+	* gcc.target/i386/ret-thunk-13.c: Likewise.
+	* gcc.target/i386/ret-thunk-14.c: Likewise.
+	* gcc.target/i386/ret-thunk-15.c: Likewise.
+	* gcc.target/i386/ret-thunk-9.c: Don't check the
+	__x86_return_thunk label.
+	Scan for "push" only for Linux.
+
+	Backport from mainline
+	2018-01-14  H.J. Lu  <hongjiu.lu@intel.com>
+
+	* gcc.target/i386/indirect-thunk-1.c (dg-options): Add
+	-mfunction-return=keep.
+	* gcc.target/i386/indirect-thunk-2.c: Likewise.
+	* gcc.target/i386/indirect-thunk-3.c: Likewise.
+	* gcc.target/i386/indirect-thunk-4.c: Likewise.
+	* gcc.target/i386/indirect-thunk-5.c: Likewise.
+	* gcc.target/i386/indirect-thunk-6.c: Likewise.
+	* gcc.target/i386/indirect-thunk-7.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-1.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-2.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-3.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-4.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-5.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-6.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-7.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-8.c: Likewise.
+	* gcc.target/i386/indirect-thunk-bnd-1.c: Likewise.
+	* gcc.target/i386/indirect-thunk-bnd-2.c: Likewise.
+	* gcc.target/i386/indirect-thunk-bnd-3.c: Likewise.
+	* gcc.target/i386/indirect-thunk-bnd-4.c: Likewise.
+	* gcc.target/i386/indirect-thunk-extern-1.c: Likewise.
+	* gcc.target/i386/indirect-thunk-extern-2.c: Likewise.
+	* gcc.target/i386/indirect-thunk-extern-3.c: Likewise.
+	* gcc.target/i386/indirect-thunk-extern-4.c: Likewise.
+	* gcc.target/i386/indirect-thunk-extern-5.c: Likewise.
+	* gcc.target/i386/indirect-thunk-extern-6.c: Likewise.
+	* gcc.target/i386/indirect-thunk-extern-7.c: Likewise.
+	* gcc.target/i386/indirect-thunk-inline-1.c: Likewise.
+	* gcc.target/i386/indirect-thunk-inline-2.c: Likewise.
+	* gcc.target/i386/indirect-thunk-inline-3.c: Likewise.
+	* gcc.target/i386/indirect-thunk-inline-4.c: Likewise.
+	* gcc.target/i386/indirect-thunk-inline-5.c: Likewise.
+	* gcc.target/i386/indirect-thunk-inline-6.c: Likewise.
+	* gcc.target/i386/indirect-thunk-inline-7.c: Likewise.
+	* gcc.target/i386/ret-thunk-1.c: New test.
+	* gcc.target/i386/ret-thunk-10.c: Likewise.
+	* gcc.target/i386/ret-thunk-11.c: Likewise.
+	* gcc.target/i386/ret-thunk-12.c: Likewise.
+	* gcc.target/i386/ret-thunk-13.c: Likewise.
+	* gcc.target/i386/ret-thunk-14.c: Likewise.
+	* gcc.target/i386/ret-thunk-15.c: Likewise.
+	* gcc.target/i386/ret-thunk-16.c: Likewise.
+	* gcc.target/i386/ret-thunk-2.c: Likewise.
+	* gcc.target/i386/ret-thunk-3.c: Likewise.
+	* gcc.target/i386/ret-thunk-4.c: Likewise.
+	* gcc.target/i386/ret-thunk-5.c: Likewise.
+	* gcc.target/i386/ret-thunk-6.c: Likewise.
+	* gcc.target/i386/ret-thunk-7.c: Likewise.
+	* gcc.target/i386/ret-thunk-8.c: Likewise.
+	* gcc.target/i386/ret-thunk-9.c: Likewise.
+
+2018-01-16  H.J. Lu  <hongjiu.lu@intel.com>
+
+	Backport from mainline
+	2018-01-14  H.J. Lu  <hongjiu.lu@intel.com>
+
+	* gcc.target/i386/indirect-thunk-1.c: New test.
+	* gcc.target/i386/indirect-thunk-2.c: Likewise.
+	* gcc.target/i386/indirect-thunk-3.c: Likewise.
+	* gcc.target/i386/indirect-thunk-4.c: Likewise.
+	* gcc.target/i386/indirect-thunk-5.c: Likewise.
+	* gcc.target/i386/indirect-thunk-6.c: Likewise.
+	* gcc.target/i386/indirect-thunk-7.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-1.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-2.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-3.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-4.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-5.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-6.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-7.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-8.c: Likewise.
+	* gcc.target/i386/indirect-thunk-bnd-1.c: Likewise.
+	* gcc.target/i386/indirect-thunk-bnd-2.c: Likewise.
+	* gcc.target/i386/indirect-thunk-bnd-3.c: Likewise.
+	* gcc.target/i386/indirect-thunk-bnd-4.c: Likewise.
+	* gcc.target/i386/indirect-thunk-extern-1.c: Likewise.
+	* gcc.target/i386/indirect-thunk-extern-2.c: Likewise.
+	* gcc.target/i386/indirect-thunk-extern-3.c: Likewise.
+	* gcc.target/i386/indirect-thunk-extern-4.c: Likewise.
+	* gcc.target/i386/indirect-thunk-extern-5.c: Likewise.
+	* gcc.target/i386/indirect-thunk-extern-6.c: Likewise.
+	* gcc.target/i386/indirect-thunk-extern-7.c: Likewise.
+	* gcc.target/i386/indirect-thunk-inline-1.c: Likewise.
+	* gcc.target/i386/indirect-thunk-inline-2.c: Likewise.
+	* gcc.target/i386/indirect-thunk-inline-3.c: Likewise.
+	* gcc.target/i386/indirect-thunk-inline-4.c: Likewise.
+	* gcc.target/i386/indirect-thunk-inline-5.c: Likewise.
+	* gcc.target/i386/indirect-thunk-inline-6.c: Likewise.
+	* gcc.target/i386/indirect-thunk-inline-7.c: Likewise.
+
+2018-01-16  Richard Biener  <rguenther@suse.de>
+
+	Backport from mainline
+	2017-09-29  Vladimir Makarov  <vmakarov@redhat.com>
+
+	PR target/81481
+	* gcc.target/i386/pr81481.c: New.
+
+2018-01-15  Segher Boessenkool  <segher@kernel.crashing.org>
+
+	Backport from mainline
+	2018-01-10  Segher Boessenkool  <segher@kernel.crashing.org>
+
+	PR target/83629
+	* gcc.target/powerpc/pr83629.c: New testcase.
+
+	2018-01-12  Segher Boessenkool  <segher@kernel.crashing.org>
+
+	PR target/83629
+	* gcc.target/powerpc/pr83629.c: Require ilp32.
+
+2018-01-15  H.J. Lu  <hongjiu.lu@intel.com>
+
+	Backport from mainline
+	PR target/83330
+	* gcc.target/i386/pr83330.c: New test.
+
+2018-01-14  Jerry DeLisle  <jvdelisle@gcc.gnu.org>
+
+	Backport from trunk
+	PR libgfortran/83811
+	* gfortran.dg/fmt_e.f90: New test.
+
+2018-01-14  Bill Schmidt  <wschmidt@linux.vnet.ibm.com>
+
+	Backport from mainline
+	2018-01-08  Bill Schmidt  <wschmidt@linux.vnet.ibm.com>
+
+	PR target/83677
+	* gcc.target/powerpc/pr83677.c: New file.
+
+2018-01-14  Uros Bizjak  <ubizjak@gmail.com>
+
+	Backport from mainline
+	2018-01-12  Uros Bizjak  <ubizjak@gmail.com>
+
+	PR target/83628
+	* gcc.target/alpha/pr83628-3.c: New test.
+
+2018-01-13  Steven G. Kargl  <kargl@gcc.gnu.org>
+
+	Backport from mainline
+	PR fortran/78814
+	* gfortran.dg/interface_40.f90: New testcase.
+
+2018-01-12  Eric Botcazou  <ebotcazou@adacore.com>
+
+	* gcc.c-torture/execute/20180112-1.c: New test.
+
+2018-01-10  Steven G. Kargl  <kargl@gcc.gnu.org>
+
+	Backport from trunk
+	PR fortran/82367
+	* gfortran.dg/deferred_character_18.f90: New test.
+
+2018-01-10  Steven G. Kargl  <kargl@gcc.gnu.org>
+
+	Backport from trunk
+	PR fortran/83093
+	* gfortran.dg/allocate_with_typespec_7.f90: New test.
+
+2018-01-10  Steven G. Kargl  <kargl@kgcc.gnu.org>
+
+	Backport r254555 from trunk
+	PR Fortran/82841
+	* gfortran.dg/transfer_simplify_11.f90: New test.
+
 2018-01-09  Richard Biener  <rguenther@suse.de>
 
 	Backport from mainline
