@@ -1,3 +1,78 @@
+2018-02-09  Andreas Krebbel  <krebbel@linux.vnet.ibm.com>
+
+	Backport from mainline
+	2018-02-09  Andreas Krebbel  <krebbel@linux.vnet.ibm.com>
+
+	PR target/PR84295
+	* gcc.target/s390/pr84295.c: New test.
+
+2018-02-08  Andreas Krebbel  <krebbel@linux.vnet.ibm.com>
+
+	Backport from mainline
+	2018-02-08  Andreas Krebbel  <krebbel@linux.vnet.ibm.com>
+
+	* gcc.target/s390/nobp-function-pointer-attr.c: New test.
+	* gcc.target/s390/nobp-function-pointer-nothunk.c: New test.
+	* gcc.target/s390/nobp-function-pointer-z10.c: New test.
+	* gcc.target/s390/nobp-function-pointer-z900.c: New test.
+	* gcc.target/s390/nobp-indirect-jump-attr.c: New test.
+	* gcc.target/s390/nobp-indirect-jump-inline-attr.c: New test.
+	* gcc.target/s390/nobp-indirect-jump-inline-z10.c: New test.
+	* gcc.target/s390/nobp-indirect-jump-inline-z900.c: New test.
+	* gcc.target/s390/nobp-indirect-jump-nothunk.c: New test.
+	* gcc.target/s390/nobp-indirect-jump-z10.c: New test.
+	* gcc.target/s390/nobp-indirect-jump-z900.c: New test.
+	* gcc.target/s390/nobp-return-attr-all.c: New test.
+	* gcc.target/s390/nobp-return-attr-neg.c: New test.
+	* gcc.target/s390/nobp-return-mem-attr.c: New test.
+	* gcc.target/s390/nobp-return-mem-nothunk.c: New test.
+	* gcc.target/s390/nobp-return-mem-z10.c: New test.
+	* gcc.target/s390/nobp-return-mem-z900.c: New test.
+	* gcc.target/s390/nobp-return-reg-attr.c: New test.
+	* gcc.target/s390/nobp-return-reg-mixed.c: New test.
+	* gcc.target/s390/nobp-return-reg-nothunk.c: New test.
+	* gcc.target/s390/nobp-return-reg-z10.c: New test.
+	* gcc.target/s390/nobp-return-reg-z900.c: New test.
+	* gcc.target/s390/nobp-table-jump-inline-z10.c: New test.
+	* gcc.target/s390/nobp-table-jump-inline-z900.c: New test.
+	* gcc.target/s390/nobp-table-jump-z10.c: New test.
+	* gcc.target/s390/nobp-table-jump-z900.c: New test.
+
+2018-02-08  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/84233
+	* g++.dg/torture/pr84233.C: New testcase.
+
+2018-02-07  Steven G. Kargl  <kargl@gcc.gnu.org>
+
+	PR fortran/82994
+	* gfortran.dg/deallocate_error_3.f90: New test.
+	* gfortran.dg/deallocate_error_4.f90: New test.
+
+2018-02-07  Steven G. Kargl  <kargl@gcc.gnu.org>
+
+	PR fortran/82049
+	* gfortran.dg/assumed_charlen_parameter.f90: New test.
+
+2018-02-07  Bill Schmidt  <wschmidt@linux.vnet.ibm.com>
+
+	Backport from mainline
+	2018-02-06  Bill Schmidt  <wschmidt@linux.vnet.ibm.com>
+
+	* gcc.target/powerpc/safe-indirect-jump-1.c: Detect deprecation
+	warning for -mno-speculate-indirect-jumps.
+	* gcc.target/powerpc/safe-indirect-jump-2.c: Likewise.
+	* gcc.target/powerpc/safe-indirect-jump-3.c: Likewise.
+	* gcc.target/powerpc/safe-indirect-jump-4.c: Likewise.
+	* gcc.target/powerpc/safe-indirect-jump-5.c: Likewise.
+	* gcc.target/powerpc/safe-indirect-jump-6.c: Likewise.
+	* gcc.target/powerpc/safe-indirect-jump-7.c: Likewise.
+
+2018-02-06  Rainer Orth  <ro@CeBiTec.Uni-Bielefeld.DE>
+
+	PR target/79975
+	* gcc.dg/rtl/x86_64/final.c: Add -fdwarf2-cfi-asm to dg-options.
+
 2017-02-02  Uros Bizjak  <ubizjak@gmail.com>
 
 	* gfortran.dg/dec_parameter_1.f (sub1): Remove statement with no effect.
