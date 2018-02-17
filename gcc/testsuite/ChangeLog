@@ -1,3 +1,110 @@
+2018-02-17  Thomas Koenig  <tkoenig@gcc.gnu.org>
+
+	Backport from trunk
+	PR fortran/84270
+	* gfortran.dg/inline_matmul_22.f90: New test.
+
+2018-02-16  Jozef Lawrynowicz <jozefl.gcc@gmail.com>
+
+	PR target/79242
+	gcc.target/msp430/pr79242.c: New test.
+
+2018-02-16  Eric Botcazou  <ebotcazou@adacore.com>
+
+	PR ada/84277
+	* gnat.dg/array11.adb (Array11): Tweak index and remove warning.
+	* gnat.dg/dispatch1.adb: Rename into...
+	* gnat.dg/disp1.adb: ...this.
+	* gnat.dg/dispatch1_p.ads: Rename into...
+	* gnat.dg/disp1_pkg.ads: ...this.
+	* gnat.dg/disp2.adb: Rename into...
+	* gnat.dg/dispatch2.adb: ...this.
+	* gnat.dg/dispatch2_p.ads: Rename into...
+	* gnat.dg/disp2_pkg.ads: ...this.
+	* gnat.dg/dispatch2_p.adb: Rename into...
+	* gnat.dg/disp2_pkg.adb: this.
+	* gnat.dg/generic_dispatch.adb: Rename into...
+	* gnat.dg/generic_disp.adb: this.
+	* gnat.dg/generic_dispatch_p.ads: Rename into...
+	* gnat.dg/generic_disp_pkg.ads: ...this.
+	* gnat.dg/generic_dispatch_p.adb: Rename into...
+	* gnat.dg/generic_disp_pkg.adb: ...this.
+	* gnat.dg/null_pointer_deref1.adb (Null_Pointer_Deref1): Robustify.
+	* gnat.dg/null_pointer_deref2.adb (Null_Pointer_Deref2): Likewise.
+	* gnat.dg/object_overflow1.adb: Tweak index.
+	* gnat.dg/object_overflow2.adb: Likewise.
+	* gnat.dg/object_overflow3.adb: Likewise.
+	* gnat.dg/object_overflow4.adb: Likewise.
+	* gnat.dg/object_overflow5.adb: Likewise.
+
+2018-02-16  Sudakshina Das  <sudi.das@arm.com>
+
+	Backport from trunk
+	2018-01-12  Sudakshina Das  <sudi.das@arm.com>
+
+	* gcc.c-torture/compile/pr82096.c: Add dg-skip-if
+	directive.
+
+	Backport from trunk
+	2018-01-10  Sudakshina Das  <sudi.das@arm.com>
+
+	PR target/82096
+	* gcc.c-torture/compile/pr82096.c: New test.
+
+2018-02-16  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/84190
+	* g++.dg/torture/pr84190.C: New testcase.
+
+2018-02-15  Michael Meissner  <meissner@linux.vnet.ibm.com>
+
+	Back port from trunk
+	2018-02-07  Michael Meissner  <meissner@linux.vnet.ibm.com>
+
+	PR target/84154
+	* gcc.target/powerpc/pr84154-1.c: New tests.
+	* gcc.target/powerpc/pr84154-2.c: Likewise.
+	* gcc.target/powerpc/pr84154-3.c: Likewise.
+
+2018-02-15  Will Schmidt  <will_schmidt@vnet.ibm.com>
+
+	PR target/84388
+	* gcc.target/powerpc/fold-vec-mult-int128-p8.c: Update dg-options
+	and scan-assembler stanzas.
+	* gcc.target/powerpc/fold-vec-mult-int128-p9.c: Same.
+
+2018-02-14  Peter Bergner  <bergner@vnet.ibm.com>
+
+	PR target/84390
+	* gcc.target/powerpc/vsxcopy.c: Also match lxv when compiling
+	with -mcpu=power9.
+
+2018-02-14  Peter Bergner  <bergner@vnet.ibm.com>
+
+	Back port from mainline
+	2018-02-13  Peter Bergner  <bergner@vnet.ibm.com>
+
+	PR target/84279
+	* g++.dg/pr84279.C: New test.
+
+2018-02-12  Thomas Koenig  <tkoenig@gcc.gnu.org>
+
+	PR fortran/68560
+	* gfortran.dg/shape_9.f90: New test.
+
+2018-02-12  Francois-Xavier Coudert  <fxcoudert@gcc.gnu.org>
+
+	PR fortran/35299
+	ChangeLog for r257566
+	* gfortran.dg/statement_function_3.f: New test.
+
+2018-02-12  Steven G. Kargl  <kargl@gcc.gnu.org>
+
+	PR fortran/54223
+	PR fortran/84276
+	* gfortran.dg/statement_function_1.f90: New test.
+	* gfortran.dg/statement_function_2.f90: New test.
+
 2018-02-09  Andreas Krebbel  <krebbel@linux.vnet.ibm.com>
 
 	Backport from mainline
