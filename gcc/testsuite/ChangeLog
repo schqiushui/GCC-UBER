@@ -1,3 +1,468 @@
+2018-03-10  Steven G. Kargl  <kargl@gcc.gnu.org>
+
+	PR fortran/84734
+	* gfortran.dg/pr84734.f90: New test.
+
+2018-03-10  Eric Botcazou  <ebotcazou@adacore.com>
+
+	* gnat.dg/prot3.adb: New test.
+	* gnat.dg/prot3_pkg.ad[sb]: New helper.
+
+2018-03-09  Kugan Vivekanandarajah  <kuganv@linaro.org>
+
+	Backport from mainline
+	2017-09-13  Kugan Vivekanandarajah  <kuganv@linaro.org>
+
+	* gcc.target/aarch64/pr63304_1.c: Remove-mno-fix-cortex-a53-843419.
+
+2018-03-08  Steven G. Kargl  <kargl@gcc.gnu.org>
+
+	PR fortran/64124
+	PR fortran/70409
+	* gfortran.dg/pr64124.f90: New tests.
+	* gfortran.dg/pr70409.f90: New tests.
+
+2018-03-06  Carl Love  <cel@us.ibm.com>
+
+	Backport from mainline
+	2/16/18  commit 257748  Carl Love  <cel@us.ibm.com>
+
+	* gcc.target/powerpc/p9-vinsert4b-1.c: Remove test file for non-ABI
+	tests.
+	* gcc.target/powerpc/p9-vinsert4b-2.c: Remove test file for non-ABI
+	tests.
+
+2018-03-06  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2018-02-23  Segher Boessenkool  <segher@kernel.crashing.org>
+
+	PR testsuite/80551
+	* c-c++-common/tsan/race_on_mutex.c: Change regexp to allow
+	__GI___pthread_mutex_init as well.
+
+2018-03-06  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2018-02-20  Martin Liska  <mliska@suse.cz>
+
+	PR c/84310
+	PR target/79747
+	* gcc.target/i386/pr84310.c: New test.
+	* gcc.target/i386/pr84310-2.c: Likewise.
+
+2018-03-06  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2018-01-23  Martin Liska  <mliska@suse.cz>
+
+	PR lto/81440
+	* gcc.dg/lto/pr81440.h: New test.
+	* gcc.dg/lto/pr81440_0.c: New test.
+	* gcc.dg/lto/pr81440_1.c: New test.
+
+2018-03-06  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2017-04-27  Martin Liska  <mliska@suse.cz>
+
+	PR testsuite/79455
+	* c-c++-common/tsan/race_on_mutex.c: Make the scanned pattern
+	more generic.
+
+2018-03-06  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2018-01-30  Jan Hubicka  <hubicka@ucw.cz>
+
+	PR lto/83954
+	* gcc.dg/lto/pr83954.h: New testcase.
+	* gcc.dg/lto/pr83954_0.c: New testcase.
+	* gcc.dg/lto/pr83954_1.c: New testcase.
+
+2018-03-06  Steven G. Kargl  <kargl@gcc.gnu.org>
+
+	PR fortran/56667
+	* gfortran.dg/implied_do_2.f90: New test.
+	* gfortran.dg/coarray_8.f90: Update for new error message.
+
+2018-03-06  Peter Bergner  <bergner@vnet.ibm.com>
+
+	Backport from mainline
+	2018-02-22  Vladimir Makarov  <vmakarov@redhat.com>
+
+	PR target/81572
+	* gcc.target/powerpc/pr81572.c: New.
+
+2018-03-06  Richard Biener  <rguenther@suse.de>
+
+	Backport from mainline
+	2018-02-28  Richard Biener  <rguenther@suse.de>
+
+	PR middle-end/84607
+	* gcc.dg/pr84607.c: New testcase.
+
+2018-03-05  Will Schmidt  <will_schmidt@vnet.ibm.com>
+
+	Backport from trunk.
+
+	2018-02-16  Will Schmidt  <will_schmidt@vnet.ibm.com>
+
+	PR target/84371
+	* gcc.target/powerpc/builtins-3.c: Update dg-options and dg-skip-if
+	stanzas.
+	* gcc.target/powerpc/builtins-3.p8.c: Add dg-skip-if stanza.
+	* gcc.target/powerpc/builtins-3.p9.c: Add dg-skip-if stanza.
+
+2018-03-05  Jakub Jelinek  <jakub@redhat.com>
+
+	PR target/84524
+	* gcc.c-torture/execute/pr84524.c: New test.
+	* gcc.target/i386/avx512bw-pr84524.c: New test.
+
+2018-03-04  Paul Thomas  <pault@gcc.gnu.org>
+
+	PR fortran/83076
+	* gfortran.dg/coarray_45.f90: New test.
+
+	PR fortran/83319
+	* gfortran.dg/coarray_46.f90: New test.
+
+2018-03-03  Harald Anlauf  <anlauf@gmx.de>
+
+	PR fortran/71085
+	* gfortran.dg/pr71085.f90: New test.
+
+2018-03-03  Steven G. Kargl  <kargl@gcc.gnu.org>
+
+	PR fortran/51434
+	* gfortran.dg/pr51434.f90: New test.
+
+2018-03-03  Paul Thomas  <pault@gcc.gnu.org>
+
+	PR fortran/80965
+	* gfortran.dg/select_type_41.f90: New test.
+
+2018-03-03  Paul Thomas  <pault@gcc.gnu.org>
+
+	Backported from trunk.
+	PR fortran/78990
+	* gfortran.dg/class_67.f90: New test.
+
+2018-03-03  Jakub Jelinek  <jakub@redhat.com>
+
+	Backported from mainline
+	2018-03-02  Jakub Jelinek  <jakub@redhat.com>
+
+	PR ipa/84628
+	* gcc.dg/pr84628.c: New test.
+
+	PR inline-asm/84625
+	* gcc.target/i386/pr84625.c: New test.
+
+	2018-03-02  Jakub Jelinek  <jakub@redhat.com>
+
+	PR sanitizer/70875
+	* gcc.dg/ubsan/bounds-3.c: Add -fno-sanitize-recover=bounds to
+	dg-options and dg-shouldfail "ubsan" directive.
+
+	2018-02-26  Jakub Jelinek  <jakub@redhat.com>
+
+	PR c++/84558
+	* g++.dg/cpp1y/pr84558.C: New test.
+
+	PR c++/84557
+	* g++.dg/gomp/pr84557.C: New test.
+
+	PR c++/84556
+	* g++.dg/gomp/pr84556.C: New test.
+	* g++.dg/vect/pr84556.cc: New test.
+
+	2018-02-22  Jakub Jelinek  <jakub@redhat.com>
+
+	PR tree-optimization/84503
+	* gcc.dg/pr84503-1.c: New test.
+	* gcc.dg/pr84503-2.c: New test.
+
+	2017-11-10  Jakub Jelinek  <jakub@redhat.com>
+
+	PR bootstrap/82916
+	* gcc.dg/pr82916.c: New test.
+
+	2018-02-20  Jakub Jelinek  <jakub@redhat.com>
+
+	PR c++/84445
+	* g++.dg/cpp1z/launder7.C: New test.
+
+	PR c++/84449
+	* g++.dg/cpp0x/constexpr-84449.C: New test.
+
+	2018-02-19  Jakub Jelinek  <jakub@redhat.com>
+
+	PR c++/84444
+	* g++.dg/cpp1z/launder8.C: New test.
+
+	PR c++/84448
+	* g++.dg/gomp/pr84448.C: New test.
+
+	PR c++/84430
+	* g++.dg/gomp/pr84430.C: New test.
+
+	2018-02-16  Jakub Jelinek  <jakub@redhat.com>
+
+	PR ipa/84425
+	* gcc.c-torture/compile/pr84425.c: New test.
+
+	2018-02-16  Marek Polacek  <polacek@redhat.com>
+		    Jakub Jelinek  <jakub@redhat.com>
+
+	PR c++/84192
+	* g++.dg/cpp1y/constexpr-84192.C: New test.
+
+	2018-02-13  Jakub Jelinek  <jakub@redhat.com>
+
+	PR c/82210
+	* gcc.c-torture/execute/pr82210.c: New test.
+
+	2018-02-12  Jakub Jelinek  <jakub@redhat.com>
+
+	PR c++/84341
+	* c-c++-common/gomp/pr84341.c: New test.
+
+	2018-02-10  Jakub Jelinek  <jakub@redhat.com>
+
+	PR sanitizer/83987
+	* g++.dg/ubsan/pr83987-2.C: New test.
+
+	2018-02-09  Marek Polacek  <polacek@redhat.com>
+		    Jakub Jelinek  <jakub@redhat.com>
+
+	PR c++/83659
+	* g++.dg/torture/pr83659.C: New test.
+
+	2018-02-07  Jakub Jelinek  <jakub@redhat.com>
+
+	PR c++/84082
+	* g++.dg/template/incomplete11.C: New test.
+	* g++.dg/parse/crash67.C: Expect an incomplete type diagnostics too.
+
+	2018-02-01  Jakub Jelinek  <jakub@redhat.com>
+
+	PR tree-optimization/81661
+	PR tree-optimization/84117
+	* gcc.dg/pr81661.c: New test.
+	* gfortran.dg/pr84117.f90: New test.
+
+	2018-01-31  Jakub Jelinek  <jakub@redhat.com>
+
+	PR fortran/84116
+	* gfortran.dg/gomp/pr84116.f90: New test.
+
+	PR c++/83993
+	* g++.dg/init/pr83993-2.C: New test.
+
+	PR preprocessor/69869
+	* gcc.dg/cpp/trad/pr69869.c: New test.
+
+	2018-01-30  Jakub Jelinek  <jakub@redhat.com>
+
+	PR rtl-optimization/83986
+	* gcc.dg/pr83986.c: New test.
+
+	2018-01-25  Jakub Jelinek  <jakub@redhat.com>
+
+	PR c++/84031
+	* g++.dg/cpp1z/decomp36.C: New test.
+
+	2018-01-24  Jakub Jelinek  <jakub@redhat.com>
+
+	PR middle-end/83977
+	* c-c++-common/gomp/pr83977-1.c: New test.
+	* c-c++-common/gomp/pr83977-2.c: New test.
+	* c-c++-common/gomp/pr83977-3.c: New test.
+	* gfortran.dg/gomp/pr83977.f90: New test.
+
+	2018-01-23  Jakub Jelinek  <jakub@redhat.com>
+
+	PR sanitizer/83987
+	* g++.dg/ubsan/pr83987.C: New test.
+
+	PR c++/83958
+	* g++.dg/cpp1z/decomp35.C: New test.
+
+	2018-01-20  Jakub Jelinek  <jakub@redhat.com>
+
+	PR middle-end/83945
+	* gcc.dg/tls/pr83945.c: New test.
+
+	PR target/83930
+	* gcc.dg/pr83930.c: New test.
+
+	2018-01-18  Jakub Jelinek  <jakub@redhat.com>
+
+	PR c++/83824
+	* g++.dg/cpp0x/pr83824.C: New test.
+
+	2018-01-16  Jakub Jelinek  <jakub@redhat.com>
+
+	PR c++/83817
+	* g++.dg/cpp1y/pr83817.C: New test.
+
+	2018-01-05  Jakub Jelinek  <jakub@redhat.com>
+
+	PR tree-optimization/83605
+	* gcc.dg/pr83605.c: New test.
+
+2018-03-01  H.J. Lu  <hongjiu.lu@intel.com>
+
+	Backport from mainline
+	2018-02-26  H.J. Lu  <hongjiu.lu@intel.com>
+
+	PR target/84039
+	* gcc.target/i386/indirect-thunk-1.c: Updated.
+	* gcc.target/i386/indirect-thunk-2.c: Likewise.
+	* gcc.target/i386/indirect-thunk-3.c: Likewise.
+	* gcc.target/i386/indirect-thunk-4.c: Likewise.
+	* gcc.target/i386/indirect-thunk-5.c: Likewise.
+	* gcc.target/i386/indirect-thunk-6.c: Likewise.
+	* gcc.target/i386/indirect-thunk-7.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-1.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-2.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-3.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-4.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-5.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-6.c: Likewise.
+	* gcc.target/i386/indirect-thunk-attr-7.c: Likewise.
+	* gcc.target/i386/indirect-thunk-bnd-1.c: Likewise.
+	* gcc.target/i386/indirect-thunk-bnd-2.c: Likewise.
+	* gcc.target/i386/indirect-thunk-bnd-3.c: Likewise.
+	* gcc.target/i386/indirect-thunk-bnd-4.c: Likewise.
+	* gcc.target/i386/indirect-thunk-extern-1.c: Likewise.
+	* gcc.target/i386/indirect-thunk-extern-2.c: Likewise.
+	* gcc.target/i386/indirect-thunk-extern-3.c: Likewise.
+	* gcc.target/i386/indirect-thunk-extern-4.c: Likewise.
+	* gcc.target/i386/indirect-thunk-extern-5.c: Likewise.
+	* gcc.target/i386/indirect-thunk-extern-6.c: Likewise.
+	* gcc.target/i386/indirect-thunk-extern-7.c: Likewise.
+	* gcc.target/i386/indirect-thunk-inline-1.c: Likewise.
+	* gcc.target/i386/indirect-thunk-inline-2.c: Likewise.
+	* gcc.target/i386/indirect-thunk-inline-3.c: Likewise.
+	* gcc.target/i386/indirect-thunk-inline-4.c: Likewise.
+	* gcc.target/i386/indirect-thunk-inline-5.c: Likewise.
+	* gcc.target/i386/indirect-thunk-inline-6.c: Likewise.
+	* gcc.target/i386/indirect-thunk-inline-7.c: Likewise.
+	* gcc.target/i386/ret-thunk-9.c: Likewise.
+	* gcc.target/i386/ret-thunk-10.c: Likewise.
+	* gcc.target/i386/ret-thunk-11.c: Likewise.
+	* gcc.target/i386/ret-thunk-12.c: Likewise.
+	* gcc.target/i386/ret-thunk-13.c: Likewise.
+	* gcc.target/i386/ret-thunk-14.c: Likewise.
+	* gcc.target/i386/ret-thunk-15.c: Likewise.
+
+2018-03-01  H.J. Lu  <hongjiu.lu@intel.com>
+
+	Backport from mainline
+	2018-02-26  H.J. Lu  <hongjiu.lu@intel.com>
+
+	PR target/84530
+	* gcc.target/i386/ret-thunk-22.c: New test.
+	* gcc.target/i386/ret-thunk-23.c: Likewise.
+	* gcc.target/i386/ret-thunk-24.c: Likewise.
+	* gcc.target/i386/ret-thunk-25.c: Likewise.
+	* gcc.target/i386/ret-thunk-26.c: Likewise.
+
+2017-03-02  Thomas Schwinge  <thomas@codesourcery.com>
+
+	Backport from trunk r256891:
+	2018-01-19  Cesar Philippidis  <cesar@codesourcery.com>
+
+	PR target/83790
+	* gcc.target/nvptx/indirect_call.c: New test.
+
+2017-03-01  Thomas Preud'homme  <thomas.preudhomme@arm.com>
+
+	Backport from mainline
+	2017-12-05  Matthew Gretton-Dann  <matthew.gretton-dann@arm.com>
+	with follow-up r255433 commit.
+
+	* gcc.c-torture/unsorted/dump-noaddr.x: Generate dump files in
+	tmpdir.
+
+2018-02-28  Alan Modra  <amodra@gmail.com>
+
+	* lib/prune.exp (prune_gcc_output): Match lower case "in function"
+	GNU ld message.
+	* g++.dg/other/anon5.C: Match lower case "bad value" GNU ld message.
+
+2018-02-26  Carl Love  <cel@us.ibm.com>
+
+	Backport from mainline: commit 257747 on 2018-02-16.
+
+	* gcc.target/powerpc/builtins-7-p9-runnable.c: New runnable test file
+	for the ABI definitions for vec_extract4b and vec_insert4b.
+
+2018-02-26  Eric Botcazou  <ebotcazou@adacore.com>
+
+	* gcc.c-torture/execute/20180226-1.c: New test.
+
+2018-02-25  Steven G. Kargl  <kargl@gcc.gnu.org>
+
+	ChangeLog for r257972
+	PR fortran/83633
+	* gfortran.dg/explicit_shape_1.f90: New test.
+	* gfortran.dg/automatic_module_variable.f90: Update regex.
+	* gfortran.dg/bad_automatic_objects_1.f90: Ditto.
+
+2018-02-25  Thomas Koenig  <tkoenig@gcc.gnu.org>
+
+	PR fortran/78238
+	Backport from trunk
+	* gfortran.dg/select_type_40.f90: New test.
+
+2018-02-24  Steven G. Kargl <kargl@gcc.gnu.org>
+
+	PR fortran/30792
+	* gfortran.dg/data_substring.f90: New test.
+
+2018-02-23  Steven G. Kargl  <kargl@gcc.gnu.org>
+
+	PR fortran/84346
+	* gfortran.dg/statement_function_1.f90: Update test.
+
+2018-02-23  Jerry DeLisle  <jvdelisle@gcc.gnu.org>
+
+	Backport from trunk
+	PR fortran/84506
+	* gfortran.dg/inquire_19.f90: New test.
+
+2018-02-22  Thomas Koenig  <tkoenig@gcc.gnu.org>
+
+	PR fortran/81116
+	PR fortran/84495
+	* gfortran.dg/realloc_on_assignment_29.f90:  New test.
+
+2017-02-22  Sudakshina Das  <sudi.das@arm.com>
+
+	Backport from mainline:
+	2017-12-14  Sudakshina Das  <sudi.das@arm.com>
+
+	PR target/81228
+	* gcc.dg/pr81228.c: New.
+
+2018-02-19  Jonathan Wakely  <jwakely@redhat.com>
+
+	Backport from mainline
+	2018-01-02  Marek Polacek  <polacek@redhat.com>
+
+	PR c++/81860
+	* g++.dg/cpp0x/inh-ctor30.C: New test.
+
+2018-02-18  Jerry DeLisle  <jvdelisle@gcc.gnu.org>
+
+	Backport from trunk
+	PR libgfortran/84412
+	* gfortran.dg/inquire_18.f90: New test.
+
 2018-02-17  Thomas Koenig  <tkoenig@gcc.gnu.org>
 
 	Backport from trunk
@@ -1186,7 +1651,7 @@
 
 	Backported from trunk
 	PR fortran/80850
-	* gfortran.dg/class_64_f90 : New test.
+	* gfortran.dg/class_64_f90: New test.
 
 2017-10-30  Paolo Carlini  <paolo.carlini@oracle.com>
 
@@ -1237,7 +1702,7 @@
 
 	Backport from trunk
 	PR fortran/82312
-	* gfortran.dg/typebound_proc_36.f90 : New test.
+	* gfortran.dg/typebound_proc_36.f90: New test.
 
 2017-10-20  Thomas Koenig  <tkoenig@gcc.gnu.org>
 
