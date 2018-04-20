@@ -1,3 +1,96 @@
+2018-04-19  Jonathan Wakely  <jwakely@redhat.com>
+
+	PR c++/85464 - missing location for -Wignored-qualifiers diagnostic
+	* g++.dg/diagnostic/pr85464.C: New.
+
+2018-04-18  Thomas Preud'homme  <thomas.preudhomme@arm.com>
+
+	Backport from mainline
+	2018-04-11  Thomas Preud'homme  <thomas.preudhomme@arm.com>
+
+	PR target/85261
+	* gcc.target/arm/fpscr.c: Add call to __builtin_arm_set_fpscr with
+	literal value.  Expect 2 MCR instruction.  Fix function prototype.
+	Remove volatile keyword.
+
+2018-04-12  Andreas Krebbel  <krebbel@linux.vnet.ibm.com>
+
+	Backport from mainline
+	2018-04-12  Andreas Krebbel  <krebbel@linux.vnet.ibm.com>
+
+	* gcc.target/s390/nobp-no-dwarf2-cfi.c: New test.
+
+2018-04-11  Thomas Preud'homme  <thomas.preudhomme@arm.com>
+
+	Backport from mainline
+	2018-04-04  Thomas Preud'homme  <thomas.preudhomme@arm.com>
+
+	PR target/85203
+	* gcc.target/arm/cmse/cmse-1.c: Tighten cmse_nonsecure_caller RTL scan
+	to match a single insn of the baz function.  Move scan directives at
+	the end of the file below the functions they are trying to test for
+	better readability.
+	* gcc.target/arm/cmse/cmse-16.c: New testcase.
+
+2018-04-10  Thomas Schwinge  <thomas@codesourcery.com>
+
+	PR target/85056
+	* gcc.target/nvptx/pr85056.c (main): Initialize "sum".
+
+2018-04-10  Kyrylo Tkachov  <kyrylo.tkachov@arm.com>
+
+	Backport from mainline
+	2018-03-08  Kyrylo Tkachov  <kyrylo.tkachov@arm.com>
+
+	PR target/84748
+	* gcc.c-torture/execute/pr84748.c: New test.
+
+2018-04-06  Eric Botcazou  <ebotcazou@adacore.com>
+
+	* g++.dg/opt/pr85196.C: New test.
+
+2018-04-05  Uros Bizjak  <ubizjak@gmail.com>
+
+	PR target/85193
+	* gcc.target/i386/pr85193.c: New test.
+
+2018-04-04  Peter Bergner  <bergner@vnet.ibm.com>
+
+	Backport from mainline
+	2018-04-04  Peter Bergner  <bergner@vnet.ibm.com>
+
+	PR rtl-optimization/84878
+	* gcc.target/powerpc/pr84878.c: New test.
+
+2018-04-03  Cesar Philippidis  <cesar@codesourcery.com>
+
+	Backport from mainline
+	2018-03-27  Cesar Philippidis  <cesar@codesourcery.com>
+
+	PR target/85056
+	* testsuite/gcc.target/nvptx/pr85056.c: New test.
+	* testsuite/gcc.target/nvptx/pr85056a.c: New test.
+
+2018-04-02  Peter Bergner  <bergner@vnet.ibm.com>
+
+	Backport from mainline
+	2018-03-28  Peter Bergner  <bergner@vnet.ibm.com>
+
+	PR target/84912
+	* gcc.target/powerpc/extend-divide-1.c (div_weo): Remove test for
+	deleted builtin function.
+	(div_weuo): Likewise.
+	* gcc.target/powerpc/extend-divide-2.c (div_deo): Likewise.
+	(div_deuo): Likewise.
+
+2018-04-02  Peter Bergner  <bergner@vnet.ibm.com>
+
+	Backport from mainline
+	2018-02-08  Peter Bergner  <bergner@vnet.ibm.com>
+
+	PR target/81143
+	* gcc.target/powerpc/pr79799-2.c: Use __LITTLE_ENDIAN__.
+
 2018-03-29  Sebastian Peryt  <sebastian.peryt@intel.com>
 
 	PR c++/84783

@@ -11551,7 +11551,7 @@ tsubst_pack_expansion (tree t, tree args, tsubst_flags_t complain,
 	  /* We can't substitute for this parameter pack.  We use a flag as
 	     well as the missing_level counter because function parameter
 	     packs don't have a level.  */
-	  gcc_assert (processing_template_decl);
+	  gcc_assert (processing_template_decl || is_auto (parm_pack));
 	  unsubstituted_packs = true;
 	}
     }
@@ -25429,6 +25429,9 @@ do_class_deduction (tree ptype, tree tmpl, tree init, int flags,
     // FIXME cache artificial deduction guides
     for (tree fns = CLASSTYPE_CONSTRUCTORS (type); fns; fns = OVL_NEXT (fns))
       {
+	if (TREE_CODE (fns) == OVERLOAD && OVL_USED (fns))
+	  continue;
+
 	tree fn = OVL_CURRENT (fns);
 	tree guide = build_deduction_guide (fn, outer_args, complain);
 	cands = ovl_cons (guide, cands);

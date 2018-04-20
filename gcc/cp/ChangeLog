@@ -1,3 +1,52 @@
+2018-04-19  Jonathan Wakely  <jwakely@redhat.com>
+
+	PR c++/85464 - missing location for -Wignored-qualifiers diagnostic
+	* decl.c (grokdeclarator): If declspecs->locations[ds_type_spec]
+	is UNKNOWN_LOCATION fall back to input_location.
+
+2018-04-09  Jason Merrill  <jason@redhat.com>
+
+	PR c++/85279 - dump_expr doesn't understand decltype.
+	* error.c (dump_expr): Handle DECLTYPE_TYPE.
+
+2018-04-05  Jason Merrill  <jason@redhat.com>
+
+	PR c++/82152 - ICE with class deduction and inherited ctor.
+	* pt.c (do_class_deduction): Ignore inherited ctors.
+
+	PR c++/84665 - ICE with array of empty class.
+	* decl2.c (cp_check_const_attributes): Use fold_non_dependent_expr.
+
+	PR c++/85006 - -fconcepts ICE with A<auto...> return type
+	* pt.c (tsubst_pack_expansion): Allow unsubstituted auto pack.
+
+2018-04-04  Jason Merrill  <jason@redhat.com>
+
+	PR c++/85118 - wrong error with generic lambda and std::bind.
+	* call.c (add_template_conv_candidate): Disable if there are any
+	call operators.
+
+	PR c++/85148 - ICE with 'this' in array NSDMI.
+	* tree.c (replace_placeholders_r): Use handled_component_p.
+
+2018-04-03  Jason Merrill  <jason@redhat.com>
+
+	PR c++/85113 - ICE with constexpr and __builtin_constant_p.
+	* constexpr.c (cxx_eval_builtin_function_call): Only defer
+	__builtin_constant_p if ctx->quiet.
+
+	* typeck.c (merge_types): Limit matching attribute shortcut to
+	the default case.
+
+	PR c++/64095 - auto... parameter pack.
+	* parser.c (cp_parser_parameter_declaration): Handle turning autos
+	into packs here.
+	(cp_parser_parameter_declaration_list): Not here.
+
+	PR c++/85060 - wrong-code with call to base member in template.
+	* search.c (any_dependent_bases_p): Check uses_template_parms
+	rather than processing_template_decl.
+
 2018-03-29  Ville Voutilainen  <ville.voutilainen@gmail.com>
 
 	Backport from mainline
