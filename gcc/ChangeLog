@@ -1,3 +1,108 @@
+2018-04-26  Richard Biener  <rguenther@suse.de>
+
+	Backport from mainline
+	2018-04-09  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/85284
+	* tree-ssa-loop-niter.c (number_of_iterations_exit_assumptions):
+	Only use the niter constraining form of simple_iv when the exit
+	is always executed.
+
+	2018-04-06  Richard Biener  <rguenther@suse.de>
+
+	PR middle-end/85244
+	* tree-dfa.c (get_ref_base_and_extent): Reset seen_variable_array_ref
+	after seeing a component reference with an adjacent field.  Treat
+	refs to arrays at struct end of external decls similar to
+	refs to unconstrained commons.
+
+	2018-04-04  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/85168
+	* tree-ssa-sccvn.c (vn_reference_maybe_forwprop_address): Avoid
+	propagating abnormals.
+
+2018-04-24  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2018-04-17  Martin Liska  <mliska@suse.cz>
+
+	PR lto/85405
+	* ipa-devirt.c (odr_types_equivalent_p): Remove trailing
+	in message, remote space in between '_G' and '('.
+
+2018-04-24  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2018-04-17  Jan Hubicka  <jh@suse.cz>
+
+	PR lto/85405
+	* ipa-devirt.c (odr_types_equivalent_p): Handle bit fields.
+
+2018-04-24  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2018-03-28  Jakub Jelinek  <jakub@redhat.com>
+		    Martin Liska  <mliska@suse.cz>
+
+	PR sanitizer/85081
+	* gimplify.c (asan_poison_variable): Don't do the check for
+	gimplify_omp_ctxp here.
+	(gimplify_decl_expr): Do it here.
+	(gimplify_target_expr): Likewise.
+
+2018-04-24  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2018-03-21  Martin Liska  <mliska@suse.cz>
+
+	PR ipa/84963
+	* ipa-icf.c (sem_item_optimizer::fixup_points_to_sets): Remove
+	not intended return statement.
+
+2018-04-24  Martin Liska  <mliska@suse.cz>
+
+	Backport from mainline
+	2018-03-13  Martin Liska  <mliska@suse.cz>
+
+	PR ipa/84658.
+	* (sem_item_optimizer::sem_item_optimizer): Initialize new
+	vector.
+	(sem_item_optimizer::~sem_item_optimizer): Release it.
+	(sem_item_optimizer::merge_classes): Register variable aliases.
+	(sem_item_optimizer::fixup_pt_set): New function.
+	(sem_item_optimizer::fixup_points_to_sets): Likewise.
+	* ipa-icf.h: Declare new variables and functions.
+
+2018-04-23  Aaron Sawdey  <acsawdey@linux.ibm.com>
+
+	Backport from mainline
+	2018-04-16  Aaron Sawdey  <acsawdey@linux.ibm.com>
+
+	PR target/83660
+	* config/rs6000/rs6000-c.c (altivec_resolve_overloaded_builtin): Mark
+	vec_extract expression as having side effects to make sure it gets
+	a cleanup point.
+
+2018-04-23  Eric Botcazou  <ebotcazou@adacore.com>
+
+	PR middle-end/85496
+	* expr.c (store_field): In the bitfield case, if the value comes from
+	a function call and is returned in registers by means of a PARALLEL,
+	do not change the mode of the temporary unless BLKmode and VOIDmode.
+
+2018-04-20  Peter Bergner  <bergner@vnet.ibm.com>
+
+	Backport from mainline
+	2018-03-09  Peter Bergner  <bergner@vnet.ibm.com>
+
+	PR target/83969
+	* config/rs6000/rs6000.c (rs6000_offsettable_memref_p): New prototype.
+	Add strict argument and use it.
+	(rs6000_split_multireg_move): Update for new strict argument.
+	(mem_operand_gpr): Disallow all non-offsettable addresses.
+	* config/rs6000/rs6000.md (*movdi_internal64): Use YZ constraint.
+
 2018-04-18  Thomas Preud'homme  <thomas.preudhomme@arm.com>
 
 	Backport from mainline
