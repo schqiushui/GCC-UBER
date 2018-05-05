@@ -1,5 +1,5 @@
 /* Basic IPA optimizations based on profile.
-   Copyright (C) 2003-2017 Free Software Foundation, Inc.
+   Copyright (C) 2003-2018 Free Software Foundation, Inc.
 
 This file is part of GCC.
 
@@ -331,16 +331,14 @@ ipa_propagate_frequency_1 (struct cgraph_node *node, void *data)
 	 it is executed by the train run.  Transfer the function only if all
 	 callers are unlikely executed.  */
       if (profile_info
-	  && edge->callee->count.initialized_p ()
-	  /* Thunks are not profiled.  This is more or less implementation
-	     bug.  */
-	  && !d->function_symbol->thunk.thunk_p
+	  && !(edge->callee->count.ipa () == profile_count::zero ())
 	  && (edge->caller->frequency != NODE_FREQUENCY_UNLIKELY_EXECUTED
 	      || (edge->caller->global.inlined_to
 		  && edge->caller->global.inlined_to->frequency
 		     != NODE_FREQUENCY_UNLIKELY_EXECUTED)))
 	  d->maybe_unlikely_executed = false;
-      if (!edge->frequency)
+      if (edge->count.ipa ().initialized_p ()
+	  && !edge->count.ipa ().nonzero_p ())
 	continue;
       switch (edge->caller->frequency)
         {
@@ -431,11 +429,11 @@ ipa_propagate_frequency (struct cgraph_node *node)
     }
 
   /* With profile we can decide on hot/normal based on count.  */
-  if (node->count.initialized_p ())
+  if (node->count. ipa().initialized_p ())
     {
       bool hot = false;
-      if (!(node->count == profile_count::zero ())
-	  && node->count >= get_hot_bb_threshold ())
+      if (!(node->count. ipa() == profile_count::zero ())
+	  && node->count. ipa() >= get_hot_bb_threshold ())
 	hot = true;
       if (!hot)
 	hot |= contains_hot_call_p (node);
@@ -667,9 +665,7 @@ ipa_profile (void)
 		      e->make_speculative
 			(n2,
 			 e->count.apply_probability
-				     (e->indirect_info->common_target_probability),
-			 apply_scale (e->frequency,
-				      e->indirect_info->common_target_probability));
+				     (e->indirect_info->common_target_probability));
 		      update = true;
 		    }
 		}

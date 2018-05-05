@@ -1,5 +1,5 @@
 /* { dg-do compile } */
-/* { dg-options "-O2 -fstack-clash-protection -mtune=generic" } */
+/* { dg-options "-O2 -fstack-clash-protection -mtune=generic -fomit-frame-pointer" } */
 /* { dg-require-effective-target supports_stack_clash_protection } */
 
 __attribute__ ((noreturn)) void exit (int);
@@ -7,7 +7,6 @@ __attribute__ ((noreturn)) void exit (int);
 __attribute__ ((noreturn)) void
 f (void)
 {
-  asm volatile ("nop" ::: "edi");
   exit (1);
 }
 
