@@ -1,3 +1,103 @@
+2018-06-13  Steven G. Kargl  <kargl@gcc.gnu.org>
+
+	PR fortran/86110
+	* gfortran.dg/pr86110.f90: New test.
+
+2018-06-12  Steven G. Kargl  <kargl@gcc.gnu.org>
+
+	PR fortran/44491
+	* gfortran.dg/pr44491.f90: New testcase
+
+2018-06-11  Peter Bergner  <bergner@vnet.ibm.com>
+
+	Backport from mainline
+	2018-06-08  Peter Bergner  <bergner@vnet.ibm.com>
+
+	PR target/85755
+	* gcc.target/powerpc/pr85755.c: New test.
+
+2018-06-09  Steven G. Kargl  <kargl@gcc.gnu.org>
+
+	PR fortran/38351
+	* gfortran.dg/pr38351.f90: New test.
+	* gfortran.dg/typebound_operator_4.f03: Adjust for new error message.
+
+2018-06-09  Steven G. Kargl  <kargl@gcc.gnu.org>
+
+	PR fortran/63514
+	* gfortran.dg/pr63514.f90: New test.
+
+2018-06-09  Steven G. Kargl  <kargl@gcc.gnu.org>
+
+	PR fortran/78278
+	* gfortran.dg/data_bounds_1.f90: Add -std=gnu option.
+	* gfortran.dg/data_char_1.f90: Ditto.
+	* gfortran.dg/pr78571.f90: Ditto.
+	* gfortran.dg/pr78278.f90: New test.
+
+2018-06-09  Steven G. Kargl  <kargl@gcc.gnu.org>
+
+	PR fortran/86059
+	* gfortran.dg/associate_30.f90: Remove code tested ...
+	* gfortran.dg/pr67803.f90: Ditto.
+	* gfortran.dg/pr67805.f90: Ditto.
+	* gfortran.dg/pr86059.f90: ... here.  New test.
+
+2018-06-09  Steven G. Kargl  <kargl@gcc.gnu.org>
+
+	PR fortran/85138
+	PR fortran/85996
+	PR fortran/86051
+	* gfortran.dg/pr85138_1.f90: New test.
+	* gfortran.dg/pr85138_2.f90: Ditto.
+	* gfortran.dg/pr85996.f90: Ditto.
+
+2018-06-07  Steven G. Kargl  <kargl@gcc.gnu.org>
+
+	PR fortran/86045
+	Backport from trunk.
+	* gfortran.dg/pr86045.f90: New test.
+
+2018-06-07  Thomas Koenig  <tkoenig@gcc.gnu.org>
+
+	PR fortran/85641
+	Backport from trunk.
+	* gfortran.dg/realloc_on_assign_30.f90: New test.
+
+2018-06-07  Richard Biener  <rguenther@suse.de>
+
+	Backport from mainline
+	2018-05-04  Richard Biener  <rguenther@suse.de>
+
+	PR middle-end/85588
+	* gcc.dg/torture/pr85588.c: New testcase.
+	* gcc.dg/torture/pr57656.c: Use dg-additional-options.
+
+	2018-05-02  Richard Biener  <rguenther@suse.de>
+
+	PR middle-end/85567
+	* gcc.dg/torture/pr85567.c: New testcase.
+
+	2018-05-02  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/85597
+	* gcc.dg/vect/pr85597.c: New testcase.
+
+2018-06-05  Andreas Krebbel  <krebbel@linux.ibm.com>
+
+	Backport from mainline
+	2018-06-05  Andreas Krebbel  <krebbel@linux.ibm.com>
+
+	* gcc.target/s390/htm-builtins-compile-4.c: New test.
+
+2018-06-04  Steven G. Kargl  <kargl@gcc.gnu.org>
+
+	PR fortran/85981
+	* gfortran.dg/allocate_alloc_opt_14.f90: New test.
+	* gfortran.dg/allocate_alloc_opt_1.f90: Update error string.
+	* gfortran.dg/allocate_stat_2.f90: Ditto.
+	* gfortran.dg/deallocate_alloc_opt_1.f90: Ditto.
+
 2018-06-02  Eric Botcazou  <ebotcazou@adacore.com>
 
 	* gnat.dg/specs/opt3.ads: New test.

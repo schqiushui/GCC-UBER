@@ -1,3 +1,61 @@
+2018-06-14  Sebastian Huber  <sebastian.huber@embedded-brains.de>
+
+	Backport from mainline
+	2018-06-14  Sebastian Huber  <sebastian.huber@embedded-brains.de>
+
+	* config/rtems.h (STDINT_LONG32): Define.
+
+2018-06-11  Peter Bergner  <bergner@vnet.ibm.com>
+
+	Backport from mainline
+	2018-06-08  Peter Bergner  <bergner@vnet.ibm.com>
+
+	PR target/85755
+	* config/rs6000/rs6000.c (mem_operand_gpr): Enable PRE_INC and PRE_DEC
+	addresses.
+
+2018-06-07  Peter Bergner  <bergner@vnet.ibm.com>
+
+	Backport from mainline
+	2018-06-06  Peter Bergner  <bergner@vnet.ibm.com>
+
+	PR target/63177
+	* /config/rs6000/rs6000.h (ASM_CPU_SPEC): Add support for -mpower9.
+	Don't handle -mcpu=power8 if -mpower9-vector is also used.
+
+2018-06-07  Richard Biener  <rguenther@suse.de>
+
+	Backport from mainline
+	2018-05-04  Richard Biener  <rguenther@suse.de>
+
+	PR middle-end/85588
+	* fold-const.c (negate_expr_p): Restrict negation of operand
+	zero of a division to when we know that can happen without
+	overflow.
+	(fold_negate_expr_1): Likewise.
+
+	2018-05-02  Richard Biener  <rguenther@suse.de>
+
+	PR middle-end/85567
+	* gimplify.c (gimplify_save_expr): When in SSA form allow
+	SAVE_EXPRs to compute to SSA vars.
+
+	2018-05-02  Richard Biener  <rguenther@suse.de>
+
+	PR tree-optimization/85597
+	* tree-vect-stmts.c (vectorizable_operation): For ternary SLP
+	do not use split vect_get_vec_defs call but call vect_get_slp_defs
+	directly.
+
+2018-06-05  Andreas Krebbel  <krebbel@linux.ibm.com>
+
+	Backport from mainline
+	2018-06-05  Andreas Krebbel  <krebbel@linux.ibm.com>
+
+	* config/s390/s390-builtin-types.def: Add void function type.
+	* config/s390/s390-builtins.def: Use the function type for the
+	tbeginc builtin.
+
 2018-06-01  Bill Schmidt  <wschmidt@linux.ibm.com>
 
 	PR tree-optimization/85712
